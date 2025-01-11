@@ -1,42 +1,105 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Common */
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html {
+    scroll-behavior: smooth;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+:root {
+    /* Colors */
+    --primary-color: #DF61E7;
+    --secondary-color: #A401AD;
+    --tertiary-color: #FAA3FF;
+    --purple: #C618D0;
+    --hover-color: #D126DB;
+    --bg-color: #021012;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.App {
+    background-color: var(--bg-color);
 }
 
-.card {
-  padding: 2em;
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    z-index: 1000;
 }
 
-.read-the-docs {
-  color: #888;
+.floating-button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    height: 68px;
+}
+
+.floating-button img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.floating-button__text {
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    margin-top: -36px;
+}
+
+.floating-button:hover img {
+    transform: scale(1.1);
+}
+
+.floating-button:hover .floating-button__text {
+    color: var(--hover-color);
+}
+
+/* Fonts */
+@font-face {
+    font-family: Aeroport;
+    font-weight: 300;
+    font-style: normal;
+    src:
+        url('./assets/fonts/Aeroport-Light/Aeroport-Light.otf') format("otf")
+}
+
+@font-face {
+    font-family: Aeroport;
+    font-weight: 400;
+    font-style: normal;
+    src:
+        url('./assets/fonts/Aeroport-Regular/Aeroport-Regular.otf') format("otf")
+}
+
+@font-face {
+    font-family: Aeroport;
+    font-weight: 500;
+    font-style: normal;
+    src:
+        url('./assets/fonts/Aeroport-Medium/Aeroport-Medium.otf') format("otf")
+}
+
+@font-face {
+    font-family: Aeroport;
+    font-weight: 700;
+    font-style: normal;
+    src:
+        url('./assets/fonts/Aeroport-Bold/Aeroport-Bold.otf') format("otf")
 }

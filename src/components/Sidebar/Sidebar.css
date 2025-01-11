@@ -1,0 +1,106 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar__header {
+    display: flex;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar__title {
+    font-family: Aeroport, sans-serif;
+    text-transform: uppercase;
+}
+
+.sidebar__subtitle {
+    font-family: Aeroport, sans-serif;
+    color: #999;
+    margin-top: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: gray;
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e8e8e8;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.message__title {
+    font-family: Aeroport, sans-serif;
+}
+
+.message__text {
+    font-family: Aeroport, sans-serif;
+    margin-top: 10px;
+}
+
+.message__time {
+    color: #999;
+}
+
+.contact-form p {
+    margin-bottom: 16px;
+}
+
+.contact-form__title {
+    text-align: center;
+    color: #999;
+}
+
+.contact-form input,
+.contact-form textarea {
+    font-family: Aeroport, sans-serif;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #a401ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #ff57f6;
+}

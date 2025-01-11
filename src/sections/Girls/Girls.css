@@ -1,0 +1,59 @@
+.girls {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+    background-image: url('../../assets/images/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(300px);
+}
+
+.girls__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 720px;
+    padding-right: 70px;
+    padding-left: 70px;
+}
+
+.girls__title {
+    font-family: Aeroport, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 50px;
+}
+
+.girls__subtitle {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 16px;
+}
+
+.girls__text {
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    width: 470px;
+    margin-top: 100px;
+}
+
+.girls__img {
+    margin-top: 50px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .girls__title {
+        font-size: 30px;
+        line-height: 30px;
+    }
+}

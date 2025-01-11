@@ -1,0 +1,255 @@
+.info {
+    display: flex;
+    justify-content: center;
+    background-image: url('../../assets/images/bg-3.png');
+    height: auto;
+    width: 100vw;
+    top: -284px;
+    left: -454.86px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(300px);
+    padding-bottom: 100px;
+}
+
+.info__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*max-width: 720px;*/
+    /*padding-right: 70px;*/
+    /*padding-left: 70px;*/
+}
+
+.info__title {
+    font-family: Aeroport, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    margin-top: 50px;
+    max-width: 580px;
+}
+
+.info__subtitle {
+    font-family: Aeroport, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 0.15em;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.info__block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 60px;
+}
+
+.info__header {
+    font-family: Aeroport, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.info__text {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.info-service {
+    margin-left: 30px;
+    width: 360px;
+}
+
+.info-manager {
+    margin-left: auto;
+    width: 360px;
+    margin-right: 30px;
+}
+
+.info-manager__title {
+    text-align: right;
+}
+
+.info-manager__text {
+    text-align: right;
+}
+
+.info__rating {
+    display: flex;
+    margin-top: 90px;
+}
+
+.info__rating-text {
+    font-family: Aeroport, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.info__rating-star {
+    margin-right: 4px;
+}
+
+.info__review {
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.info-rating-card {
+    width: 232px;
+    height: 136px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid var(--secondary-color);
+}
+
+.info-rating-cards {
+    display: flex;
+    margin-top: 40px;
+}
+
+.info-rating-card__rating {
+    font-family: Aeroport, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #fff;
+}
+
+.info-rating-card__btn {
+    width: 200px;
+    height: 40px;
+    border-radius: 120px;
+    border: none;
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.info-rating-card__btn:hover {
+    background: var(--hover-color);
+    cursor: pointer;
+}
+
+.info-rating-card__text {
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.info-rating-card__img {
+    margin-right: 10px;
+}
+
+.info-manager--big {
+    display: block;
+}
+
+.info-manager--small {
+    display: none;
+}
+
+.info-privacy {
+    width: 360px;
+    margin-left: 30px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .info__title {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .info__subtitle {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .info__block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-service {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .info-manager__title {
+        text-align: left;
+    }
+
+    .info__text {
+        text-align: left;
+    }
+
+    .info__img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .info-rating-card {
+        width: 181px;
+    }
+
+    .info-rating-card__btn {
+        /*width: 171px;*/
+        width: 100%;
+    }
+
+    .info-rating-card__btn-text {
+        /*width: 100%;*/
+    }
+
+    .info-manager--big {
+        display: none;
+    }
+
+    .info-manager--small {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .info-privacy {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .info-manager {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+}

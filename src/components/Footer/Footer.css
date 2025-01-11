@@ -1,0 +1,278 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    background-image: url('../../assets/images/bg-2.png');
+    height: auto;
+    width: 100vw;
+    top: -284px;
+    left: -454.86px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(300px);
+    padding-bottom: 100px;
+}
+
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 720px;
+    padding-right: 70px;
+    padding-left: 70px;
+}
+
+.footer__logo {
+    width: 253px;
+    margin-top: 20px;
+}
+
+.footer__title {
+    font-family: Aeroport, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 50px;
+}
+
+.footer__subtitle {
+    font-family: Aeroport, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 40px;
+}
+
+.gastronomy-cards {
+    display: flex;
+    margin-top: 40px;
+}
+
+.gastronomy-card {
+    cursor: pointer;
+    display: flex;
+    border: 2px solid var(--secondary-color);
+    width: 358px;
+    height: 144px;
+    padding: 24px 16px 24px 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 #C618D080;
+    background: #000000;
+}
+
+.gastronomy-card:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 #C618D080;
+    background: linear-gradient(180deg, #000000 54.86%, #A401AD 115.97%);
+}
+
+.gastronomy-card__title {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.watch-btn {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+    width: 145px;
+    height: 48px;
+    padding: 16px 24px 16px 24px;
+    border-radius: 120px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.watch-btn__text {
+    text-transform: uppercase;
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    margin-right: 10px;
+}
+
+.footer__days, .footer__hours {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.footer__days {
+    color: var(--secondary-color);
+}
+
+.footer__hours {
+    margin-top: 6px;
+}
+
+.footer__addess {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.footer__text {
+    font-family: Aeroport, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.footer__goto {
+    display: flex;
+    margin-top: 60px;
+}
+
+.footer__map {
+    display: none;
+}
+
+.footer__map--big {
+    display: block;
+}
+
+.footer__phone {
+    display: flex;
+    align-items: center;
+}
+
+.footer__phone-text {
+    font-family: Aeroport, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.15em;
+    color: var(--secondary-color);
+}
+
+.footer__phone-img {
+    width: 72px;
+    height: 72px;
+    margin-top: 16px;
+    margin-right: -6px;
+    margin-left: -20px;
+}
+
+.footer__button {
+    width: 358px;
+    height: 60px;
+    border-radius: 120px;
+    border: 2px solid var(--secondary-color);
+    background-color: transparent;
+    color: #fff;
+    font-family: Aeroport, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.footer__button a {
+    color: #fff;
+    font-family: Aeroport, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.footer__button:hover {
+    border-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.footer-taxi {
+    margin-left: 10px;
+}
+
+.footer-reserve {
+    margin-top: 60px;
+}
+
+.footer__button--filled {
+    background-color: var(--secondary-color);
+    box-shadow: 0 8px 16px 0 #C618D080;
+}
+
+.footer__button--filled:hover {
+    background-color: var(--hover-color);
+}
+
+.footer__info {
+    text-align: center;
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    opacity: 50%;
+    color: #fff;
+    margin-top: 50px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .footer__title {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .footer__goto {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+    }
+
+    .footer__map {
+        display: block;
+    }
+
+    .footer__map--big {
+        display: none;
+    }
+
+    .footer-taxi {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .footer-reserve {
+        margin-top: 36px;
+    }
+
+    .gastronomy-cards {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .gastronomy-card {
+        margin-top: 20px;
+    }
+}
