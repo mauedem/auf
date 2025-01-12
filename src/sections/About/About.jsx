@@ -137,6 +137,9 @@ export const About = () => {
                     initial="hidden"
                     animate="visible"
                     transition={{ duration: 1 }}
+                    onClick={() => {
+                        window.location.href = `tel:${BOOK_NUMBER}`;
+                    }}
                 >
                     <motion.img
                         className="reserve-button__phone-call"

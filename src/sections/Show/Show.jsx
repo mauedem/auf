@@ -35,7 +35,7 @@ export const Show = ({ onInteriorClick }) => {
     const [textRef, textInView] = useInView({
         threshold: 0
     });
-    const text = "Музыкальная концепция стрипклуба AUF построена в стиле ORGANIC, MELODIC и AFRO HOUSE создает настроение пира души и тела. А наши актрисы создают неповторимые иммерсивные эротические постановки под руководством из лучших хореографов Москвы.";
+    const text = "Музыкальная концепция стрипклуба AUF построена в стиле ORGANIC, MELODIC и AFRO HOUSE создает настроение пира души и тела. А наши актрисы создают неповторимые иммерсивные эротические постановки под руководством лучших хореографов Москвы.";
     const words = text.split(" ")
     const wordAnimation = {
         hidden: { opacity: 0, y: 20 },

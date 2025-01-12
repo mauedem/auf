@@ -22,7 +22,12 @@ export const Footer = ({ onMoreInfoClick }) => {
                     <h2 className="footer__title">Кухня и бар</h2>
 
                     <div className="gastronomy-cards">
-                        <div className="gastronomy-card">
+                        <div
+                            className="gastronomy-card"
+                            onClick={() => {
+                                window.open('/assets/files/menu-kitchen.pdf', '_blank', 'noopener,noreferrer');
+                            }}
+                        >
                             <div><img src={Kitchen} alt="Kitchen"/></div>
 
                             <div style={{marginLeft: '20px'}}>
@@ -60,7 +65,7 @@ export const Footer = ({ onMoreInfoClick }) => {
                     <div className="footer__days">Ежедневно</div>
                     <div className="footer__hours">с 21:00 до 06:00</div>
 
-                    <div className="footer__addess">
+                    <div className="footer__addess" onClick={() => window.open(ADDRESS, '_blank')}>
                         <div>Стриптиз клуб</div>
                         <div style={{marginTop: '6px'}}>находится по адресу</div>
                         <div style={{color: 'var(--secondary-color)', marginTop: '6px'}}>г. Москва, ул. Красная Пресня,
@@ -72,7 +77,12 @@ export const Footer = ({ onMoreInfoClick }) => {
                         Клубный паркинг
                     </div>
 
-                    <div className="footer__phone">
+                    <div
+                        className="footer__phone"
+                        onClick={() => {
+                            window.location.href = `tel:${BOOK_NUMBER}`;
+                        }}
+                    >
                         <img className="footer__phone-img" src={PhoneCallShadowed} alt="phone"/>
                         <div className="footer__phone-text">+7 (495) 245-99-99</div>
                     </div>
@@ -96,9 +106,12 @@ export const Footer = ({ onMoreInfoClick }) => {
                         </button>
                     </div>
 
-                    <button className="footer__button footer__button--filled footer-reserve">
-                        <a href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
-                    </button>
+                    <a
+                        className="footer__button footer__button--filled footer-reserve"
+                        href={`tel:${BOOK_NUMBER}`}
+                    >
+                        Забронировать
+                    </a>
 
                     <div className="footer__info">
                         <div
@@ -107,7 +120,7 @@ export const Footer = ({ onMoreInfoClick }) => {
                         >
                             Подробнее о сайте
                         </div>
-                        <div style={{marginTop: '30px'}}>© AUF 2024</div>
+                        <div style={{marginTop: '30px'}}>© AUF 2025</div>
                         <div style={{marginTop: '10px'}}>Политика в отношении обработки персональных данных</div>
                     </div>
                 </div>

@@ -3,10 +3,26 @@
     top: 56px;
     right: 0;
     width: 390px;
-    height: 100vh;
     z-index: 1000;
-    background-color: #070323;
-    padding: 0 16px;
+    background-color: #000;
+}
+
+.language-menu-list__item {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    font-family: Aeroport, sans-serif;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 400;
+    text-align: left;
+    color: #FFFFFF;
+    padding: 2px 16px 2px 16px;
+}
+
+.language-menu-list__item:hover {
+    cursor: pointer;
+    background-color: #A401AD66;
 }
 
 @media (min-width: 320px) and (max-width: 767px) {

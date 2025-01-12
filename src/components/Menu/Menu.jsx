@@ -6,7 +6,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import './Menu.css'
-import {BOOK_NUMBER, MENU_ITEMS} from "../../utils/constants.js";
+import {ADDRESS, BOOK_NUMBER, MENU_ITEMS} from "../../utils/constants.js";
 
 export const Menu = ({ showMenu, onMenuChange }) => {
     const navigate = useNavigate()
@@ -46,21 +46,30 @@ export const Menu = ({ showMenu, onMenuChange }) => {
                             ))}
                         </div>
 
-                        <button className="menu-reserve-button">
+                        <button
+                            className="menu-reserve-button"
+                            onClick={() => {
+                                window.location.href = `tel:${BOOK_NUMBER}`;
+                            }}
+                        >
                             <img className="reserve-button__phone-call" src={PhoneCall} alt="Phone call"/>
                                 <a href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
                             <img className="reserve-button__arrow-right" src={ArrowRight} alt="Arrow right"/>
                         </button>
 
                         <div className="menu__contacts">
-                            <div className="menu__phone">
+                            <div
+                                className="menu__phone"
+                                onClick={() => {
+                                    window.location.href = `tel:${BOOK_NUMBER}`;
+                                }}>
                                 <img className="menu__phone-img" src={Phone} alt="Phone"/>
-                                <div className="menu__phone-text">+7 (495) 245-99-99</div>
+                                <div className="menu__phone-text" >+7 (495) 245-99-99</div>
                             </div>
 
                             <div style={{display: "flex"}}>
                                 <div style={{ marginTop: '20px' }}>
-                                    <div className="menu__map">
+                                    <div className="menu__map" onClick={() => window.open(ADDRESS, '_blank')}>
                                         <img className="menu__map-img" src={Map} alt="Map"/>
                                         <div className="menu__address">ул. Красная <br/> <div style={{ marginTop: '5px' }}>Пресня, 24</div></div>
                                     </div>

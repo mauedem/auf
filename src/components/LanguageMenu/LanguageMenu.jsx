@@ -28,18 +28,16 @@ export const LanguageMenu = ({ showLanguageMenu }) => {
             <div style={{position: 'relative'}}>
                 {showLanguageMenu &&
                     <div className="language-menu">
-                        <div className="language-menu-list">
-                            {languageMenuItems.map((item, index) => (
-                                <div className="menu-list__item" key={index}>
-                                    <div>{item.text}</div>
-                                    <div style={{marginLeft: "auto", marginRight: "10px"}}>
-                                        {item.active &&
-                                            <img className="menu-list__item-icon" src={Check} alt="Arrow right" />
-                                        }
-                                    </div>
+                        {languageMenuItems.map((item, index) => (
+                            <div className="language-menu-list__item" key={index}>
+                                <div>{item.text}</div>
+                                <div style={{marginLeft: "auto", marginRight: "10px"}}>
+                                    {item.active &&
+                                        <img className="language-menu-list__item-icon" src={Check} alt="Arrow right" />
+                                    }
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 }
             </div>

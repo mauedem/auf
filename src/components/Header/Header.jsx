@@ -108,9 +108,7 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                     </div>
 
 
-                    <button className="header-reserve-btn">
-                        <a href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
-                    </button>
+                    <a className="header-reserve-btn" href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
 
                     <div style={{ marginLeft: '16px', marginRight: '16px', }}>
                         <img
@@ -135,7 +133,12 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                 </div>
 
                 <div className="header--small">
-                    <button className="reserve-btn">
+                    <button
+                        className="reserve-btn"
+                        onClick={() => {
+                            window.location.href = `tel:${BOOK_NUMBER}`;
+                        }}
+                    >
                         <img className="reserve-btn__phone-call" src={PhoneCallShadowed} alt="Phone call"/>
                         <div className="reserve-btn__text">
                             <a href={`tel:${BOOK_NUMBER}`}>Бронь</a>
