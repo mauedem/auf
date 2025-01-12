@@ -1,27 +1,30 @@
-import Interior1 from "../../assets/images/interier-1-big.png";
-import Interior2 from "../../assets/images/interier-2-big.png";
-import Interior3 from "../../assets/images/interier-3-big.png";
-import Interior4 from "../../assets/images/interier-4-big.png";
+import Interior1 from "../../../public/assets/images/interier-1-big.png";
+import Interior2 from "../../../public/assets/images/interier-2-big.png";
+import Interior3 from "../../../public/assets/images/interier-3-big.png";
+import Interior4 from "../../../public/assets/images/interier-4-big.png";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Stories } from "../../components/Stories/Stories.jsx";
 import { useRef } from "react";
 import { INTERIOR_ITEMS } from "../../utils/constants.js";
+import PropTypes from "prop-types";
 
 import './Show.css'
 
-export const Show = () => {
+export const Show = ({ onInteriorClick }) => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
 
+    /* TODO сделать динамический класс active / inactive */
     const interiorItems = INTERIOR_ITEMS.map(
         item => {
             return (
                 <div
                     key={item.id}
                     className="interior__tag interior__tag--inactive"
+                    onClick={() => onInteriorClick(item.photos)}
                 >
                     {item.text}
                 </div>
@@ -171,3 +174,7 @@ export const Show = () => {
         </>
     )
 }
+
+Show.propTypes = {
+    onInteriorClick: PropTypes.func.isRequired,
+};

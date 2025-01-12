@@ -1,5 +1,5 @@
 .container {
-    background-image: url('../../assets/images/show-bg.png');
+    background-image: url('../../../public/assets/images/show-bg.png');
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(300px);
@@ -43,7 +43,7 @@
 .show__stories {
     display: flex;
     justify-content: center;
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 .interior {
@@ -109,8 +109,8 @@
     align-items: center;
     justify-content: center;
     height: 32px;
-    padding-left: 20px;
-    padding-right: 20px;
+    max-width: 100%;
+    text-wrap: nowrap;
     border-radius: 24px;
     font-family: Aeroport, sans-serif;
     font-size: 12px;
@@ -120,6 +120,7 @@
     color: #ffffff;
     margin-right: 10px;
     cursor: pointer;
+    padding: 8px 16px 8px 16px;
 }
 
 .interior__tag:hover {

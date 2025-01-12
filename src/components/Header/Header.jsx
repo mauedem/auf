@@ -1,12 +1,12 @@
-import Language from "../../assets/icons/language.svg"
-import LanguageHover from "../../assets/icons/language-hover.svg"
-import OpenMenu from "../../assets/icons/open-menu.svg"
-import OpenMenuHover from "../../assets/icons/open-menu-hover.svg"
-import CloseMenu from "../../assets/icons/close-menu.svg"
-import CloseMenuHover from "../../assets/icons/close-menu-hover.svg"
-import AufLogoShadowed from "../../assets/icons/auf-logo-shadowed.svg"
-import PhoneCallShadowed from "../../assets/icons/phone-call-shadowed.svg";
-import Map from "../../assets/icons/map.svg";
+import Language from "../../../public/assets/icons/language.svg"
+import LanguageHover from "../../../public/assets/icons/language-hover.svg"
+import OpenMenu from "../../../public/assets/icons/open-menu.svg"
+import OpenMenuHover from "../../../public/assets/icons/open-menu-hover.svg"
+import CloseMenu from "../../../public/assets/icons/close-menu.svg"
+import CloseMenuHover from "../../../public/assets/icons/close-menu-hover.svg"
+import AufLogoShadowed from "../../../public/assets/icons/auf-logo-shadowed.svg"
+import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
+import Map from "../../../public/assets/icons/map.svg";
 
 import './Header.css'
 

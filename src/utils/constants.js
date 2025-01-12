@@ -79,21 +79,31 @@ export const INTERIOR_ITEMS = [
     {
         id: 1,
         text: 'Основной зал',
+        photos: 'hall',
+        bg: 'hall-bg.png'
     },
     {
         id: 2,
         text: 'Посадочные места',
+        photos: 'seats',
+        bg: 'seats-bg.png'
     },
     {
         id: 3,
         text: 'Бар',
+        photos: 'bar',
+        bg: 'bar-bg.png'
     },
     {
         id: 4,
         text: 'Вход с улицы',
+        photos: 'entrance',
+        bg: 'entrance-bg.png'
     },
     {
         id: 5,
         text: 'VIP-ложи',
+        photos: 'vip',
+        bg: 'vip-bg.png'
     }
 ]

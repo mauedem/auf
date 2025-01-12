@@ -5,7 +5,7 @@
     width: 100vw;
     top: -284px;
     left: -454.86px;
-    background-image: url('../../assets/images/bg.png');
+    background-image: url('../../../public/assets/images/bg.png');
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(300px);

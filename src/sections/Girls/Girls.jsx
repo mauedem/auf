@@ -1,13 +1,13 @@
-import Girls1 from "../../assets/icons/girls/girls-1.png";
-import Girls2 from "../../assets/icons/girls/girls-2.png";
-import Girls3 from "../../assets/icons/girls/girls-3.png";
-import Girls4 from "../../assets/icons/girls/girls-4.png";
-import Girls5 from "../../assets/icons/girls/girls-5.png";
-import Girls6 from "../../assets/icons/girls/girls-6.png";
-import Girls7 from "../../assets/icons/girls/girls-7.png";
-import Girls8 from "../../assets/icons/girls/girls-8.png";
-import Girls9 from "../../assets/icons/girls/girls-9.png";
-import Girls10 from "../../assets/icons/girls/girls-10.png";
+import Girls1 from "../../../public/assets/icons/girls/girls-1.png";
+import Girls2 from "../../../public/assets/icons/girls/girls-2.png";
+import Girls3 from "../../../public/assets/icons/girls/girls-3.png";
+import Girls4 from "../../../public/assets/icons/girls/girls-4.png";
+import Girls5 from "../../../public/assets/icons/girls/girls-5.png";
+import Girls6 from "../../../public/assets/icons/girls/girls-6.png";
+import Girls7 from "../../../public/assets/icons/girls/girls-7.png";
+import Girls8 from "../../../public/assets/icons/girls/girls-8.png";
+import Girls9 from "../../../public/assets/icons/girls/girls-9.png";
+import Girls10 from "../../../public/assets/icons/girls/girls-10.png";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 

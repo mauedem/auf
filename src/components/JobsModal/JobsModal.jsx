@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import ArrowRight from "../../assets/icons/arrow-right.svg";
+import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import { TELEGRAM, WHATSAPP } from "../../utils/constants.js";
 
 import './JobsModal.css';

@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import MainBgVideo from "../../assets/videos/main-bg.mp4";
-import MainBgMobileVideo from "../../assets/videos/main-bg-mobile.mp4";
-import AufLogo from "../../assets/icons/auf-logo.svg";
-import PhoneCall from "../../assets/icons/phone-call.svg";
-import ArrowRight from "../../assets/icons/arrow-right.svg";
-import Map from "../../assets/icons/map.svg";
+import MainBgVideo from "../../../public/assets/videos/main-bg.mp4";
+import MainBgMobileVideo from "../../../public/assets/videos/main-bg-mobile.mp4";
+import AufLogo from "../../../public/assets/icons/auf-logo.svg";
+import PhoneCall from "../../../public/assets/icons/phone-call.svg";
+import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
+import Map from "../../../public/assets/icons/map.svg";
 import { BOOK_NUMBER, NAV_ITEMS } from "../../utils/constants.js";
 
 import "./About.css";

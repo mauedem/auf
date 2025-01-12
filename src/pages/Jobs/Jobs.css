@@ -1,7 +1,7 @@
 .jobs {
     display: flex;
     justify-content: center;
-    background-image: url('../../assets/images/bg.png');
+    background-image: url('../../../public/assets/images/bg.png');
     height: auto;
     width: 100vw;
     top: -284px;

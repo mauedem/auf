@@ -1,7 +1,7 @@
-import ArrowRight from "../../assets/icons/arrow-right.svg"
-import PhoneCall from "../../assets/icons/phone-call.svg";
-import Phone from "../../assets/icons/phone.svg";
-import Map from "../../assets/icons/map.svg";
+import ArrowRight from "../../../public/assets/icons/arrow-right.svg"
+import PhoneCall from "../../../public/assets/icons/phone-call.svg";
+import Phone from "../../../public/assets/icons/phone.svg";
+import Map from "../../../public/assets/icons/map.svg";
 import {useLocation, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 

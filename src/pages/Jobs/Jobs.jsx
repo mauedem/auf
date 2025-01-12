@@ -1,5 +1,5 @@
-import ArrowRight from "../../assets/icons/arrow-right.svg"
-import AufLogoShadowed from "../../assets/icons/auf-logo-shadowed.svg"
+import ArrowRight from "../../../public/assets/icons/arrow-right.svg"
+import AufLogoShadowed from "../../../public/assets/icons/auf-logo-shadowed.svg"
 import { useEffect } from "react";
 
 import './Jobs.css'

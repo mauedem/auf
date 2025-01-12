@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-import Video1 from "../../assets/videos/stories/1.mp4";
-import Video2 from "../../assets/videos/stories/2.mp4";
-import Video3 from "../../assets/videos/stories/3.mp4";
-import Video4 from "../../assets/videos/stories/4.mp4";
-import Video5 from "../../assets/videos/stories/5.mp4";
-import Video6 from "../../assets/videos/stories/6.mp4";
+import Video1 from "../../../public/assets/videos/stories/1.mp4";
+import Video2 from "../../../public/assets/videos/stories/2.mp4";
+import Video3 from "../../../public/assets/videos/stories/3.mp4";
+import Video4 from "../../../public/assets/videos/stories/4.mp4";
+import Video5 from "../../../public/assets/videos/stories/5.mp4";
+import Video6 from "../../../public/assets/videos/stories/6.mp4";
 
 import "./Stories.css";
 
@@ -83,7 +83,7 @@ export const Stories = () => {
                 ))}
             </div>
 
-            <div className="">
+            <div>
                 <video
                     ref={videoRef}
                     className="story-video__content"

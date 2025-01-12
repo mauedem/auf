@@ -1,4 +1,4 @@
-import Check from "../../assets/icons/check.svg"
+import Check from "../../../public/assets/icons/check.svg"
 import PropTypes from "prop-types";
 
 import './LanguageMenu.css'

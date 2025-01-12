@@ -1,10 +1,10 @@
-import MoreInfo1 from "../../assets/images/more-info-1.png"
-import MoreInfo2 from "../../assets/images/more-info-2.png"
-import MoreInfo3 from "../../assets/images/more-info-3.png"
+import MoreInfo1 from "../../../public/assets/images/more-info-1.png"
+import MoreInfo2 from "../../../public/assets/images/more-info-2.png"
+import MoreInfo3 from "../../../public/assets/images/more-info-3.png"
 
 import './MoreInfoModal.css'
 import PropTypes from "prop-types";
-import Cross from "../../assets/icons/cross.svg";
+import Cross from "../../../public/assets/icons/cross.svg";
 
 export const MoreInfoModal = ({ isOpen, onClose }) => {
     const handleOverlayClick = (event) => {

@@ -43,7 +43,7 @@
 
 .more-info-modal__close-btn {
     position: fixed;
-    bottom: 30%;
+    bottom: 16%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;

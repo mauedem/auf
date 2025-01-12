@@ -1,11 +1,11 @@
-import Kitchen from "../../assets/icons/kitchen.svg";
-import Bar from "../../assets/icons/bar.svg";
-import ArrowRight from "../../assets/icons/arrow-right.svg";
+import Kitchen from "../../../public/assets/icons/kitchen.svg";
+import Bar from "../../../public/assets/icons/bar.svg";
+import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 // import AufLogoShadowed from "../../assets/icons/auf-logo-shadowed.svg";
-import AufLogoBigShadowed from "../../assets/icons/auf-logo-big-shadowed.svg";
-import PhoneCallShadowed from "../../assets/icons/phone-call-shadowed.svg";
-import Map from "../../assets/images/map.png";
-import MapBig from "../../assets/images/map-big.png";
+import AufLogoBigShadowed from "../../../public/assets/icons/auf-logo-big-shadowed.svg";
+import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
+import Map from "../../../public/assets/images/map.png";
+import MapBig from "../../../public/assets/images/map-big.png";
 import { useRef } from "react";
 
 import './Footer.css'

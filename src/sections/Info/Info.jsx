@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import Info1Big from "../../assets/images/info-1-big.png"
-import Info2Big from "../../assets/images/info-2-big.png"
-import Info3Big from "../../assets/images/info-3-big.png"
-import Star from "../../assets/icons/star.svg"
-import Yandex from "../../assets/icons/yandex.svg"
-import Google from "../../assets/icons/google.svg"
+import Info1Big from "../../../public/assets/images/info-1-big.png"
+import Info2Big from "../../../public/assets/images/info-2-big.png"
+import Info3Big from "../../../public/assets/images/info-3-big.png"
+import Star from "../../../public/assets/icons/star.svg"
+import Yandex from "../../../public/assets/icons/yandex.svg"
+import Google from "../../../public/assets/icons/google.svg"
 import { useInView } from "react-intersection-observer";
 
 import './Info.css'
@@ -100,12 +100,11 @@ export const Info = () => {
                     <div className="info__block">
                         <motion.div
                             ref={infoImage1Ref}
-                            className="animated-image-wrapper"
                             initial="hidden"
                             animate={infoImage1InView ? "visible" : "hidden"}
                             variants={imageVariantLeftToRight}
                         >
-                            <img className="info__img animated-image" src={Info1Big} alt=""/>
+                            <img className="info__img" src={Info1Big} alt=""/>
                         </motion.div>
 
                         <div className="info-service">
@@ -133,7 +132,6 @@ export const Info = () => {
 
                         <motion.div
                             ref={infoImage2Ref}
-                            className="animated-image-wrapper"
                             initial="hidden"
                             animate={infoImage2InView ? "visible" : "hidden"}
                             variants={imageVariantRightToLeft}
@@ -154,7 +152,6 @@ export const Info = () => {
                     <div className="info__block" style={{marginTop: '90px'}}>
                         <motion.div
                             ref={infoImage3Ref}
-                            className="animated-image-wrapper"
                             initial="hidden"
                             animate={infoImage3InView ? "visible" : "hidden"}
                             variants={imageVariantLeftToRight}
