@@ -6,22 +6,23 @@ import { Girls } from "./sections/Girls/Girls.jsx";
 import { Info } from "./sections/Info/Info.jsx";
 import { Show } from "./sections/Show/Show.jsx";
 import { Footer } from "./components/Footer/Footer.jsx";
-// import { MoreInfo } from "./sections/MoreInfo/MoreInfo.jsx";
 import { Gift } from "./pages/Gift/Gift.jsx";
 import { Jobs } from "./pages/Jobs/Jobs.jsx";
 import { LanguageMenu } from "./components/LanguageMenu/LanguageMenu.jsx";
 import { JobsModal } from "./components/JobsModal/JobsModal.jsx";
 import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
+import { MoreInfoModal } from "./components/MoreInfoModal/MoreInfoModal.jsx";
 
 import Taxi from "./assets/icons/taxi.svg";
 import TaxiHover from "./assets/icons/taxi-hover.svg";
 import Chat from "./assets/icons/chat.svg";
 import ChatHover from "./assets/icons/chat-hover.svg";
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
+
+import { TAXI } from "./utils/constants.js";
 
 import './App.css'
-import { TAXI } from "./utils/constants.js";
 
 function App() {
     const [showMenu, setShowMenu] = useState(false);
@@ -42,6 +43,7 @@ function App() {
     };
 
     const [isJobsModalOpen, setIsJobsModalOpen] = useState(false);
+    const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const handleShowMenu = (newState) => {
@@ -55,6 +57,14 @@ function App() {
 
         setShowMenu(false);
     };
+
+    useEffect(() => {
+        if (isMoreInfoModalOpen) {
+            document.body.classList.add("no-scroll");
+        } else {
+            document.body.classList.remove("no-scroll");
+        }
+    }, [isMoreInfoModalOpen]);
 
     return (
         <div className="App">
@@ -74,8 +84,7 @@ function App() {
                         <Girls/>
                         <Info/>
                         <Show/>
-                        <Footer/>
-                        {/*<MoreInfo />*/}
+                        <Footer onMoreInfoClick={() => setIsMoreInfoModalOpen(true)} />
                     </>
                 }/>
                 <Route path="/gift" element={<Gift/>}/>
@@ -105,6 +114,8 @@ function App() {
             </div>
 
             <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+            <MoreInfoModal isOpen={isMoreInfoModalOpen} onClose={() => setIsMoreInfoModalOpen(false)}/>
 
             <JobsModal isOpen={isJobsModalOpen} onClose={() => setIsJobsModalOpen(false)}/>
         </div>

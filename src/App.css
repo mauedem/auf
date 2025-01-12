@@ -8,6 +8,10 @@ html {
     scroll-behavior: smooth;
 }
 
+body.no-scroll {
+    overflow: hidden; /* Отключаем прокрутку для основного содержимого */
+}
+
 :root {
     /* Colors */
     --primary-color: #DF61E7;

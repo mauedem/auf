@@ -17,6 +17,7 @@
 .header__logo {
     width: 99px;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .header__language {

@@ -10,8 +10,9 @@ import { useRef } from "react";
 
 import './Footer.css'
 import {ADDRESS, BOOK_NUMBER, TAXI} from "../../utils/constants.js";
+import PropTypes from "prop-types";
 
-export const Footer = () => {
+export const Footer = ({ onMoreInfoClick }) => {
     const gastronomyRef = useRef(null);
 
     return (
@@ -35,7 +36,7 @@ export const Footer = () => {
                             </div>
                         </div>
 
-                        <div className="gastronomy-card" style={{marginLeft: '14px'}}>
+                        <div className="gastronomy-card">
                             <div><img src={Bar} alt="Bar"/></div>
 
                             <div style={{marginLeft: '20px'}}>
@@ -100,7 +101,12 @@ export const Footer = () => {
                     </button>
 
                     <div className="footer__info">
-                        <div>Подробнее о сайте</div>
+                        <div
+                            className="footer__more-info-modal-modal"
+                            onClick={onMoreInfoClick}
+                        >
+                            Подробнее о сайте
+                        </div>
                         <div style={{marginTop: '30px'}}>© AUF 2024</div>
                         <div style={{marginTop: '10px'}}>Политика в отношении обработки персональных данных</div>
                     </div>
@@ -109,3 +115,8 @@ export const Footer = () => {
         </>
     )
 }
+
+Footer.propTypes = {
+    onMoreInfoClick: PropTypes.func.isRequired,
+};
+

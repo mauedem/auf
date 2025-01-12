@@ -1,87 +1,178 @@
-import MainBgVideo from "../../assets/videos/main-bg.mp4"
-import AufLogo from "../../assets/icons/auf-logo.svg"
-import PhoneCall from "../../assets/icons/phone-call.svg"
-import ArrowRight from "../../assets/icons/arrow-right.svg"
-import Map from "../../assets/icons/map.svg"
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import MainBgVideo from "../../assets/videos/main-bg.mp4";
+import MainBgMobileVideo from "../../assets/videos/main-bg-mobile.mp4";
+import AufLogo from "../../assets/icons/auf-logo.svg";
+import PhoneCall from "../../assets/icons/phone-call.svg";
+import ArrowRight from "../../assets/icons/arrow-right.svg";
+import Map from "../../assets/icons/map.svg";
 import { BOOK_NUMBER, NAV_ITEMS } from "../../utils/constants.js";
 
-import './About.css'
+import "./About.css";
+import {useInView} from "react-intersection-observer";
 
 export const About = () => {
-    const aboutRef = useRef(null);
+    const [aboutRef, aboutRefInView] = useInView({
+        threshold: 0
+    });
 
-    function goToLinkHref(menuItem) {
-        if (menuItem.href) {
-            document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+    const textVariant = (direction = "y", distance = 50) => ({
+        hidden: { opacity: 0, [direction]: distance },
+        visible: {
+            opacity: 1,
+            [direction]: 0,
+            transition: { duration: 1.2 },
+        },
+    });
 
-    const navItems = NAV_ITEMS.map(
-        item => {
-            return (
-                <div
-                    key={item.id}
-                    className="about__tag"
-                    onClick={() => goToLinkHref(item)}
-                >
-                    {item.name}
-                </div>
-            )
-        }
-    );
+    const buttonBackgroundVariant = {
+        initial: {borderColor: "#C618D0"},
+        hidden: {scaleX: 0},
+        animate: {
+            borderColor: "#ffffff",
+            transition: {
+                duration: 1,
+                repeat: 1,
+                repeatType: "reverse",
+            },
+        },
+        visible: {
+            scaleX: 1,
+            transition: {duration: 1},
+        },
+    };
+
+    const buttonTextVariant = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { duration: 0.5, delay: 0.5 },
+        },
+    };
+
+    const navItems = NAV_ITEMS.map((item) => {
+        return (
+            <div
+                key={item.id}
+                className="about__tag"
+                onClick={() => {
+                    if (item.href) {
+                        document
+                            .getElementById(item.href)
+                            .scrollIntoView({ behavior: "smooth" });
+                    }
+                }}
+            >
+                {item.name}
+            </div>
+        );
+    });
 
     return (
-        <>
-            <div className="about" id="about" ref={aboutRef}>
-                <div className="video-background">
-                    <video
-                        className="video"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                    >
-                        <source src={MainBgVideo} type="video/mp4"/>
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <div className="video-overlay"></div>
-                </div>
-
-                <div className="about__container">
-                    <div className="about__title about__title--welcome">WELCOME TO</div>
-                    <img className="about__logo" src={AufLogo} alt="AUF Logo"/>
-                    <div className="about__title about__title--experience">EXPERIENCE CLUB</div>
-
-                    <div>
-                        <h1 className="about__subtitle">стриптиз клуб в центре <br/> москвы</h1>
-                        <div className="about__description">изысканный отдых <br/> для мужчин</div>
-                    </div>
-
-                    <button className="reserve-button">
-                        <img className="reserve-button__phone-call" src={PhoneCall} alt="Phone call"/>
-                            <a href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
-                        <img className="reserve-button__arrow-right" src={ArrowRight} alt="Arrow right"/>
-                    </button>
-
-                    <div className="about__info">
-                        <div style={{display: "flex", alignItems: "center"}}>
-                            <img src={Map} alt="Map"/>
-                            <div className="about__address">ул. Красная Пресня, 24</div>
-                        </div>
-
-                        <div style={{display: "flex", flexDirection: 'column'}}>
-                            <div className="about__timetable">Ежедневно</div>
-                            <div className="about__opening-hours">с 21:00 до 06:00</div>
-                        </div>
-                    </div>
-
-                    <div className="about__tags">
-                        {navItems}
-                    </div>
-                </div>
+        <motion.div
+            className="about"
+            ref={aboutRef}
+            initial="hidden"
+            animate={aboutRefInView ? "visible" : "hidden"}
+            transition={{ duration: 1 }}
+        >
+            <div className="video-background">
+                <video
+                    className="video"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                >
+                    <source
+                        src={MainBgVideo}
+                        type="video/mp4"
+                        media="(min-width: 576px)"
+                    />
+                    <source
+                        src={MainBgMobileVideo}
+                        type="video/mp4"
+                        media="(max-width: 575px)"
+                    />
+                    Ваш браузер не поддерживает видео.
+                </video>
+                <div className="video-overlay"></div>
             </div>
-        </>
-    )
-}
+
+            <div className="about__container">
+                <motion.div
+                    className="about__title about__title--welcome"
+                    variants={textVariant("y", -30)}
+                >
+                    WELCOME TO
+                </motion.div>
+
+                <img className="about__logo" src={AufLogo} alt="AUF Logo" />
+
+                <motion.div
+                    className="about__title about__title--experience"
+                    variants={textVariant("y", 30)}
+                >
+                    EXPERIENCE CLUB
+                </motion.div>
+
+                <div>
+                    <motion.h1
+                        className="about__subtitle"
+                        variants={textVariant("y", -30)}
+                    >
+                        стриптиз клуб в центре <br /> москвы
+                    </motion.h1>
+                    <motion.div
+                        className="about__description"
+                        variants={textVariant("y", 30)}
+                    >
+                        изысканный отдых <br /> для мужчин
+                    </motion.div>
+                </div>
+
+                <motion.div
+                    className="reserve-button"
+                    variants={buttonBackgroundVariant}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 1 }}
+                >
+                    <motion.img
+                        className="reserve-button__phone-call"
+                        src={PhoneCall}
+                        alt="Phone call"
+                    />
+                    <motion.a
+                        href={`tel:${BOOK_NUMBER}`}
+                        variants={buttonTextVariant}
+                        transition={{ duration: 0.5 }}
+                    >
+                        Забронировать
+                    </motion.a>
+                    <motion.img
+                        className="reserve-button__arrow-right"
+                        src={ArrowRight}
+                        alt="Arrow right"
+                    />
+                </motion.div>
+
+                <motion.div className="about__info" variants={textVariant("y", 50)}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <img src={Map} alt="Map" />
+                        <div className="about__address">ул. Красная Пресня, 24</div>
+                    </div>
+
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div className="about__timetable">Ежедневно</div>
+                        <div className="about__opening-hours">с 21:00 до 06:00</div>
+                    </div>
+                </motion.div>
+
+                <motion.div className="about__tags" variants={textVariant("y", 50)}>
+                    {navItems}
+                </motion.div>
+            </div>
+        </motion.div>
+    );
+};

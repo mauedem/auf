@@ -72,7 +72,19 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
     return (
         <>
             <div className="header">
-                <img className="header__logo" src={AufLogoShadowed} alt="Auf logo" />
+                <img
+                    className="header__logo"
+                    src={AufLogoShadowed}
+                    alt="Auf logo"
+                    onClick={() => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth',
+                        });
+
+                        navigate('/');
+                    }}
+                />
 
                 <div className="header-wrapper">
                     <nav className="header__nav">{navItems}</nav>

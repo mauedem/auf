@@ -64,6 +64,10 @@
     background: #000000;
 }
 
+.gastronomy-card:nth-child(2) {
+    margin-left: 14px;
+}
+
 .gastronomy-card:hover {
     cursor: pointer;
     box-shadow: 0 8px 16px 0 #C618D080;
@@ -237,7 +241,16 @@
     margin-top: 50px;
 }
 
+.footer__more-info-modal-modal:hover {
+    color: var(--hover-color);
+    cursor: pointer;
+}
+
 @media (min-width: 320px) and (max-width: 767px) {
+    .gastronomy-card:nth-child(2) {
+        margin-left: 0;
+    }
+
     .footer__title {
         font-size: 30px;
         line-height: 30px;
@@ -269,7 +282,7 @@
     .gastronomy-cards {
         display: flex;
         flex-direction: column;
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     .gastronomy-card {

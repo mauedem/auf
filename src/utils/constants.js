@@ -39,39 +39,61 @@ export const NAV_ITEMS = [
 ];
 
 export const MENU_ITEMS = [
-        {
-            id: 1,
-            text: 'О клубе',
-            link: '/',
-            href: 'about',
-        },
-        {
-            id: 2,
-            text: 'Девушки',
-            link: '/',
-            href: 'girls',
-        },
-        {
-            id: 3,
-            text: 'Интерьер',
-            link: '/',
-            href: 'interior',
-        },
-        {
-            id: 4,
-            text: 'VIP ложи',
-            link: '/',
-            href: 'vip'
-        },
-        {
-            id: 5,
-            text: 'Подарочные карты',
-            link: '/gift'
-        },
-        {
-            id: 6,
-            text: 'работа',
-            link: '/jobs'
-        },
-    ]
+    {
+        id: 1,
+        text: 'О клубе',
+        link: '/',
+        href: 'about',
+    },
+    {
+        id: 2,
+        text: 'Девушки',
+        link: '/',
+        href: 'girls',
+    },
+    {
+        id: 3,
+        text: 'Интерьер',
+        link: '/',
+        href: 'interior',
+    },
+    {
+        id: 4,
+        text: 'VIP ложи',
+        link: '/',
+        href: 'vip'
+    },
+    {
+        id: 5,
+        text: 'Подарочные карты',
+        link: '/gift'
+    },
+    {
+        id: 6,
+        text: 'работа',
+        link: '/jobs'
+    },
+]
 
+export const INTERIOR_ITEMS = [
+    {
+        id: 1,
+        text: 'Основной зал',
+    },
+    {
+        id: 2,
+        text: 'Посадочные места',
+    },
+    {
+        id: 3,
+        text: 'Бар',
+    },
+    {
+        id: 4,
+        text: 'Вход с улицы',
+    },
+    {
+        id: 5,
+        text: 'VIP-ложи',
+    }
+]

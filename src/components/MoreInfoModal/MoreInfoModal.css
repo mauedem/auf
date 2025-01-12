@@ -1,0 +1,86 @@
+.more-info-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.more-info-modal__content {
+    width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: #000;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+
+
+.more-info-modal__title {
+    font-family: Aeroport, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-top: 50px;
+}
+
+.more-info-modal__text {
+    font-family: Aeroport, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #ffffff;
+    margin-top: 30px;
+}
+
+.more-info-modal__close-btn {
+    position: fixed;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 32px;
+    border-radius: 120px;
+    background: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+    z-index: 1100;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.more-info-modal__close-btn:hover {
+    background: var(--hover-color);
+}
+
+.more-info-modal__close-img {
+    height: 82px;
+    margin-left: -46px;
+    margin-top: 18px;
+}
+
+.more-info-modal__close-text {
+    text-transform: uppercase;
+    font-family: Aeroport, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.15em;
+    margin-left: -16px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.more-info-modal__img {
+    margin-top: 50px;
+}

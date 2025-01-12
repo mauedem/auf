@@ -1,11 +1,13 @@
-import Show1 from "../../assets/images/show-1.png";
-
 import Interior1 from "../../assets/images/interier-1-big.png";
 import Interior2 from "../../assets/images/interier-2-big.png";
 import Interior3 from "../../assets/images/interier-3-big.png";
 import Interior4 from "../../assets/images/interier-4-big.png";
 
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Stories } from "../../components/Stories/Stories.jsx";
 import { useRef } from "react";
+import { INTERIOR_ITEMS } from "../../utils/constants.js";
 
 import './Show.css'
 
@@ -13,6 +15,60 @@ export const Show = () => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
+
+    const interiorItems = INTERIOR_ITEMS.map(
+        item => {
+            return (
+                <div
+                    key={item.id}
+                    className="interior__tag interior__tag--inactive"
+                >
+                    {item.text}
+                </div>
+            )
+        }
+    );
+
+    const [textRef, textInView] = useInView({
+        threshold: 0
+    });
+    const text = "Музыкальная концепция стрипклуба AUF построена в стиле ORGANIC, MELODIC и AFRO HOUSE создает настроение пира души и тела. А наши актрисы создают неповторимые иммерсивные эротические постановки под руководством из лучших хореографов Москвы.";
+    const words = text.split(" ")
+    const wordAnimation = {
+        hidden: { opacity: 0, y: 20 },
+        visible: (i) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.1,
+                delay: i * 0.1,
+            },
+        }),
+    };
+
+    const [image1Ref, image1InView] = useInView({
+        threshold: 0
+    });
+    const [image2Ref, image2InView] = useInView({
+        threshold: 0
+    });
+    const [image3Ref, image3InView] = useInView({
+        threshold: 0
+    });
+    const [image4Ref, image4InView] = useInView({
+        threshold: 0
+    });
+    const imageVariants = {
+        hidden: { scaleX: 0, opacity: 0 },
+        visible: {
+            scaleX: 1,
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: "easeInOut",
+            },
+        },
+    };
 
     return (
         <>
@@ -24,14 +80,22 @@ export const Show = () => {
                         </h2>
 
                         <div className="show__text">
-                            Музыкальная концепция стрипклуба AUF построена в стиле ORGANIC, MELODIC и AFRO HOUSE создает
-                            настроение пира души и тела.
-                            А наши актрисы создают неповторимые иммерсивные эротические постановки под руководством из
-                            лучших хореографов Москвы.
+                            {words.map((word, index) => (
+                            <motion.span
+                                ref={textRef}
+                                key={`part1-${index}`}
+                                custom={index}
+                                initial="hidden"
+                                animate={textInView ? "visible" : "hidden"}
+                                variants={wordAnimation}
+                            >
+                                {word}{" "}
+                            </motion.span>
+                            ))}
                         </div>
 
-                        <div className="show__images">
-                            <img src={Show1} alt=""/>
+                        <div className="show__stories">
+                            <Stories />
                         </div>
                     </div>
                 </div>
@@ -41,11 +105,7 @@ export const Show = () => {
                         <h2 className="interior__title">Интерьер клуба</h2>
 
                         <div className="interior__tags">
-                            <div className="interior__tag interior__tag--active">Основной зал</div>
-                            <div className="interior__tag interior__tag--inactive">Посадочные места</div>
-                            <div className="interior__tag interior__tag--inactive">Бар</div>
-                            <div className="interior__tag interior__tag--inactive">вход с улицы</div>
-                            <div className="interior__tag interior__tag--inactive">VIP-ложи</div>
+                            {interiorItems}
                         </div>
                     </div>
 
@@ -64,26 +124,48 @@ export const Show = () => {
 
                 <div>
                     <div className="interior__block">
-                        <img className="interior__img-1" src={Interior1} alt="Interior"/>
+                        <motion.div
+                            ref={image1Ref}
+                            initial="hidden"
+                            animate={image1InView ? "visible" : "hidden"}
+                            variants={imageVariants}
+                        >
+                            <img className="interior__img-1" src={Interior1} alt="Interior"/>
+                        </motion.div>
 
                         <div className="interior__subtext">
                             Максимум комфорта и анонимности – приватные ложи, где только Вы и Ваши удовольствия.
                         </div>
                     </div>
 
-                    <div className="interior__block" style={{ marginTop: '30px' }}>
-                        <div className="interior__subtext interior__subtext--2">
-                            Максимум комфорта и анонимности – приватные ложи, где только Вы и Ваши удовольствия.
-                        </div>
-
+                    <motion.div
+                        ref={image2Ref}
+                        initial="hidden"
+                        animate={image2InView ? "visible" : "hidden"}
+                        variants={imageVariants}
+                    >
                         <img className="interior__img-2" src={Interior2} alt="Interior"/>
+                    </motion.div>
+
+                    <div className="interior__block">
+                        <motion.div
+                            ref={image3Ref}
+                            initial="hidden"
+                            animate={image3InView ? "visible" : "hidden"}
+                            variants={imageVariants}
+                        >
+                            <img className="interior__img-3" src={Interior3} alt="Interior"/>
+                        </motion.div>
                     </div>
 
-                    <div className="interior__block" style={{ marginTop: '30px' }}>
-                        <img className="interior__img-3" src={Interior3} alt="Interior"/>
-                    </div>
-
-                    <img className="interior__img-4" src={Interior4} alt="Interior"/>
+                    <motion.div
+                        ref={image4Ref}
+                        initial="hidden"
+                        animate={image4InView ? "visible" : "hidden"}
+                        variants={imageVariants}
+                    >
+                        <img className="interior__img-4" src={Interior4} alt="Interior"/>
+                    </motion.div>
                 </div>
             </div>
         </>
