@@ -6,15 +6,16 @@ import Video2 from "../../assets/videos/stories/2.mp4";
 import Video3 from "../../assets/videos/stories/3.mp4";
 import Video4 from "../../assets/videos/stories/4.mp4";
 import Video5 from "../../assets/videos/stories/5.mp4";
+import Video6 from "../../assets/videos/stories/6.mp4";
 
 import "./Stories.css";
 
 export const Stories = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [videoDuration, setVideoDuration] = useState(5);
+    const [videoDuration, setVideoDuration] = useState(11.8);
     const [isPlaying, setIsPlaying] = useState(true);
 
-    const videos = [Video1, Video2, Video3, Video4, Video5];
+    const videos = [Video1, Video2, Video3, Video4, Video5, Video6];
     const videoRef = useRef(null);
 
     const nextVideo = () => {
