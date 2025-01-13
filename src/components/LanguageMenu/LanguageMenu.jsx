@@ -1,9 +1,12 @@
 import Check from "../../../public/assets/icons/check.svg"
 import PropTypes from "prop-types";
+import { useEffect, useRef } from "react";
 
 import './LanguageMenu.css'
 
-export const LanguageMenu = ({ showLanguageMenu }) => {
+export const LanguageMenu = ({ showLanguageMenu, onLanguageMenuChange }) => {
+    const languageMenuRef = useRef(null);
+
     const languageMenuItems = [
         {
             text: 'English (US)',
@@ -23,11 +26,29 @@ export const LanguageMenu = ({ showLanguageMenu }) => {
         },
     ]
 
+    const handleClickOutside = (event) => {
+        if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+            onLanguageMenuChange(false);
+        }
+    };
+
+    useEffect(() => {
+        if (showLanguageMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showLanguageMenu]);
+
     return (
         <>
-            <div style={{position: 'relative'}}>
+            <div style={{position: 'relative'}} onClick={handleClickOutside}>
                 {showLanguageMenu &&
-                    <div className="language-menu">
+                    <div className="language-menu" ref={languageMenuRef}>
                         {languageMenuItems.map((item, index) => (
                             <div className="language-menu-list__item" key={index}>
                                 <div>{item.text}</div>
@@ -47,4 +68,5 @@ export const LanguageMenu = ({ showLanguageMenu }) => {
 
 LanguageMenu.propTypes = {
     showLanguageMenu: PropTypes.bool.isRequired,
+    onLanguageMenuChange: PropTypes.func.isRequired,
 };

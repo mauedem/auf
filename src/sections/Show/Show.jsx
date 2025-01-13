@@ -1,7 +1,9 @@
-import Interior1 from "../../../public/assets/images/interier-1-big.png";
-import Interior2 from "../../../public/assets/images/interier-2-big.png";
-import Interior3 from "../../../public/assets/images/interier-3-big.png";
-import Interior4 from "../../../public/assets/images/interier-4-big.png";
+import Interior1 from "../../../public/assets/images/interior-1-big.png";
+import Interior2 from "../../../public/assets/images/interior-2-big.png";
+import Interior3 from "../../../public/assets/images/interior-3-big.png";
+import Interior4 from "../../../public/assets/images/interior-4-big.png";
+
+// import Interior from "../../../public/assets/images/interior.png";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -104,8 +106,10 @@ export const Show = ({ onInteriorClick }) => {
                 </div>
 
                 <div className="interior" id="interior" ref={interiorRef}>
-                    <div>
+                    <div className="interior__universal-container">
                         <h2 className="interior__title">Интерьер клуба</h2>
+
+                        {/*<img src={Interior} alt="Interior" />*/}
 
                         <div className="interior__tags">
                             {interiorItems}
@@ -125,50 +129,52 @@ export const Show = ({ onInteriorClick }) => {
                     </div>
                 </div>
 
-                <div>
-                    <div className="interior__block">
-                        <motion.div
-                            ref={image1Ref}
-                            initial="hidden"
-                            animate={image1InView ? "visible" : "hidden"}
-                            variants={imageVariants}
-                        >
-                            <img className="interior__img-1" src={Interior1} alt="Interior"/>
-                        </motion.div>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className="interior__universal-container">
+                        <div className="interior__block">
+                            <motion.div
+                                ref={image1Ref}
+                                initial="hidden"
+                                animate={image1InView ? "visible" : "hidden"}
+                                variants={imageVariants}
+                            >
+                                <img className="interior__img-1" src={Interior1} alt="Interior"/>
+                            </motion.div>
 
-                        <div className="interior__subtext">
-                            Максимум комфорта и анонимности – приватные ложи, где только Вы и Ваши удовольствия.
+                            <div className="interior__subtext">
+                                Максимум комфорта и анонимности – приватные ложи, где только Вы и Ваши удовольствия.
+                            </div>
                         </div>
-                    </div>
 
-                    <motion.div
-                        ref={image2Ref}
-                        initial="hidden"
-                        animate={image2InView ? "visible" : "hidden"}
-                        variants={imageVariants}
-                    >
-                        <img className="interior__img-2" src={Interior2} alt="Interior"/>
-                    </motion.div>
-
-                    <div className="interior__block">
                         <motion.div
-                            ref={image3Ref}
+                            ref={image2Ref}
                             initial="hidden"
-                            animate={image3InView ? "visible" : "hidden"}
+                            animate={image2InView ? "visible" : "hidden"}
                             variants={imageVariants}
                         >
-                            <img className="interior__img-3" src={Interior3} alt="Interior"/>
+                            <img className="interior__img-2" src={Interior2} alt="Interior"/>
+                        </motion.div>
+
+                        <div className="interior__block">
+                            <motion.div
+                                ref={image3Ref}
+                                initial="hidden"
+                                animate={image3InView ? "visible" : "hidden"}
+                                variants={imageVariants}
+                            >
+                                <img className="interior__img-3" src={Interior3} alt="Interior"/>
+                            </motion.div>
+                        </div>
+
+                        <motion.div
+                            ref={image4Ref}
+                            initial="hidden"
+                            animate={image4InView ? "visible" : "hidden"}
+                            variants={imageVariants}
+                        >
+                            <img className="interior__img-4" src={Interior4} alt="Interior"/>
                         </motion.div>
                     </div>
-
-                    <motion.div
-                        ref={image4Ref}
-                        initial="hidden"
-                        animate={image4InView ? "visible" : "hidden"}
-                        variants={imageVariants}
-                    >
-                        <img className="interior__img-4" src={Interior4} alt="Interior"/>
-                    </motion.div>
                 </div>
             </div>
         </>

@@ -6,14 +6,17 @@ import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import Map from "../../../public/assets/icons/map.svg";
 import { BOOK_NUMBER, NAV_ITEMS } from "../../utils/constants.js";
+import { useInView } from "react-intersection-observer";
+import { useState } from "react";
 
 import "./About.css";
-import {useInView} from "react-intersection-observer";
 
 export const About = () => {
     const [aboutRef, aboutRefInView] = useInView({
         threshold: 0
     });
+
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
     const textVariant = (direction = "y", distance = 50) => ({
         hidden: { opacity: 0, [direction]: distance },
@@ -53,7 +56,7 @@ export const About = () => {
         return (
             <div
                 key={item.id}
-                className="about__tag"
+                className="about__tag about__tag--active"
                 onClick={() => {
                     if (item.href) {
                         document
@@ -75,7 +78,14 @@ export const About = () => {
             animate={aboutRefInView ? "visible" : "hidden"}
             transition={{ duration: 1 }}
         >
-            <div className="video-background">
+            <div
+                className="video-background"
+                style={{
+                    backgroundImage: isVideoLoaded
+                        ? "none"
+                        : "url('../../../public/assets/images/bg.png')",
+                }}
+            >
                 <video
                     className="video"
                     autoPlay
@@ -83,6 +93,7 @@ export const About = () => {
                     loop
                     playsInline
                     preload="auto"
+                    onLoadedData={() => setIsVideoLoaded(true)}
                 >
                     <source
                         src={MainBgVideo}
@@ -100,34 +111,36 @@ export const About = () => {
             </div>
 
             <div className="about__container">
-                <motion.div
-                    className="about__title about__title--welcome"
-                    variants={textVariant("y", -30)}
-                >
-                    WELCOME TO
-                </motion.div>
+                <div className="about__logo-container">
+                    <motion.div
+                        className="about__title about__title--welcome"
+                        variants={textVariant("y", -30)}
+                    >
+                        WELCOME TO
+                    </motion.div>
 
-                <img className="about__logo" src={AufLogo} alt="AUF Logo" />
+                    <img className="about__logo" src={AufLogo} alt="AUF Logo"/>
 
-                <motion.div
-                    className="about__title about__title--experience"
-                    variants={textVariant("y", 30)}
-                >
-                    EXPERIENCE CLUB
-                </motion.div>
+                    <motion.div
+                        className="about__title about__title--experience"
+                        variants={textVariant("y", 30)}
+                    >
+                        EXPERIENCE CLUB
+                    </motion.div>
+                </div>
 
                 <div>
                     <motion.h1
                         className="about__subtitle"
                         variants={textVariant("y", -30)}
                     >
-                        стриптиз клуб в центре <br /> москвы
+                        стриптиз клуб в центре москвы
                     </motion.h1>
                     <motion.div
                         className="about__description"
                         variants={textVariant("y", 30)}
                     >
-                        изысканный отдых <br /> для мужчин
+                        изысканный отдых <br/> для мужчин
                     </motion.div>
                 </div>
 

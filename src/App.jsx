@@ -46,7 +46,7 @@ import Vip3 from "../public/assets/images/vip/3.png";
 import Vip4 from "../public/assets/images/vip/4.png";
 import Vip5 from "../public/assets/images/vip/5.png";
 
-import {INTERIOR_ITEMS, TAXI} from "./utils/constants.js";
+import { INTERIOR_ITEMS, TAXI } from "./utils/constants.js";
 
 import './App.css'
 
@@ -61,6 +61,20 @@ const photoGroups = {
 function App() {
     const [showMenu, setShowMenu] = useState(false);
     const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+
+    const [isScrolling, setIsScrolling] = useState(false);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolling(true);
+            } else {
+                setIsScrolling(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const [isTaxiHover, setIsTaxiHover] = useState(false);
     const handleMouseEnterTaxi = () => setIsTaxiHover(true);
@@ -141,7 +155,11 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace/>}/>
             </Routes>
 
-            <div className="floating-buttons">
+            <div
+                className={`floating-buttons ${
+                    isScrolling ? "floating-buttons--visible" : ""
+                }`}
+            >
                 <div className="floating-button" onClick={() => window.open(TAXI, '_blank')}>
                     <img
                         src={getTaxiIcon()}

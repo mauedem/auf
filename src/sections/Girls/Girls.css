@@ -112,6 +112,11 @@
 }
 
 @media (min-width: 320px) and (max-width: 575px) {
+    .girls {
+        justify-content: flex-start;
+        padding-bottom: 70px;
+    }
+
     .girls__title {
         align-self: start;
     }
@@ -122,6 +127,7 @@
 
     .girls__text {
         text-align: left;
+        width: 100%;
     }
 
     .girls__img--left {
@@ -136,6 +142,12 @@
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
+    .girls__container {
+        width: 100%;
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
     .girls__title {
         font-size: 30px;
         line-height: 30px;

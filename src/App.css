@@ -9,7 +9,14 @@ html {
 }
 
 body.no-scroll {
-    overflow: hidden; /* Отключаем прокрутку для основного содержимого */
+    overflow: hidden;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 :root {
@@ -24,6 +31,7 @@ body.no-scroll {
 
 .App {
     background-color: var(--bg-color);
+    overflow-x: hidden;
 }
 
 .floating-buttons {
@@ -36,6 +44,16 @@ body.no-scroll {
     gap: 24px;
     margin-bottom: 20px;
     z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+}
+
+.floating-buttons--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 .floating-button {
@@ -73,6 +91,13 @@ body.no-scroll {
 
 .floating-button:hover .floating-button__text {
     color: var(--hover-color);
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+    .floating-buttons {
+        /*top: 60px;*/
+        right: -20px;
+    }
 }
 
 /* Fonts */

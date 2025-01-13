@@ -189,13 +189,28 @@
 }
 
 @media (min-width: 320px) and (max-width: 575px) {
-    .info__title, .info__subtitle, .info__rating, .info__review {
+    .info {
+        justify-content: flex-start;
+        padding-bottom: 70px;
+    }
+
+    .info__title, .info__subtitle {
         text-align: left;
         align-self: start;
+    }
+
+    .info-rating-card:nth-child(2) {
+        margin-left: 14px;
     }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
+    .info__container {
+        width: 100%;
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
     .info__title {
         font-size: 30px;
         line-height: 30px;
@@ -209,6 +224,7 @@
     .info__block {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
     .info-service {
@@ -230,7 +246,7 @@
     }
 
     .info-rating-card {
-        width: 181px;
+        width: 166px;
     }
 
     .info-rating-card__btn {

@@ -77,6 +77,9 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                     src={AufLogoShadowed}
                     alt="Auf logo"
                     onClick={() => {
+                        onLanguageMenuChange(false);
+                        onMenuChange(false);
+
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',

@@ -16,6 +16,7 @@
 .interior-modal__content {
     width: 400px;
     height: 660px;
+    position: relative;
 
     max-height: 90vh;
     overflow-y: auto;
@@ -90,7 +91,7 @@
 }
 
 .interior-modal__tags {
-    position: relative;
+    position: absolute;
     width: 100%;
     margin-top: 20px;
     display: flex;
@@ -98,6 +99,7 @@
     gap: 10px;
     padding: 10px;
     scrollbar-width: none;
+    z-index: 99999;
 }
 
 .interior-modal__tags::-webkit-scrollbar {

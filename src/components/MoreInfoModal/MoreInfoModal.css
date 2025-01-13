@@ -84,3 +84,16 @@
 .more-info-modal__img {
     margin-top: 50px;
 }
+
+@media (min-width: 320px) and (max-width: 575px) {
+    .more-info-modal__content {
+        padding-left: 14px;
+        padding-right: 14px;
+        width: 100%;
+    }
+
+    .more-info-modal__img {
+        width: 100%;
+    }
+}
+
