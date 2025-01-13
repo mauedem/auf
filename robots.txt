@@ -27,5 +27,3 @@ Disallow: /*_escaped_fragment_*
 Disallow:
 Clean-param: calltouch_tm&yclid&utm_term&utm&calltouch_param&bs1&bs2&bs3&bs4&yd&etext&geoadv_yabs&utm_ya_campaign&yabizcmpgn&utm_candidate&yclid&stat-id&test-tag&banner-sizes&anner-test-tags
 
-Sitemap: https://auf.club/sitemap.xml
-Host: https://auf.club
