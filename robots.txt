@@ -1,0 +1,31 @@
+User-Agent: *
+Disallow: /page34448098.html
+Disallow: /page34448109.html
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow: /*_escaped_fragment_*
+Disallow:
+
+User-Agent: Yandex
+Disallow: /page34448098.html
+Disallow: /page34448109.html
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow: /*_escaped_fragment_*
+Disallow:
+Clean-param: calltouch_tm&yclid&utm_term&utm&calltouch_param&bs1&bs2&bs3&bs4&yd&etext&geoadv_yabs&utm_ya_campaign&yabizcmpgn&utm_candidate&yclid&stat-id&test-tag&banner-sizes&anner-test-tags
+
+Sitemap: https://auf.club/sitemap.xml
+Host: https://auf.club

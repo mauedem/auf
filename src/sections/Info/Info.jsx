@@ -6,6 +6,7 @@ import Star from "../../../public/assets/icons/star.svg"
 import Yandex from "../../../public/assets/icons/yandex.svg"
 import Google from "../../../public/assets/icons/google.svg"
 import { useInView } from "react-intersection-observer";
+import { GOOGLE_REVIEW, YANDEX_REVIEW } from "../../utils/constants.js";
 
 import './Info.css'
 
@@ -116,7 +117,7 @@ export const Info = () => {
                         </div>
                     </div>
 
-                    <h3 className="info__title" style={{marginTop: '90px'}}>
+                    <h3 className="info__title info__title--90">
                         <span style={{color: 'var(--primary-color)'}}>Рай для</span> гедонистов
                     </h3>
 
@@ -149,7 +150,7 @@ export const Info = () => {
                         </div>
                     </div>
 
-                    <div className="info__block" style={{marginTop: '90px'}}>
+                    <div className="info__block info__block--90">
                         <motion.div
                             ref={infoImage3Ref}
                             initial="hidden"
@@ -209,7 +210,12 @@ export const Info = () => {
                                     <div className="info-rating-card__text">Яндекс</div>
                                 </div>
                             </div>
-                            <button className="info-rating-card__btn">
+                            <button
+                                className="info-rating-card__btn"
+                                onClick={() => {
+                                    window.open(YANDEX_REVIEW, '_blank');
+                                }}
+                            >
                                 <div className="info-rating-card__btn-text">Оставить отзыв</div>
                             </button>
                         </motion.div>
@@ -231,7 +237,12 @@ export const Info = () => {
                                     <div className="info-rating-card__text">Google</div>
                                 </div>
                             </div>
-                            <button className="info-rating-card__btn">
+                            <button
+                                className="info-rating-card__btn"
+                                onClick={() => {
+                                    window.open(GOOGLE_REVIEW, '_blank');
+                                }}
+                            >
                                 <div className="info-rating-card__btn-text">Оставить отзыв</div>
                             </button>
                         </motion.div>

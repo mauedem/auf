@@ -4,6 +4,9 @@ export const ADDRESS = 'https://yandex.ru/maps/org/auf/239756751058';
 export const BOOK_NUMBER = '+74952459999'
 export const TAXI = 'https://3.redirect.appmetrica.yandex.com/route?end-lat=55.762277&end-lon=37.569899&tariffClass=econom&ref=https%3A%2F%2Fauf.club%2F&appmetrica_tracking_id=1178268795219780156&lang=ru&data-app=3'
 export const TO_BUY = 'https://api.whatsapp.com/send/?phone=%2B79066357540&text&type=phone_number&app_absent=0'
+export const MENU_KITCHEN = '/assets/files/menu-kitchen.pdf'
+export const YANDEX_REVIEW = 'https://yandex.ru/profile/239756751058'
+export const GOOGLE_REVIEW = 'https://maps.app.goo.gl/moSb5VGyaNjzQSyA7'
 
 export const NAV_ITEMS = [
     {

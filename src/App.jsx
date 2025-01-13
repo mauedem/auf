@@ -15,10 +15,10 @@ import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 import { MoreInfoModal } from "./components/MoreInfoModal/MoreInfoModal.jsx";
 import { InteriorModal } from "./components/InteriorModal/InteriorModal.jsx";
 
-import Taxi from "../public/assets/icons/taxi.svg";
-import TaxiHover from "../public/assets/icons/taxi-hover.svg";
-import Chat from "../public/assets/icons/chat.svg";
-import ChatHover from "../public/assets/icons/chat-hover.svg";
+import Taxi from "../public/assets/icons/taxi-3.svg";
+// import TaxiHover from "../public/assets/icons/taxi-hover.svg";
+// import Chat from "../public/assets/icons/chat.svg";
+// import ChatHover from "../public/assets/icons/chat-hover.svg";
 
 import Bar1 from "../public/assets/images/bar/1.png";
 import Bar2 from "../public/assets/images/bar/2.png";
@@ -76,19 +76,19 @@ function App() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const [isTaxiHover, setIsTaxiHover] = useState(false);
-    const handleMouseEnterTaxi = () => setIsTaxiHover(true);
-    const handleMouseLeaveTaxi = () => setIsTaxiHover(false);
-    const getTaxiIcon = () => {
-        return isTaxiHover ? TaxiHover : Taxi;
-    };
-
-    const [isChatHover, setIsChatHover] = useState(false);
-    const handleMouseEnterChat = () => setIsChatHover(true);
-    const handleMouseLeaveChat = () => setIsChatHover(false);
-    const getChatIcon = () => {
-        return isChatHover ? ChatHover : Chat;
-    };
+    // const [isTaxiHover, setIsTaxiHover] = useState(false);
+    // const handleMouseEnterTaxi = () => setIsTaxiHover(true);
+    // const handleMouseLeaveTaxi = () => setIsTaxiHover(false);
+    // const getTaxiIcon = () => {
+    //     return isTaxiHover ? TaxiHover : Taxi;
+    // };
+    //
+    // const [isChatHover, setIsChatHover] = useState(false);
+    // const handleMouseEnterChat = () => setIsChatHover(true);
+    // const handleMouseLeaveChat = () => setIsChatHover(false);
+    // const getChatIcon = () => {
+    //     return isChatHover ? ChatHover : Chat;
+    // };
 
     const [isJobsModalOpen, setIsJobsModalOpen] = useState(false);
     const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
@@ -123,8 +123,10 @@ function App() {
 
     useEffect(() => {
         if (isMoreInfoModalOpen || isInteriorModalOpen) {
+            document.documentElement.classList.add("no-scroll");
             document.body.classList.add("no-scroll");
         } else {
+            document.documentElement.classList.remove("no-scroll");
             document.body.classList.remove("no-scroll");
         }
     }, [isMoreInfoModalOpen, isInteriorModalOpen]);
@@ -161,22 +163,7 @@ function App() {
                 }`}
             >
                 <div className="floating-button" onClick={() => window.open(TAXI, '_blank')}>
-                    <img
-                        src={getTaxiIcon()}
-                        alt="Taxi"
-                        onMouseEnter={handleMouseEnterTaxi}
-                        onMouseLeave={handleMouseLeaveTaxi}
-                    />
-                    <span className="floating-button__text">Такси</span>
-                </div>
-                <div className="floating-button" onClick={() => setIsSidebarOpen(true)}>
-                    <img
-                        src={getChatIcon()}
-                        alt="Chat"
-                        onMouseEnter={handleMouseEnterChat}
-                        onMouseLeave={handleMouseLeaveChat}
-                    />
-                    <span className="floating-button__text">Чат</span>
+                    <img src={Taxi} alt="Taxi" />
                 </div>
             </div>
 

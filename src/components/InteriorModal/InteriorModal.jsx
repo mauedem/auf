@@ -130,6 +130,7 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
     return (
         <>
             <div className="interior-modal" onClick={handleOverlayClick}>
+                <div className="interior-modal__tags interior-modal__tags--big">{interiorItems}</div>
                 <div className="interior-modal__content">
                     <div className="interior-progress">
                         {photos.map((_, index) => (
@@ -148,7 +149,7 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
                             </div>
                         ))}
                     </div>
-                    <div className="interior-modal__tags">{interiorItems}</div>
+                    <div className="interior-modal__tags interior-modal__tags--small">{interiorItems}</div>
                     {photos.length > 0 && (
                         <div
                             className="interior-photo__container"
@@ -157,6 +158,7 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
                                 backgroundPosition: "center center",
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",
+                                backgroundAttachment: "fixed"
                             }}
                         >
                             <img
@@ -169,13 +171,19 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
                             />
                         </div>
                     )}
-                    <button className="more-info-modal__close-btn" onClick={onClose}>
-                        <img className="more-info-modal__close-img" src={Cross} alt="Cross"/>
-                        <div className="more-info-modal__close-text">
+                    <button className="interior-modal__close-btn interior-modal__close-btn--small" onClick={onClose}>
+                        <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
+                        <div className="interior-modal__close-text">
                             Закрыть
                         </div>
                     </button>
                 </div>
+                <button className="interior-modal__close-btn interior-modal__close-btn--big" onClick={onClose}>
+                    <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
+                    <div className="interior-modal__close-text">
+                        Закрыть
+                    </div>
+                </button>
             </div>
         </>
     );

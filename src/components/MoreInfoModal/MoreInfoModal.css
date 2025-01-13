@@ -43,7 +43,7 @@
 
 .more-info-modal__close-btn {
     position: fixed;
-    bottom: 16%;
+    bottom: 20%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -56,6 +56,7 @@
     border: 2px solid var(--primary-color);
     z-index: 1100;
     cursor: pointer;
+    padding-right: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

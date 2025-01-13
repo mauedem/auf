@@ -149,3 +149,9 @@
         line-height: 30px;
     }
 }
+
+@media (min-width: 2000px) {
+    .jobs {
+        height: 100vh;
+    }
+}

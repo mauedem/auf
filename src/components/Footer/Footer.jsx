@@ -9,7 +9,7 @@ import MapBig from "../../../public/assets/images/map-big.png";
 import { useRef } from "react";
 
 import './Footer.css'
-import {ADDRESS, BOOK_NUMBER, TAXI} from "../../utils/constants.js";
+import {ADDRESS, BOOK_NUMBER, MENU_KITCHEN, TAXI} from "../../utils/constants.js";
 import PropTypes from "prop-types";
 
 export const Footer = ({ onMoreInfoClick }) => {
@@ -25,7 +25,7 @@ export const Footer = ({ onMoreInfoClick }) => {
                         <div
                             className="gastronomy-card"
                             onClick={() => {
-                                window.open('/assets/files/menu-kitchen.pdf', '_blank', 'noopener,noreferrer');
+                                window.open(MENU_KITCHEN, '_blank');
                             }}
                         >
                             <div><img src={Kitchen} alt="Kitchen"/></div>
