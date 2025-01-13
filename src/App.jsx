@@ -122,14 +122,16 @@ function App() {
     }
 
     useEffect(() => {
-        if (isMoreInfoModalOpen || isInteriorModalOpen) {
+        const shouldDisableScroll = isMoreInfoModalOpen || isInteriorModalOpen || (window.innerWidth < 768 && showMenu);
+
+        if (shouldDisableScroll) {
             document.documentElement.classList.add("no-scroll");
             document.body.classList.add("no-scroll");
         } else {
             document.documentElement.classList.remove("no-scroll");
             document.body.classList.remove("no-scroll");
         }
-    }, [isMoreInfoModalOpen, isInteriorModalOpen]);
+    }, [isMoreInfoModalOpen, isInteriorModalOpen, showMenu]);
 
     return (
         <div className="App">

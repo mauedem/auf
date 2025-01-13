@@ -1,6 +1,7 @@
 .about {
     position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
     padding-bottom: 100px;
     height: 100vh;
@@ -12,16 +13,12 @@
 }
 
 .about__container {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 720px;
-    /*padding-right: 70px;*/
-    /*padding-left: 70px;*/
     position: relative;
     z-index: 1;
-    /*padding-top: 100px;*/
 }
 
 .video-background {
@@ -55,10 +52,10 @@
 }
 
 .about__subtitle, .about__description {
-    word-wrap: break-word; /* Разрешает перенос длинных слов */
-    word-break: break-word; /* Переносит слова при переполнении */
-    overflow-wrap: break-word; /* Устраняет переполнение текста */
-    max-width: 100%; /* Ограничивает ширину текста */
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
     font-family: Aeroport, sans-serif;
     font-size: 40px;
     line-height: 40px;
@@ -107,9 +104,6 @@
     border: 4px solid var(--primary-color);
     margin-top: 20px;
     box-shadow: 0 16px 32px 0 #C618D040;
-
-    /*border: 4px solid white; !* Белая граница *!*/
-    /*box-shadow: 0 4px 20px rgba(255, 255, 255, 0.6); !* Сияние *!*/
 }
 
 .reserve-button a {
@@ -217,19 +211,51 @@
 @media (min-width: 320px) and (max-width: 575px) {
     .about {
         /*justify-content: left;*/
+        height: auto;
         justify-content: flex-start;
+        padding-bottom: 0;
+    }
+
+    .about__title--welcome {
+        margin-top: 90px;
     }
 
     .about__container {
         /*justify-content: flex-start;*/
+        /*padding-top: 140px;*/
         align-items: flex-start;
         width: 100%;
-        height: 100vh;
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .about__logo-container {
+        /*width: 100%;*/
+        /*height: auto;*/
+        align-self: center;
     }
 
     .about__subtitle, .about__description {
         text-align: left;
         max-width: 300px;
+    }
+
+    .about__text-block {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .reserve-button__container {
+        padding-right: 14px;
+        padding-left: 14px;
+        width: 100%;
+    }
+
+    .reserve-button {
+        width: 100%;
+        align-self: center;
+        height: 62px;
+        padding: 12px 24px 12px 12px;
     }
 }
 
@@ -240,24 +266,34 @@
         width: 100%;
         overflow-x: auto;
         padding-left: 10px;
-        /*margin-right: 10px;*/
     }
 
     .about__tags::-webkit-scrollbar {
         display: none;
     }
 
+    .about__info {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
     .about__subtitle, .about__description {
         font-size: 30px;
         line-height: 30px;
-        /*max-width: 100%;*/
     }
 
-    .reserve-button {
-        width: 362px;
-        height: 62px;
-        padding: 12px 24px 12px 12px;
-    }
+    /*.reserve-button__container {*/
+    /*    padding-right: 14px;*/
+    /*    padding-left: 14px;*/
+    /*    width: 100%;*/
+    /*}*/
+
+    /*.reserve-button {*/
+    /*    width: 100%;*/
+    /*    align-self: center;*/
+    /*    height: 62px;*/
+    /*    padding: 12px 24px 12px 12px;*/
+    /*}*/
 
     .about__info {
         align-self: start;

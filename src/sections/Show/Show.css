@@ -11,6 +11,12 @@
     padding-bottom: 100px;
 }
 
+.interior__universal-container--1 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+
 .interior__universal-container {
     /*display: flex;*/
     /*flex-direction: column;*/
@@ -223,6 +229,10 @@
 
     .show__stories {
         margin-top: 30px;
+    }
+
+    .interior__universal-container--1 {
+        padding-bottom: 40px;
     }
 }
 

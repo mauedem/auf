@@ -129,7 +129,7 @@ export const About = () => {
                     </motion.div>
                 </div>
 
-                <div>
+                <div className="about__text-block">
                     <motion.h1
                         className="about__subtitle"
                         variants={textVariant("y", -30)}
@@ -144,42 +144,44 @@ export const About = () => {
                     </motion.div>
                 </div>
 
-                <motion.div
-                    className="reserve-button"
-                    variants={buttonBackgroundVariant}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 1 }}
-                    onClick={() => {
-                        window.location.href = `tel:${BOOK_NUMBER}`;
-                    }}
-                >
-                    <motion.img
-                        className="reserve-button__phone-call"
-                        src={PhoneCall}
-                        alt="Phone call"
-                    />
-                    <motion.a
-                        href={`tel:${BOOK_NUMBER}`}
-                        variants={buttonTextVariant}
-                        transition={{ duration: 0.5 }}
+                <div className="reserve-button__container">
+                    <motion.div
+                        className="reserve-button"
+                        variants={buttonBackgroundVariant}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{duration: 1}}
+                        onClick={() => {
+                            window.location.href = `tel:${BOOK_NUMBER}`;
+                        }}
                     >
-                        Забронировать
-                    </motion.a>
-                    <motion.img
-                        className="reserve-button__arrow-right"
-                        src={ArrowRight}
-                        alt="Arrow right"
-                    />
-                </motion.div>
+                        <motion.img
+                            className="reserve-button__phone-call"
+                            src={PhoneCall}
+                            alt="Phone call"
+                        />
+                        <motion.a
+                            href={`tel:${BOOK_NUMBER}`}
+                            variants={buttonTextVariant}
+                            transition={{duration: 0.5}}
+                        >
+                            Забронировать
+                        </motion.a>
+                        <motion.img
+                            className="reserve-button__arrow-right"
+                            src={ArrowRight}
+                            alt="Arrow right"
+                        />
+                    </motion.div>
+                </div>
 
                 <motion.div className="about__info" variants={textVariant("y", 50)}>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img src={Map} alt="Map" />
+                    <div style={{display: "flex", alignItems: "center"}}>
+                        <img src={Map} alt="Map"/>
                         <div className="about__address">ул. Красная Пресня, 24</div>
                     </div>
 
-                    <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div style={{display: "flex", flexDirection: "column"}}>
                         <div className="about__timetable">Ежедневно</div>
                         <div className="about__opening-hours">с 21:00 до 06:00</div>
                     </div>

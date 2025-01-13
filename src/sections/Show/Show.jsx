@@ -129,7 +129,7 @@ export const Show = ({ onInteriorClick }) => {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '100px' }}>
+                <div className="interior__universal-container--1">
                     <div className="interior__universal-container">
                         <div className="interior__block">
                             <motion.div
