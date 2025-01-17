@@ -20,31 +20,31 @@ import Taxi from "../public/assets/icons/taxi-3.svg";
 // import Chat from "../public/assets/icons/chat.svg";
 // import ChatHover from "../public/assets/icons/chat-hover.svg";
 
-import Bar1 from "../public/assets/images/bar/1.png";
-import Bar2 from "../public/assets/images/bar/2.png";
-import Bar3 from "../public/assets/images/bar/3.png";
+import Bar1 from "../public/assets/images/bar/1.webp";
+import Bar2 from "../public/assets/images/bar/2.webp";
+import Bar3 from "../public/assets/images/bar/3.webp";
 
-import Entrance1 from "../public/assets/images/entrance/1.png";
-import Entrance2 from "../public/assets/images/entrance/2.png";
-import Entrance3 from "../public/assets/images/entrance/3.png";
+import Entrance1 from "../public/assets/images/entrance/1.webp";
+import Entrance2 from "../public/assets/images/entrance/2.webp";
+import Entrance3 from "../public/assets/images/entrance/3.webp";
 
-import Hall1 from "../public/assets/images/hall/1.png";
-import Hall2 from "../public/assets/images/hall/2.png";
-import Hall3 from "../public/assets/images/hall/3.png";
-import Hall4 from "../public/assets/images/hall/4.png";
-import Hall5 from "../public/assets/images/hall/5.png";
-import Hall6 from "../public/assets/images/hall/6.png";
+import Hall1 from "../public/assets/images/hall/1.webp";
+import Hall2 from "../public/assets/images/hall/2.webp";
+import Hall3 from "../public/assets/images/hall/3.webp";
+import Hall4 from "../public/assets/images/hall/4.webp";
+import Hall5 from "../public/assets/images/hall/5.webp";
+import Hall6 from "../public/assets/images/hall/6.webp";
 
-import Seats1 from "../public/assets/images/seats/1.png";
-import Seats2 from "../public/assets/images/seats/2.png";
-import Seats3 from "../public/assets/images/seats/3.png";
-import Seats4 from "../public/assets/images/seats/4.png";
+import Seats1 from "../public/assets/images/seats/1.webp";
+import Seats2 from "../public/assets/images/seats/2.webp";
+import Seats3 from "../public/assets/images/seats/3.webp";
+import Seats4 from "../public/assets/images/seats/4.webp";
 
-import Vip1 from "../public/assets/images/vip/1.png";
-import Vip2 from "../public/assets/images/vip/2.png";
-import Vip3 from "../public/assets/images/vip/3.png";
-import Vip4 from "../public/assets/images/vip/4.png";
-import Vip5 from "../public/assets/images/vip/5.png";
+import Vip1 from "../public/assets/images/vip/1.webp";
+import Vip2 from "../public/assets/images/vip/2.webp";
+import Vip3 from "../public/assets/images/vip/3.webp";
+import Vip4 from "../public/assets/images/vip/4.webp";
+import Vip5 from "../public/assets/images/vip/5.webp";
 
 import { INTERIOR_ITEMS, TAXI } from "./utils/constants.js";
 

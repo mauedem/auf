@@ -1,18 +1,18 @@
-import Girls1 from "../../../public/assets/icons/girls/girls-1.png";
-import Girls2 from "../../../public/assets/icons/girls/girls-2.png";
-import Girls3 from "../../../public/assets/icons/girls/girls-3.png";
-import Girls4 from "../../../public/assets/icons/girls/girls-4.png";
-import Girls5 from "../../../public/assets/icons/girls/girls-5.png";
-import Girls6 from "../../../public/assets/icons/girls/girls-6.png";
-import Girls7 from "../../../public/assets/icons/girls/girls-7.png";
-import Girls8 from "../../../public/assets/icons/girls/girls-8.png";
-import Girls9 from "../../../public/assets/icons/girls/girls-9.png";
-import Girls10 from "../../../public/assets/icons/girls/girls-10.png";
+import Girls1 from "../../../public/assets/images/girls/girls-1.webp";
+import Girls2 from "../../../public/assets/images/girls/girls-2.webp";
+import Girls3 from "../../../public/assets/images/girls/girls-3.webp";
+import Girls4 from "../../../public/assets/images/girls/girls-4.webp";
+import Girls5 from "../../../public/assets/images/girls/girls-5.webp";
+import Girls6 from "../../../public/assets/images/girls/girls-6.webp";
+import Girls7 from "../../../public/assets/images/girls/girls-7.webp";
+import Girls8 from "../../../public/assets/images/girls/girls-8.webp";
+import Girls9 from "../../../public/assets/images/girls/girls-9.webp";
+import Girls10 from "../../../public/assets/images/girls/girls-10.webp";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 
 import './Girls.css'
-import {useInView} from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 
 export const Girls = () => {
     const girlsRef = useRef(null);

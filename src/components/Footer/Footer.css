@@ -1,7 +1,8 @@
 .footer {
     display: flex;
     justify-content: center;
-    background-image: url('../../../public/assets/images/bg-2.png');
+    background-image: url('../../../public/assets/images/bg.png');
+    background-color: var(--bg-color);
     height: auto;
     width: 100vw;
     top: -284px;

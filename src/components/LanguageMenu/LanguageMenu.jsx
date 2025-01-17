@@ -9,8 +9,12 @@ export const LanguageMenu = ({ showLanguageMenu, onLanguageMenuChange }) => {
 
     const languageMenuItems = [
         {
-            text: 'English (US)',
+            text: 'Pусский',
             active: true,
+        },
+        {
+            text: 'English (US)',
+            active: false,
         },
         {
             text: 'Español',
@@ -18,10 +22,6 @@ export const LanguageMenu = ({ showLanguageMenu, onLanguageMenuChange }) => {
         },
         {
             text: 'Dutsch',
-            active: false,
-        },
-        {
-            text: 'Pусский',
             active: false,
         },
     ]

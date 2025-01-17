@@ -1,5 +1,6 @@
 .container {
     background-image: url('../../../public/assets/images/show-bg.png');
+    background-color: var(--bg-color);
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(300px);

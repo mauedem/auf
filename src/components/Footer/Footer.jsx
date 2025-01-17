@@ -4,13 +4,12 @@ import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 // import AufLogoShadowed from "../../assets/icons/auf-logo-shadowed.svg";
 import AufLogoBigShadowed from "../../../public/assets/icons/auf-logo-big-shadowed.svg";
 import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
-import Map from "../../../public/assets/images/map.png";
-import MapBig from "../../../public/assets/images/map-big.png";
 import { useRef } from "react";
 
 import './Footer.css'
-import {ADDRESS, BOOK_NUMBER, MENU_KITCHEN, TAXI} from "../../utils/constants.js";
+import { ADDRESS, BOOK_NUMBER, MENU_BAR, MENU_KITCHEN, TAXI } from "../../utils/constants.js";
 import PropTypes from "prop-types";
+import { YandexMap } from "../YandexMap/YandexMap.jsx";
 
 export const Footer = ({ onMoreInfoClick }) => {
     const gastronomyRef = useRef(null);
@@ -41,7 +40,12 @@ export const Footer = ({ onMoreInfoClick }) => {
                             </div>
                         </div>
 
-                        <div className="gastronomy-card">
+                        <div
+                            className="gastronomy-card"
+                            onClick={() => {
+                                window.open(MENU_BAR, '_blank');
+                            }}
+                        >
                             <div><img src={Bar} alt="Bar"/></div>
 
                             <div style={{marginLeft: '20px'}}>
@@ -56,7 +60,7 @@ export const Footer = ({ onMoreInfoClick }) => {
                         </div>
                     </div>
 
-                    <h2 className="footer__title" style={{ marginTop: '100px' }}>Контакты</h2>
+                    <h2 className="footer__title" style={{marginTop: '100px'}}>Контакты</h2>
 
                     <div className="footer__subtitle">Welcome to</div>
 
@@ -87,8 +91,7 @@ export const Footer = ({ onMoreInfoClick }) => {
                         <div className="footer__phone-text">+7 (495) 245-99-99</div>
                     </div>
 
-                    <img className="footer__map footer__map--big" src={MapBig} alt="map"/>
-                    <img className="footer__map footer__map--small" src={Map} alt="map"/>
+                    <YandexMap className="footer__map" />
 
                     <div className="footer__goto">
                         <button

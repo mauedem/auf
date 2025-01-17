@@ -2,11 +2,11 @@ import ArrowRight from "../../../public/assets/icons/arrow-right.svg"
 import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import Phone from "../../../public/assets/icons/phone.svg";
 import Map from "../../../public/assets/icons/map.svg";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import './Menu.css'
-import {ADDRESS, BOOK_NUMBER, MENU_ITEMS} from "../../utils/constants.js";
+import { ADDRESS, BOOK_NUMBER, MENU_ITEMS } from "../../utils/constants.js";
 
 export const Menu = ({ showMenu, onMenuChange }) => {
     const navigate = useNavigate()

@@ -72,6 +72,7 @@ export const About = () => {
 
     return (
         <motion.div
+            id="about"
             className="about"
             ref={aboutRef}
             initial="hidden"
@@ -83,7 +84,7 @@ export const About = () => {
                 style={{
                     backgroundImage: isVideoLoaded
                         ? "none"
-                        : "url('../../../public/assets/images/bg.png')",
+                        : "url('../../../public/assets/images/bg.webp')",
                 }}
             >
                 <video
