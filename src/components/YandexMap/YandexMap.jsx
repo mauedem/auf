@@ -1,5 +1,6 @@
 import { YMaps, Map, Placemark, ZoomControl } from '@pbe/react-yandex-maps';
 import { useRef } from "react";
+import { MAP_API_KEY } from "../../utils/constants.js";
 
 export const YandexMap = () => {
     const mapRef = useRef(null);
@@ -12,17 +13,16 @@ export const YandexMap = () => {
     };
 
     return (
-        <YMaps query={{ apikey: '1485297f-c779-4550-a9c6-f8a8d7174e27', ns: 'use-load-option', lang: 'ru_RU' }}>
+        <YMaps query={{ apikey: MAP_API_KEY, ns: 'use-load-option', lang: 'ru_RU' }}>
             <div style={{ width: '560px', height: '400px' }}>
                 <Map
                     defaultState={mapState}
                     style={{ width: '100%', height: '100%' }}
                     options={{
-                        // mapType: 'yandex#dark',
+                        mapType: 'yandex#dark',
                         suppressMapOpenBlock: true,
                         yandexMapDisablePoiInteractivity: true,
-                        // theme: 'dark',
-                        mapType: 'yandex#map',
+                        // mapType: 'yandex#map',
                         theme: 'dark',
                     }}
                     instanceRef={(ref) => {

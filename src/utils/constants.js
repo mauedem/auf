@@ -12,6 +12,8 @@ export const MENU_BAR = '/auf/assets/files/menu-bar.pdf'
 export const YANDEX_REVIEW = 'https://yandex.ru/profile/239756751058'
 export const GOOGLE_REVIEW = 'https://maps.app.goo.gl/moSb5VGyaNjzQSyA7'
 
+export const MAP_API_KEY = '4f4359f8-0626-4d6f-b1c3-1cf1259b48a6'
+
 export const NAV_ITEMS = [
     {
         id: 1,
