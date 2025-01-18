@@ -95,6 +95,7 @@ export const About = () => {
                     loop
                     playsInline
                     preload="auto"
+                    onCanPlayThrough={() => setIsVideoLoaded(true)}
                     onLoadedData={() => setIsVideoLoaded(true)}
                 >
                     <source
@@ -108,7 +109,7 @@ export const About = () => {
                         media="(max-width: 575px)"
                     />
                     <noscript>
-                        <img src={MobileBg} alt="" />
+                        <img src={MobileBg} alt=""/>
                     </noscript>
                 </video>
                 <div className={`video-overlay ${isVideoLoaded ? '' : 'loading-overlay'}`}></div>
