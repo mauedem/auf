@@ -2,7 +2,7 @@
   "name": "my-react-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://mauedem.github.io/auf",
+  "homepage": "https://mauedem.github.io",
   "type": "module",
   "scripts": {
     "dev": "vite",

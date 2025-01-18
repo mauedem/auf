@@ -6,8 +6,8 @@ export const TAXI = 'https://3.redirect.appmetrica.yandex.com/route?end-lat=55.7
 export const TO_BUY = 'https://api.whatsapp.com/send/?phone=%2B79066357540&text&type=phone_number&app_absent=0'
 
 // TODO перед деплоем убрать auf
-export const MENU_KITCHEN = '/auf/assets/files/menu-kitchen.pdf'
-export const MENU_BAR = '/auf/assets/files/menu-bar.pdf'
+export const MENU_KITCHEN = '/assets/files/menu-kitchen.pdf'
+export const MENU_BAR = '/assets/files/menu-bar.pdf'
 
 export const YANDEX_REVIEW = 'https://yandex.ru/profile/239756751058'
 export const GOOGLE_REVIEW = 'https://maps.app.goo.gl/moSb5VGyaNjzQSyA7'
