@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import MainBgVideo from "../../../public/assets/videos/main-bg.mp4";
 import MainBgMobileVideo from "../../../public/assets/videos/main-bg-mobile.mp4";
+import MobileBg from "../../../public/assets/images/mobile-bg.png";
 import AufLogo from "../../../public/assets/icons/auf-logo.svg";
 import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
@@ -84,7 +85,7 @@ export const About = () => {
                 style={{
                     backgroundImage: isVideoLoaded
                         ? "none"
-                        : "url('../../../public/assets/images/bg.webp')",
+                        : "url('../../../public/assets/images/bg.png')",
                 }}
             >
                 <video
@@ -106,9 +107,11 @@ export const About = () => {
                         type="video/mp4"
                         media="(max-width: 575px)"
                     />
-                    Ваш браузер не поддерживает видео.
+                    <noscript>
+                        <img src={MobileBg} alt="" />
+                    </noscript>
                 </video>
-                <div className="video-overlay"></div>
+                <div className={`video-overlay ${isVideoLoaded ? '' : 'loading-overlay'}`}></div>
             </div>
 
             <div className="about__container">

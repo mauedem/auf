@@ -1,7 +1,7 @@
-import Interior1 from "../../../public/assets/images/interior-1-big.png";
-import Interior2 from "../../../public/assets/images/interior-2-big.png";
-import Interior3 from "../../../public/assets/images/interior-3-big.png";
-import Interior4 from "../../../public/assets/images/interior-4-big.png";
+import Interior1 from "../../../public/assets/images/interior/interior-1.webp";
+import Interior2 from "../../../public/assets/images/interior/interior-2.webp";
+import Interior3 from "../../../public/assets/images/interior/interior-3.webp";
+import Interior4 from "../../../public/assets/images/interior/interior-4.webp";
 
 // import Interior from "../../../public/assets/images/interior.png";
 

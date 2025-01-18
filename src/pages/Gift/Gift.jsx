@@ -1,5 +1,5 @@
-import GiftCard1 from "../../../public/assets/images/gift-card-1.png";
-import GiftCard2 from "../../../public/assets/images/gift-card-2.png";
+import GiftCard1 from "../../../public/assets/images/gift-cards/gift-card-1.webp";
+import GiftCard2 from "../../../public/assets/images/gift-cards/gift-card-2.webp";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import { useEffect } from "react";
 

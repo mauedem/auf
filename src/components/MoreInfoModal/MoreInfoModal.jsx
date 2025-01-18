@@ -1,6 +1,6 @@
-import MoreInfo1 from "../../../public/assets/images/more-info-1.png"
-import MoreInfo2 from "../../../public/assets/images/more-info-2.png"
-import MoreInfo3 from "../../../public/assets/images/more-info-3.png"
+import MoreInfo1 from "../../../public/assets/images/more-info-modal/more-info-1.webp"
+import MoreInfo2 from "../../../public/assets/images/more-info-modal/more-info-2.webp"
+import MoreInfo3 from "../../../public/assets/images/more-info-modal/more-info-3.webp"
 
 import './MoreInfoModal.css'
 import PropTypes from "prop-types";

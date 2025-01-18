@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import Info1Big from "../../../public/assets/images/info-1-big.png"
-import Info2Big from "../../../public/assets/images/info-2-big.png"
-import Info3Big from "../../../public/assets/images/info-3-big.png"
+import Info1Big from "../../../public/assets/images/info/info-1.webp"
+import Info2Big from "../../../public/assets/images/info/info-2.webp"
+import Info3Big from "../../../public/assets/images/info/info-3.webp"
 import Star from "../../../public/assets/icons/star.svg"
 import Yandex from "../../../public/assets/icons/yandex.svg"
 import Google from "../../../public/assets/icons/google.svg"
