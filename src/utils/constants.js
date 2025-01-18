@@ -5,7 +5,6 @@ export const BOOK_NUMBER = '+74952459999'
 export const TAXI = 'https://3.redirect.appmetrica.yandex.com/route?end-lat=55.762277&end-lon=37.569899&tariffClass=econom&ref=https%3A%2F%2Fauf.club%2F&appmetrica_tracking_id=1178268795219780156&lang=ru&data-app=3'
 export const TO_BUY = 'https://api.whatsapp.com/send/?phone=%2B79066357540&text&type=phone_number&app_absent=0'
 
-// TODO перед деплоем убрать auf
 export const MENU_KITCHEN = '/assets/files/menu-kitchen.pdf'
 export const MENU_BAR = '/assets/files/menu-bar.pdf'
 

@@ -91,7 +91,9 @@ export const Footer = ({ onMoreInfoClick }) => {
                         <div className="footer__phone-text">+7 (495) 245-99-99</div>
                     </div>
 
-                    <YandexMap className="footer__map" />
+                    <div className="footer__map-filter">
+                        <YandexMap className="footer__map" />
+                    </div>
 
                     <div className="footer__goto">
                         <button

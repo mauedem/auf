@@ -155,6 +155,10 @@
     margin-top: 60px;
 }
 
+.footer__map-filter {
+    filter: invert(1) brightness(1)
+}
+
 .footer__map {
     display: none;
 }

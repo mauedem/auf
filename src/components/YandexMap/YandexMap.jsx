@@ -32,11 +32,8 @@ export const YandexMap = () => {
                     <Placemark
                         geometry={placemarkCoordinates}
                         options={{
-                            iconLayout: 'default#image',
-                            iconImageHref:
-                                'https://static.tildacdn.com/tild6237-3332-4436-b733-636138666635/marker.svg',
-                            iconImageSize: [66, 56],
-                            iconImageOffset: [-33, -28],
+                            preset: 'islands#darkOrangeDotIcon',
+                            iconColor: '#2ED924',
                         }}
                         properties={{
                             hintContent: 'г. Москва, ул. Красная Пресня, 24',
