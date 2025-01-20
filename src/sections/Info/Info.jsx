@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
-import Info1Big from "../../../public/assets/images/info/info-1.webp"
-import Info2Big from "../../../public/assets/images/info/info-2.webp"
-import Info3Big from "../../../public/assets/images/info/info-3.webp"
+
 import Star from "../../../public/assets/icons/star.svg"
 import Yandex from "../../../public/assets/icons/yandex.svg"
 import Google from "../../../public/assets/icons/google.svg"
 import { useInView } from "react-intersection-observer";
-import { GOOGLE_REVIEW, YANDEX_REVIEW } from "../../utils/constants.js";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import './Info.css'
 
-export const Info = () => {
+import { useEffect, useState } from "react";
+import ApiService from "../../api/api.js";
+import PropTypes from "prop-types";
+
+export const Info = ({ language }) => {
     const imageVariantRightToLeft = {
         hidden: {
             scaleX: 0,
@@ -85,95 +88,137 @@ export const Info = () => {
         }),
     };
 
+    const [infoData, setInfoData] = useState({});
+    // const [error, setError] = useState({});
+
+    const [images, setImages] = useState({
+        image_1: null,
+        image_2: null,
+        image_3: null,
+    });
+
+    useEffect(() => {
+        if (Object.keys(infoData).length > 0) {
+            setImages({
+                image_1: `${API_BASE_URL}${infoData['block_1_photo']}`,
+                image_2: `${API_BASE_URL}${infoData['block_2_photo']}`,
+                image_3: `${API_BASE_URL}${infoData['block_3_photo']}`,
+            });
+        }
+    }, [infoData]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const infoData = await ApiService.fetchInfo();
+                setInfoData(infoData[0]);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <>
             <div className="info">
                 <div className="info__container">
                     <h2 className="info__title">
-                        <span style={{color: 'var(--secondary-color)'}}>Уникальный стрип</span> клуб в Москве
+                        <span style={{color: 'var(--secondary-color)'}}>{infoData[`highlight_title_${language}`]}</span> {infoData[`title_${language}`]}
                     </h2>
                     <div className="info__subtitle">
                         <span style={{color: 'var(--primary-color)'}}>
-                            Эротический клубный проект
+                            {infoData[`subtitle_${language}`]}
                         </span>
                     </div>
 
                     <div className="info__block">
-                        <motion.div
-                            ref={infoImage1Ref}
-                            initial="hidden"
-                            animate={infoImage1InView ? "visible" : "hidden"}
-                            variants={imageVariantLeftToRight}
-                        >
-                            <img className="info__img" src={Info1Big} alt=""/>
-                        </motion.div>
+                        {images.image_1 &&
+                            <motion.div
+                                ref={infoImage1Ref}
+                                initial="hidden"
+                                animate={infoImage1InView ? "visible" : "hidden"}
+                                variants={imageVariantLeftToRight}
+                            >
+                                <img className="info__img" src={images.image_1} alt=""/>
+                            </motion.div>
+                        }
 
                         <div className="info-service">
-                            <h4 className="info__header">Премиальный уровень сервиса</h4>
+                            <h4 className="info__header">
+                                {infoData[`block_1_title_${language}`]}
+                            </h4>
 
                             <div className="info__text" style={{marginTop: '14px'}}>
-                                Исключительный сервис, который соответствует самым высоким стандартам.
+                                {infoData[`block_1_text_${language}`]}
                             </div>
                         </div>
                     </div>
 
                     <h3 className="info__title info__title--90">
-                        <span style={{color: 'var(--primary-color)'}}>Рай для</span> гедонистов
+                        <span style={{color: 'var(--primary-color)'}}>{infoData[`highlight_title_2_${language}`]}</span> {infoData[`title_2_${language}`]}
                     </h3>
 
                     <div className="info__block">
                         <div className="info-manager info-manager--big">
-                            <h4 className="info__header info-manager__title">Ваш личный комфорт-менеджер</h4>
+                            <h4 className="info__header info-manager__title">
+                                {infoData[`block_2_title_${language}`]}
+                            </h4>
 
                             <div className="info__text info-manager__text" style={{marginTop: '10px'}}>
-                                Это ваш проводник в мир изысканного досуга, который позаботится обо всем:
-                                от подбора коктейля до организации шоу в индивидуальной зоне.
+                                {infoData[`block_2_text_${language}`]}
                             </div>
                         </div>
 
-                        <motion.div
-                            ref={infoImage2Ref}
-                            initial="hidden"
-                            animate={infoImage2InView ? "visible" : "hidden"}
-                            variants={imageVariantRightToLeft}
-                        >
-                            <img className="info__img" src={Info2Big} alt=""/>
-                        </motion.div>
+                        {images.image_2 &&
+                            <motion.div
+                                ref={infoImage2Ref}
+                                initial="hidden"
+                                animate={infoImage2InView ? "visible" : "hidden"}
+                                variants={imageVariantRightToLeft}
+                            >
+                                <img className="info__img" src={images.image_2} alt=""/>
+                            </motion.div>
+                        }
 
                         <div className="info-manager info-manager--small">
-                            <h4 className="info__header info-manager__title">Ваш личный комфорт-менеджер</h4>
+                            <h4 className="info__header info-manager__title">{infoData[`block_2_title_${language}`]}</h4>
 
                             <div className="info__text info-manager__text" style={{marginTop: '10px'}}>
-                                Это ваш проводник в мир изысканного досуга, который позаботится обо всем:
-                                от подбора коктейля до организации шоу в индивидуальной зоне.
+                                {infoData[`block_2_text_${language}`]}
                             </div>
                         </div>
                     </div>
 
                     <div className="info__block info__block--90">
-                        <motion.div
-                            ref={infoImage3Ref}
-                            initial="hidden"
-                            animate={infoImage3InView ? "visible" : "hidden"}
-                            variants={imageVariantLeftToRight}
-                        >
-                            <img className="info__img" src={Info3Big} alt=""/>
-                        </motion.div>
+                        {images.image_3 &&
+                            <motion.div
+                                ref={infoImage3Ref}
+                                initial="hidden"
+                                animate={infoImage3InView ? "visible" : "hidden"}
+                                variants={imageVariantLeftToRight}
+                            >
+                                <img className="info__img" src={images.image_3} alt=""/>
+                            </motion.div>
+                        }
 
                         <div className="info-privacy">
                             <h4 className="info__header" style={{width: '360px'}}>
-                                100% конфиденциальность и приватность
+                                {infoData[`block_3_title_${language}`]}
                             </h4>
 
                             <div className="info__text" style={{marginTop: '10px'}}>
-                                Приватные зоны, закрытые VIP-ложи и строгая политика конфиденциальности гарантируют,
-                                что ваше посещение останется только вашим секретом.
+                            {infoData[`block_3_text_${language}`]}
                             </div>
                         </div>
                     </div>
 
                     <div className="info__rating" ref={startRef}>
-                        <h3 className="info__rating-text">Рейтинг клуба:</h3>
+                        <h3 className="info__rating-text">
+                            {infoData[`rating_${language}`]}
+                        </h3>
                         {stars.map((_, index) => (
                             <motion.img
                                 key={index}
@@ -189,7 +234,7 @@ export const Info = () => {
                     </div>
 
                     <div className="info__review">
-                        Положительных отзывов: 327
+                        {infoData[`reviews_total_count_${language}`]}
                     </div>
 
                     <div className="info-rating-cards">
@@ -206,17 +251,23 @@ export const Info = () => {
                                     <img src={Yandex} alt="Yandex"/>
                                 </div>
                                 <div>
-                                    <div className="info-rating-card__rating">5,0</div>
-                                    <div className="info-rating-card__text">Яндекс</div>
+                                    <div className="info-rating-card__rating">
+                                        {infoData[`yandex_score`]}
+                                    </div>
+                                    <div className="info-rating-card__text">
+                                        {infoData[`yandex_text_${language}`]}
+                                    </div>
                                 </div>
                             </div>
                             <button
                                 className="info-rating-card__btn"
                                 onClick={() => {
-                                    window.open(YANDEX_REVIEW, '_blank');
+                                    window.open(infoData['yandex_review_link'], '_blank');
                                 }}
                             >
-                                <div className="info-rating-card__btn-text">Оставить отзыв</div>
+                                <div className="info-rating-card__btn-text">
+                                    {infoData[`yandex_button_text_${language}`]}
+                                </div>
                             </button>
                         </motion.div>
 
@@ -233,17 +284,23 @@ export const Info = () => {
                                     <img src={Google} alt="Google"/>
                                 </div>
                                 <div>
-                                    <div className="info-rating-card__rating">5,0</div>
-                                    <div className="info-rating-card__text">Google</div>
+                                    <div className="info-rating-card__rating">
+                                        {infoData[`google_score`]}
+                                    </div>
+                                    <div className="info-rating-card__text">
+                                        {infoData[`gooogle_text_${language}`]}
+                                    </div>
                                 </div>
                             </div>
                             <button
                                 className="info-rating-card__btn"
                                 onClick={() => {
-                                    window.open(GOOGLE_REVIEW, '_blank');
+                                    window.open(infoData['google_review_link'], '_blank');
                                 }}
                             >
-                                <div className="info-rating-card__btn-text">Оставить отзыв</div>
+                                <div className="info-rating-card__btn-text">
+                                    {infoData[`gooogle_button_text_${language}`]}
+                                </div>
                             </button>
                         </motion.div>
                     </div>
@@ -252,3 +309,7 @@ export const Info = () => {
         </>
     )
 }
+
+Info.propTypes = {
+    language: PropTypes.string.isRequired,
+};

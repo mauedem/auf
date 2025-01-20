@@ -67,10 +67,14 @@
     font-family: Aeroport, sans-serif;
     font-size: 11px;
     font-weight: 400;
-    line-height: 11px;
+    line-height: 18px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #fff;
+    width: 126px;
+    height: 27px;
+    margin-top: -6px;
+    margin-left: 6px;
 }
 
 .menu__days, .menu__hours, .menu__parking {
@@ -86,7 +90,7 @@
 .menu__parking {
     color: #DF61E7;
     margin-left: 34px;
-    margin-top: 10px;
+    margin-top: 16px;
 }
 
 .menu__days {

@@ -1,16 +1,61 @@
-import MoreInfo1 from "../../../public/assets/images/more-info-modal/more-info-1.webp"
-import MoreInfo2 from "../../../public/assets/images/more-info-modal/more-info-2.webp"
-import MoreInfo3 from "../../../public/assets/images/more-info-modal/more-info-3.webp"
-
 import './MoreInfoModal.css'
 import PropTypes from "prop-types";
 import Cross from "../../../public/assets/icons/cross.svg";
+import { useEffect, useState } from "react";
+import ApiService from "../../api/api.js";
 
-export const MoreInfoModal = ({ isOpen, onClose }) => {
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const MoreInfoModal = ({ language, isOpen, onClose }) => {
     const handleOverlayClick = (event) => {
         if (event.target.classList.contains("more-info-modal")) {
             onClose();
         }
+    };
+
+    const [moreInfoData, setMoreInfoData] = useState({});
+    // const [error, setError] = useState({});
+
+    const [images, setImages] = useState({
+        image_1: null,
+        image_2: null,
+        image_3: null,
+    });
+
+    useEffect(() => {
+        if (Object.keys(moreInfoData).length > 0) {
+            setImages({
+                image_1: `${API_BASE_URL}${moreInfoData['photo_1']}`,
+                image_2: `${API_BASE_URL}${moreInfoData['photo_2']}`,
+                image_3: `${API_BASE_URL}${moreInfoData['photo_3']}`,
+            });
+        }
+    }, [moreInfoData]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const moreInfoData = await ApiService.fetchMoreInfo();
+                setMoreInfoData(moreInfoData[0]);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const TextList = () => {
+        const lines = moreInfoData[`text_6_${language}`]?.split("\r\n");
+
+        return (
+            <ul style={{ padding: '0', margin: '0' }}>
+                {lines.map((line, index) => (
+                    <li key={index}>{line}</li>
+                ))}
+            </ul>
+        );
     };
 
     if (!isOpen) return null;
@@ -19,95 +64,72 @@ export const MoreInfoModal = ({ isOpen, onClose }) => {
         <>
             <div className="more-info-modal" onClick={handleOverlayClick}>
                 <div className="more-info-modal__content">
-                    <h2 className="more-info-modal__title">Какой лучший <span
-                        style={{color: 'var(--secondary-color)'}}>стриптиз-клуб</span> в Москве
+                    <h2 className="more-info-modal__title">{moreInfoData[`title_1_${language}`]?.split('{{highlited}}')[0]} <span
+                        style={{color: 'var(--secondary-color)'}}>
+                        {moreInfoData[`highlight_title_1_${language}`]}
+                    </span> {moreInfoData[`title_1_${language}`]?.split('{{highlited}}')[1]}
                     </h2>
 
                     <div className="more-info-modal__text">
-                        Добро пожаловать в лучший элитный стриптиз-клуб в Москве!
-                        Мы готовы подарить вам незабываемую ночь в атмосфере роскоши и страсти.
-                        Наши шоу-программы созданы для истинных ценителей эротического искусства.
-                        Каждый танец наших танцовщиц – это магия движения, которая не оставит вас равнодушными в мужском
-                        клубе AUF в Москве.
+                        {moreInfoData[`text_1_${language}`]}
                     </div>
 
-                    <img src={MoreInfo1} alt="girl" className="more-info-modal__img" />
+                    {images.image_1 &&
+                        <img src={images.image_1} alt="girl" className="more-info-modal__img"/>
+                    }
 
                     <h2 className="more-info-modal__title">
-                        Что предлагает <span style={{color: 'var(--secondary-color)'}}> мужской клуб</span> AUF в Москве
+                        {moreInfoData[`title_2_${language}`]?.split('{{highlited}}')[0]} <span style={{color: 'var(--secondary-color)'}}> {moreInfoData[`highlight_title_2_${language}`]}</span> {moreInfoData[`title_1_${language}`]?.split('{{highlited}}')[2]}
                     </h2>
 
                     <div className="more-info-modal__text">
-                        Для наших гостей мы предлагаем роскошные VIP-зоны с лучшим видом на сцену.
-                        Здесь мужчины могут по-настоящему расслабиться и наслаждаться шоу в полной мере,
-                        оставаясь в комфорте и уединении.
-                        Каждую ночь – новые эмоции и новые впечатления, которые останутся с вами надолго!
+                        {moreInfoData[`text_2_${language}`]}
                     </div>
 
-                    <img src={MoreInfo3} alt="girl" className="more-info-modal__img"/>
+                    {images.image_2 &&
+                        <img src={images.image_2} alt="girl" className="more-info-modal__img"/>
+                    }
 
                     <h3 className="more-info-modal__title">
-                        Что такое <span style={{color: 'var(--secondary-color)'}}>иммерсивные</span> шоу-программы
+                        {moreInfoData[`title_3_${language}`]?.split('{{highlited}}')[0]} <span style={{color: 'var(--secondary-color)'}}>{moreInfoData[`highlight_title_3_${language}`]}</span> {moreInfoData[`title_3_${language}`]?.split('{{highlited}}')[1]}
                     </h3>
 
                     <div className="more-info-modal__text">
-                        В нашем клубе вы найдете самые разнообразные программы, которые разжигают фантазию и дарят вам
-                        море
-                        эмоций.
-                        Ночные шоу с профессиональными танцовщицами, которые умело соединяют грацию и смелость, оставят
-                        яркие впечатления.
-                        Стильные бары нашего клуба предложат вам лучший выбор напитков, которые помогут расслабиться и
-                        насладиться шоу.
-                        Мы также предлагаем уникальные авторские коктейли, которые создаются специально для наших
-                        гостей.
-                        Каждый вечер мы радуем наших гостей новой программой, где каждая деталь продумана до мелочей.
-                        Изысканные костюмы, современное световое шоу и отличная музыкальная подборка —
-                        всё это сделает ваше пребывание в стрип-клубе настоящим праздником.
+                        {moreInfoData[`text_3_${language}`]}
                     </div>
 
-                    <img src={MoreInfo2} alt="girl" className="more-info-modal__img" />
+                    {images.image_3 &&
+                        <img src={images.image_3} alt="girl" className="more-info-modal__img"/>
+                    }
 
                     <h3 className="more-info-modal__title">
-                        <span style={{color: 'var(--secondary-color)'}}>Незабываемая</span> атмосфера
+                        <span style={{color: 'var(--secondary-color)'}}>{moreInfoData[`highlight_title_4_${language}`]}</span> {moreInfoData[`title_4_${language}`]?.split('{{highlited}}')[1]}
                     </h3>
 
                     <div className="more-info-modal__text">
-                        Мы создали идеальное место для тех, кто хочет отдохнуть и насладиться роскошным отдыхом в
-                        столице.
-                        Стильный интерьер, качественный сервис и приятная музыкальная программа — все это делает наш
-                        стрип-клуб уникальным местом для вечернего отдыха.
-                        Мы всегда рады пригласить вас провести незабываемый вечер в компании красивых и обворожительных
-                        танцовщиц.
+                        {moreInfoData[`text_4_${language}`]}
                     </div>
 
                     <div className="more-info-modal__text" style={{marginTop: '20px'}}>
-                        В нашем клубе вы можете проводить различные мероприятия, такие как вечеринки или праздники.
-                        Наши сотрудники позаботятся о том, чтобы каждый гость получил максимум внимания и удовольствия.
-                        Время в нашем стриптиз-клубе в Москве станет поистине особенным.
+                        {moreInfoData[`text_5_${language}`]}
                     </div>
 
                     <h2 className="more-info-modal__text" style={{marginTop: '20px'}}>
-                        Почему наши гости выбирают стриптиз клуб AUF?
+                        {moreInfoData[`subtitle_${language}`]}
                     </h2>
 
                     <ul className="more-info-modal__text" style={{marginTop: '20px'}}>
-                        <li>Самая красивая шоу-программа в городе</li>
-                        <li>Эротические танцы от лучших танцовщиц Москвы</li>
-                        <li>Комфортная атмосфера для всех гостей</li>
-                        <li>Широкий выбор элитных напитков и авторских коктейлей</li>
-                        <li>Центральное расположение для удобства всех посетителей</li>
+                        {TextList()}
                     </ul>
 
                     <div className="more-info-modal__text" style={{marginTop: '20px'}}>
-                        Не откладывайте возможность окунуться в мир женской магии и ярких шоу!
-                        Забронируйте столик прямо сейчас и наслаждайтесь исключительным сервисом в нашем стрип-клубе в
-                        Москве.
+                        {moreInfoData[`text_7_${language}`]}
                     </div>
 
                     <button className="more-info-modal__close-btn" onClick={onClose}>
                         <img className="more-info-modal__close-img" src={Cross} alt="Cross"/>
                         <div className="more-info-modal__close-text">
-                            Закрыть
+                            {moreInfoData[`close_button_text_${language}`]}
                         </div>
                     </button>
                 </div>
@@ -117,6 +139,7 @@ export const MoreInfoModal = ({ isOpen, onClose }) => {
 }
 
 MoreInfoModal.propTypes = {
+    language: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
 };

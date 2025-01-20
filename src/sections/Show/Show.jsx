@@ -1,55 +1,22 @@
-import Interior1 from "../../../public/assets/images/interior/interior-1.webp";
-import Interior2 from "../../../public/assets/images/interior/interior-2.webp";
-import Interior3 from "../../../public/assets/images/interior/interior-3.webp";
-import Interior4 from "../../../public/assets/images/interior/interior-4.webp";
-
-// import Interior from "../../../public/assets/images/interior.png";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Stories } from "../../components/Stories/Stories.jsx";
-import { useRef } from "react";
-import { INTERIOR_ITEMS } from "../../utils/constants.js";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import './Show.css'
+import ApiService from "../../api/api.js";
 
-export const Show = ({ onInteriorClick }) => {
+export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksData }) => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
 
-    /* TODO сделать динамический класс active / inactive */
-    const interiorItems = INTERIOR_ITEMS.map(
-        item => {
-            return (
-                <div
-                    key={item.id}
-                    className="interior__tag interior__tag--inactive"
-                    onClick={() => onInteriorClick(item.photos)}
-                >
-                    {item.text}
-                </div>
-            )
-        }
-    );
-
     const [textRef, textInView] = useInView({
         threshold: 0
     });
-    const text = "Музыкальная концепция стрипклуба AUF построена в стиле ORGANIC, MELODIC и AFRO HOUSE создает настроение пира души и тела. А наши актрисы создают неповторимые иммерсивные эротические постановки под руководством лучших хореографов Москвы.";
-    const words = text.split(" ")
-    const wordAnimation = {
-        hidden: { opacity: 0, y: 20 },
-        visible: (i) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.1,
-                delay: i * 0.1,
-            },
-        }),
-    };
 
     const [image1Ref, image1InView] = useInView({
         threshold: 0
@@ -75,13 +42,80 @@ export const Show = ({ onInteriorClick }) => {
         },
     };
 
+    const [showData, setShowData] = useState({});
+    // const [error, setError] = useState({});
+
+    const text = showData[`text_${language}`] ||  ''
+    const words = text?.split(" ")
+    const wordAnimation = {
+        hidden: { opacity: 0, y: 20 },
+        visible: (i) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.1,
+                delay: i * 0.1,
+            },
+        }),
+    };
+
+    const [images, setImages] = useState({
+        image_1: null,
+        image_2: null,
+        image_3: null,
+    });
+
+    useEffect(() => {
+        if (Object.keys(interiorData).length > 0) {
+            setImages({
+                image_1: `${API_BASE_URL}${interiorData['photo_1']}`,
+                image_2: `${API_BASE_URL}${interiorData['photo_2']}`,
+                image_3: `${API_BASE_URL}${interiorData['photo_3']}`,
+                image_4: `${API_BASE_URL}${interiorData['photo_4']}`,
+            });
+        }
+    }, [interiorData]);
+
+    const videos = showData?.videos?.length
+        ? showData.videos.map((video) => `${API_BASE_URL}${video.video}`)
+        : [];
+
+    const interiorItems = interiorBlocksData.map(
+        item => {
+            return (
+                <div
+                    key={item.id}
+                    className="interior__tag interior__tag--inactive"
+                    onClick={() => onInteriorClick(item.key)}
+                >
+
+                    {item[`title_${language}`]}
+                </div>
+            )
+        }
+    );
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const showData = await ApiService.fetchShow();
+                setShowData(showData[0]);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <>
             <div className="container">
                 <div className="show" id="music" ref={musicRef}>
                     <div className="show__container">
                         <h2 className="show__title">
-                            Show <span style={{color: 'var(--secondary-color)'}}>& Music</span>
+                            {showData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{showData[`highlight_title_${language}`]}</span>
                         </h2>
 
                         <div className="show__text">
@@ -100,14 +134,16 @@ export const Show = ({ onInteriorClick }) => {
                         </div>
 
                         <div className="show__stories">
-                            <Stories />
+                            <Stories videos={videos} />
                         </div>
                     </div>
                 </div>
 
                 <div className="interior" id="interior" ref={interiorRef}>
                     <div className="interior__universal-container">
-                        <h2 className="interior__title">Интерьер клуба</h2>
+                        <h2 className="interior__title">
+                            {interiorData[`title_${language}`]}
+                        </h2>
 
                         {/*<img src={Interior} alt="Interior" />*/}
 
@@ -118,13 +154,13 @@ export const Show = ({ onInteriorClick }) => {
 
                     <div className="interior__container" id="vip" ref={vipRef}>
                         <h3 className="interior__title interior__title--secondary">
-                            VIP-ложи
+                            {interiorData[`title_2_${language}`]}
                         </h3>
 
                         <div className="interior__text">
-                            Для тех, кто ценит приватность и комфорт, AUF предлагает эксклюзивные VIP-комнаты.
-                            <span style={{color: 'var(--primary-color)'}}> Закрытая обстановка, персональный сервис и абсолютная конфиденциальность </span>
-                            обеспечат вам незабываемый вечер
+                            {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[0]}
+                            <span style={{color: 'var(--primary-color)'}}> {interiorData[`highlight_subtitle_${language}`]} </span>
+                            {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[1]}
                         </div>
                     </div>
                 </div>
@@ -132,48 +168,56 @@ export const Show = ({ onInteriorClick }) => {
                 <div className="interior__universal-container--1">
                     <div className="interior__universal-container">
                         <div className="interior__block">
-                            <motion.div
-                                ref={image1Ref}
-                                initial="hidden"
-                                animate={image1InView ? "visible" : "hidden"}
-                                variants={imageVariants}
-                            >
-                                <img className="interior__img-1" src={Interior1} alt="Interior"/>
-                            </motion.div>
+                            {images.image_1 &&
+                                <motion.div
+                                    ref={image1Ref}
+                                    initial="hidden"
+                                    animate={image1InView ? "visible" : "hidden"}
+                                    variants={imageVariants}
+                                >
+                                    <img className="interior__img-1" src={images.image_1} alt="Interior"/>
+                                </motion.div>
+                            }
 
                             <div className="interior__subtext">
-                                Максимум комфорта и анонимности – приватные ложи, где только Вы и Ваши удовольствия.
+                                {interiorData[`text_${language}`]}
                             </div>
                         </div>
 
-                        <motion.div
-                            ref={image2Ref}
-                            initial="hidden"
-                            animate={image2InView ? "visible" : "hidden"}
-                            variants={imageVariants}
-                        >
-                            <img className="interior__img-2" src={Interior2} alt="Interior"/>
-                        </motion.div>
-
-                        <div className="interior__block">
+                        {images.image_2 &&
                             <motion.div
-                                ref={image3Ref}
+                                ref={image2Ref}
                                 initial="hidden"
-                                animate={image3InView ? "visible" : "hidden"}
+                                animate={image2InView ? "visible" : "hidden"}
                                 variants={imageVariants}
                             >
-                                <img className="interior__img-3" src={Interior3} alt="Interior"/>
+                                <img className="interior__img-2" src={images.image_2} alt="Interior"/>
                             </motion.div>
+                        }
+
+                        <div className="interior__block">
+                            {images.image_3 &&
+                                <motion.div
+                                    ref={image3Ref}
+                                    initial="hidden"
+                                    animate={image3InView ? "visible" : "hidden"}
+                                    variants={imageVariants}
+                                >
+                                    <img className="interior__img-3" src={images.image_3} alt="Interior"/>
+                                </motion.div>
+                            }
                         </div>
 
-                        <motion.div
-                            ref={image4Ref}
-                            initial="hidden"
-                            animate={image4InView ? "visible" : "hidden"}
-                            variants={imageVariants}
-                        >
-                            <img className="interior__img-4" src={Interior4} alt="Interior"/>
-                        </motion.div>
+                        {images.image_4 &&
+                            <motion.div
+                                ref={image4Ref}
+                                initial="hidden"
+                                animate={image4InView ? "visible" : "hidden"}
+                                variants={imageVariants}
+                            >
+                                <img className="interior__img-4" src={images.image_4} alt="Interior"/>
+                            </motion.div>
+                        }
                     </div>
                 </div>
             </div>
@@ -183,4 +227,7 @@ export const Show = ({ onInteriorClick }) => {
 
 Show.propTypes = {
     onInteriorClick: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
+    interiorData: PropTypes.object.isRequired,
+    interiorBlocksData: PropTypes.array.isRequired,
 };

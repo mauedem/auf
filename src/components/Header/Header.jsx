@@ -13,9 +13,18 @@ import './Header.css'
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ADDRESS, BOOK_NUMBER, NAV_ITEMS } from "../../utils/constants.js";
+import { LANGUAGES } from "../../utils/constants.js";
 
-export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLanguageMenu }) => {
+export const Header = ({
+    onMenuChange,
+    onLanguageMenuChange,
+    showMenu,
+    showLanguageMenu,
+    navItemsData,
+    contactsData,
+    language,
+    onLanguageChange
+}) => {
     const [isMenuHover, setIsMenuHover] = useState(false);
     const handleMouseEnterMenu = () => setIsMenuHover(true);
     const handleMouseLeaveMenu = () => setIsMenuHover(false);
@@ -37,7 +46,28 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
     const navigate = useNavigate()
     const location = useLocation();
 
+    const toggleLanguage = () => {
+        const currentIndex = LANGUAGES.indexOf(language);
+        const nextIndex = (currentIndex + 1) % LANGUAGES.length;
+        const newLanguage = LANGUAGES[nextIndex];
+
+        localStorage.setItem('language', newLanguage);
+
+        onLanguageChange(newLanguage);
+
+        // const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, "");
+        // const newPath = language === "ru" ? currentPath : `/${language}${currentPath}`;
+        // navigate(newPath, { replace: true });
+    };
+
     function goToLinkHref(menuItem) {
+        const isLanguageSwitcher = menuItem['text_ru'] === 'Русский'
+        if (isLanguageSwitcher) {
+            toggleLanguage(menuItem);
+
+            return;
+        }
+
         if (location.pathname !== menuItem.link) {
             navigate(menuItem.link);
 
@@ -55,7 +85,7 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
         onMenuChange(false);
     }
 
-    const navItems = NAV_ITEMS.map(
+    const navItems = navItemsData.map(
         item => {
             return (
                 <button
@@ -63,7 +93,9 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                     className="nav-btn"
                     onClick={() => goToLinkHref(item)}
                 >
-                    <span className="nav-button__link">{item.name}</span>
+                    <span className="nav-button__link">
+                        {item[`text_${language}`]}
+                    </span>
                 </button>
             )
         }
@@ -98,20 +130,27 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                         <img className="header-map__img" src={Map} alt="map"/>
                         <div
                             className="header-map__addess-block"
-                            onClick={() => window.open(ADDRESS, '_blank')}
+                            onClick={() => window.open(contactsData['navigator_link'], '_blank')}
                         >
-                            <div className="header-map__addess">ул. Красная</div>
-                            <div className="header-map__addess" style={{ marginTop: '6px' }}>Пресня, 24</div>
+                            <div className="header-map__addess">
+                                {contactsData[`short_address_${language}`]}
+                            </div>
                         </div>
                     </div>
 
                     <div className="header-hours">
-                        <div className="header-hours__days">Ежедневно</div>
-                        <div className="header-hours__hours">с 21:00 до 06:00</div>
+                        <div className="header-hours__days">
+                            {contactsData[`opening_hours_text_${language}`]}
+                        </div>
+                        <div className="header-hours__hours">
+                            {contactsData[`opening_hours_${language}`]}
+                        </div>
                     </div>
 
 
-                    <a className="header-reserve-btn" href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
+                    <a className="header-reserve-btn" href={`tel:${contactsData['phone']}`}>
+                        {contactsData[`book_button_${language}`]}
+                    </a>
 
                     <div style={{ marginLeft: '16px', marginRight: '16px', }}>
                         <img
@@ -139,30 +178,14 @@ export const Header = ({ onMenuChange, onLanguageMenuChange, showMenu, showLangu
                     <button
                         className="reserve-btn"
                         onClick={() => {
-                            window.location.href = `tel:${BOOK_NUMBER}`;
+                            window.location.href = `tel:${contactsData['phone']}`;
                         }}
                     >
                         <img className="reserve-btn__phone-call" src={PhoneCallShadowed} alt="Phone call"/>
                         <div className="reserve-btn__text">
-                            <a href={`tel:${BOOK_NUMBER}`}>Бронь</a>
+                            <a href={`tel:${contactsData['phone']}`}>Бронь</a>
                         </div>
                     </button>
-
-                    {/*{showLanguageMenu*/}
-                    {/*    ? <img*/}
-                    {/*        className="header__language"*/}
-                    {/*        src={getLanuguageMobileMenuIcon()}*/}
-                    {/*        alt="Change language"*/}
-                    {/*        onMouseEnter={handleMouseEnterLanguageMobileMenu}*/}
-                    {/*        onMouseLeave={handleMouseLeaveLanguageMobileMenu}*/}
-                    {/*    />*/}
-                    {/*    : <button className="reserve-btn">*/}
-                    {/*        <img className="reserve-btn__phone-call" src={PhoneCallShadowed} alt="Phone call"/>*/}
-                    {/*        <div className="reserve-btn__text">*/}
-                    {/*            <a href={`tel:${BOOK_NUMBER}`}>Бронь</a>*/}
-                    {/*        </div>*/}
-                    {/*    </button>*/}
-                    {/*}*/}
 
                     <div style={{marginLeft: '16px', marginRight: '5px', marginTop: '6px'}}>
                         <img
@@ -194,4 +217,8 @@ Header.propTypes = {
     onLanguageMenuChange: PropTypes.func.isRequired,
     showMenu: PropTypes.bool.isRequired,
     showLanguageMenu: PropTypes.bool.isRequired,
+    navItemsData: PropTypes.array.isRequired,
+    contactsData: PropTypes.object.isRequired,
+    language: PropTypes.string.isRequired,
+    onLanguageChange: PropTypes.func.isRequired,
 };

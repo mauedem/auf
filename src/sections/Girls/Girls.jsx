@@ -1,23 +1,22 @@
-import Girls1 from "../../../public/assets/images/girls/girls-1.webp";
-import Girls2 from "../../../public/assets/images/girls/girls-2.webp";
-import Girls3 from "../../../public/assets/images/girls/girls-3.webp";
-import Girls4 from "../../../public/assets/images/girls/girls-4.webp";
-import Girls5 from "../../../public/assets/images/girls/girls-5.webp";
-import Girls6 from "../../../public/assets/images/girls/girls-6.webp";
-import Girls7 from "../../../public/assets/images/girls/girls-7.webp";
-import Girls8 from "../../../public/assets/images/girls/girls-8.webp";
-import Girls9 from "../../../public/assets/images/girls/girls-9.webp";
-import Girls10 from "../../../public/assets/images/girls/girls-10.webp";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import './Girls.css'
 import { useInView } from "react-intersection-observer";
+import ApiService from "../../api/api.js";
+import PropTypes from "prop-types";
 
-export const Girls = () => {
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const Girls = ({ language }) => {
     const girlsRef = useRef(null);
 
-    const images = [Girls1, Girls2, Girls3, Girls4, Girls5, Girls6, Girls7, Girls8, Girls9, Girls10];
+    const [girlsData, setGirlsData] = useState({});
+    // const [error, setError] = useState({});
+
+    const images = girlsData?.photos?.length
+        ? girlsData.photos.map((photo) => `${API_BASE_URL}${photo.photo}`)
+        : [];
 
     const imageAnimationVariants = {
         initial: { opacity: 0, scale: 0 },
@@ -27,11 +26,10 @@ export const Girls = () => {
     const [girlsTextRef, girlsTextnView] = useInView({
         threshold: 0
     });
-    const textPart1 =
-        "уникальная атмосфера, вас ждут премиальные шоу-программы, персональный сервис и лучшие коктейли Москвы.";
-    const textPart2 = "мы создаем ночи, которые запоминаются навсегда.";
-    const wordsPart1 = textPart1.split(" ");
-    const wordsPart2 = textPart2.split(" ");
+    const textPart1 = girlsData[`text_${language}`] ||  '';
+    const textPart2 = girlsData[`highlight_text_${language}`] || '';
+    const wordsPart1 = textPart1?.split(" ");
+    const wordsPart2 = textPart2?.split(" ");
     const wordAnimation = {
         hidden: { opacity: 0, y: 20 },
         visible: (i) => ({
@@ -43,6 +41,20 @@ export const Girls = () => {
             },
         }),
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const girlsData = await ApiService.fetchGirls();
+                setGirlsData(girlsData[0]);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -57,19 +69,19 @@ export const Girls = () => {
                             ease: "linear",
                         }}
                     >
-                        <span className="animation-string__text">Игривые актрисы</span>
-                        <span className="animation-string__text">Игривые актрисы</span>
-                        <span className="animation-string__text">Игривые актрисы</span>
+                        <span className="animation-string__text">{girlsData[`title_${language}`]} {girlsData[`highlight_title_${language}`]}</span>
+                        <span className="animation-string__text">{girlsData[`title_${language}`]} {girlsData[`highlight_title_${language}`]}</span>
+                        <span className="animation-string__text">{girlsData[`title_${language}`]} {girlsData[`highlight_title_${language}`]}</span>
                     </motion.div>
                 </div>
 
                 <div className="girls__container">
                     <h2 className="girls__title">
-                        игривые <span style={{color: 'var(--secondary-color)'}}>актрисы</span>
+                        {girlsData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{girlsData[`highlight_title_${language}`]}</span>
                     </h2>
 
                     <div className="girls__subtitle">
-                        приватный отдых высшего уровня и неповторимый опыт эротического погружения
+                        {girlsData[`subtitle_${language}`]}
                     </div>
 
                     <div className="girls__animation">
@@ -134,3 +146,7 @@ export const Girls = () => {
         </>
     )
 }
+
+Girls.propTypes = {
+    language: PropTypes.string.isRequired,
+};

@@ -6,13 +6,16 @@ import AufLogo from "../../../public/assets/icons/auf-logo.svg";
 import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import Map from "../../../public/assets/icons/map.svg";
-import { BOOK_NUMBER, NAV_ITEMS } from "../../utils/constants.js";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import ApiService from "../../api/api.js";
+import PropTypes from "prop-types";
 
 import "./About.css";
+import {LANGUAGES} from "../../utils/constants.js";
 
-export const About = () => {
+export const About = ({ language, contactsData, navItemsData, onLanguageChange }) => {
     const [aboutRef, aboutRefInView] = useInView({
         threshold: 0
     });
@@ -53,23 +56,67 @@ export const About = () => {
         },
     };
 
-    const navItems = NAV_ITEMS.map((item) => {
-        return (
-            <div
-                key={item.id}
-                className="about__tag about__tag--active"
-                onClick={() => {
-                    if (item.href) {
-                        document
-                            .getElementById(item.href)
-                            .scrollIntoView({ behavior: "smooth" });
-                    }
-                }}
-            >
-                {item.name}
-            </div>
-        );
-    });
+    const toggleLanguage = () => {
+        const currentIndex = LANGUAGES.indexOf(language);
+        const nextIndex = (currentIndex + 1) % LANGUAGES.length;
+        const newLanguage = LANGUAGES[nextIndex];
+
+        localStorage.setItem('language', newLanguage);
+
+        onLanguageChange(newLanguage);
+
+        // const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, "");
+        // const newPath = language === "ru" ? currentPath : `/${language}${currentPath}`;
+        // navigate(newPath, { replace: true });
+    };
+
+    function goToLinkHref(menuItem) {
+        console.log('goToLinkHref menuItem', menuItem)
+        const isLanguageSwitcher = menuItem['text_ru'] === 'Русский'
+        console.log('isLanguageSwitcher', isLanguageSwitcher)
+        if (isLanguageSwitcher) {
+            toggleLanguage(menuItem);
+
+            return;
+        }
+
+        if (menuItem.href) {
+            document
+                .getElementById(menuItem.href)
+                .scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    const navItems = navItemsData.map(
+        item => {
+            return (
+                <div
+                    key={item.id}
+                    className="about__tag about__tag--active"
+                    onClick={() => goToLinkHref(item)}
+                >
+                    {item[`text_${language}`]}
+                </div>
+            )
+        }
+    );
+
+    const [aboutData, setAboutData] = useState({});
+    // const [error, setError] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const aboutData = await ApiService.fetchAbout();
+                setAboutData(aboutData[0]);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <motion.div
@@ -121,7 +168,7 @@ export const About = () => {
                         className="about__title about__title--welcome"
                         variants={textVariant("y", -30)}
                     >
-                        WELCOME TO
+                        {aboutData[`text_1_${language}`]}
                     </motion.div>
 
                     <img className="about__logo" src={AufLogo} alt="AUF Logo"/>
@@ -130,7 +177,7 @@ export const About = () => {
                         className="about__title about__title--experience"
                         variants={textVariant("y", 30)}
                     >
-                        EXPERIENCE CLUB
+                        {aboutData[`text_2_${language}`]}
                     </motion.div>
                 </div>
 
@@ -139,13 +186,13 @@ export const About = () => {
                         className="about__subtitle"
                         variants={textVariant("y", -30)}
                     >
-                        стриптиз клуб в центре москвы
+                        {aboutData[`title_${language}`]}
                     </motion.h1>
                     <motion.div
                         className="about__description"
                         variants={textVariant("y", 30)}
                     >
-                        изысканный отдых <br/> для мужчин
+                        {aboutData[`subtitle_${language}`]}
                     </motion.div>
                 </div>
 
@@ -157,7 +204,7 @@ export const About = () => {
                         animate="visible"
                         transition={{duration: 1}}
                         onClick={() => {
-                            window.location.href = `tel:${BOOK_NUMBER}`;
+                            window.location.href = `tel:${contactsData['phone']}`;
                         }}
                     >
                         <motion.img
@@ -166,11 +213,11 @@ export const About = () => {
                             alt="Phone call"
                         />
                         <motion.a
-                            href={`tel:${BOOK_NUMBER}`}
+                            href={`tel:${contactsData['phone']}`}
                             variants={buttonTextVariant}
                             transition={{duration: 0.5}}
                         >
-                            Забронировать
+                            {contactsData[`book_button_${language}`]}
                         </motion.a>
                         <motion.img
                             className="reserve-button__arrow-right"
@@ -198,4 +245,11 @@ export const About = () => {
             </div>
         </motion.div>
     );
+};
+
+About.propTypes = {
+    language: PropTypes.string.isRequired,
+    contactsData: PropTypes.object.isRequired,
+    navItemsData: PropTypes.array.isRequired,
+    onLanguageChange: PropTypes.func.isRequired,
 };

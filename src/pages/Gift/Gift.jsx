@@ -1,14 +1,59 @@
-import GiftCard1 from "../../../public/assets/images/gift-cards/gift-card-1.webp";
-import GiftCard2 from "../../../public/assets/images/gift-cards/gift-card-2.webp";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import './Gift.css'
-import { TO_BUY } from "../../utils/constants.js";
 
-export const Gift = () => {
+import ApiService from "../../api/api.js";
+import PropTypes from "prop-types";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const Gift = ({ language }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, []);
+
+    const [giftData, setGiftData] = useState({});
+    const [giftCardsData, setGiftCardsData] = useState([]);
+    // const [error, setError] = useState({});
+
+    const giftCards = giftCardsData?.map((card, index) => (
+        <div style={{marginTop: '70px'}} key={index}>
+            <div className="gift-card__title">
+                {card[`title_${language}`]}
+                <div style={{color: 'var(--primary-color)'}}>
+                    {card[`money_${language}`]}
+                </div>
+            </div>
+
+            <img className="gift-card__img" src={`${API_BASE_URL}${card['card_photo']}`} alt="gift card"/>
+
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: '12px'}}>
+                <button
+                    className="gift-card__button"
+                    onClick={() => window.open(card['to_buy_link'], '_blank')}
+                >
+                    {card[`button_text_${language}`]}
+                    <img style={{marginLeft: '10px'}} src={ArrowRight} alt="arrow-right"/>
+                </button>
+            </div>
+        </div>
+    ));
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const giftData = await ApiService.fetchGift();
+                setGiftData(giftData[0]);
+                const giftCardsData = await ApiService.fetchGiftCards();
+                setGiftCardsData(giftCardsData);
+            } catch (err) {
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
     }, []);
 
     return (
@@ -16,65 +61,33 @@ export const Gift = () => {
             <div className="gift">
                 <div className="gift__container">
                     <div className="gift__title">
-                        подарочные карты <div style={{color: 'var(--secondary-color)'}}>auf club</div>
+                        {giftData[`title_${language}`]?.split('{{highlited}}')[0]}
+                        <div style={{color: 'var(--secondary-color)'}}>{giftData[`highlight_title_${language}`]}</div>
                     </div>
 
                     <div className="gift__subtitle" style={{marginTop: '20px'}}>
-                        Станьте дилером удовольствий для своих друзей.
+                        {giftData[`subtitle_${language}`]}
                     </div>
 
                     <div className="gift__text" style={{marginTop: '20px'}}>
-                        Подарите карту депозитом 50000 или 100000 рублей для посещения клуба.
+                        {giftData[`text_1_${language}`]}
                     </div>
 
                     <div className="gift__text" style={{marginTop: '20px'}}>
-                        Картой AUF можно оплатить вход и все, что захочется попробовать ее обладателю:
-                        начиная с бара, заканчивая персональным шоу в приватной ложе.
+                        {giftData[`text_2_${language}`]}
                     </div>
 
                     <div className="gift__text" style={{marginTop: '20px'}}>
-                        Подарок, достойный своего дарителя!
+                        {giftData[`text_3_${language}`]}
                     </div>
 
-                    <div style={{marginTop: '70px'}}>
-                        <div className="gift-card__title">
-                            подарочная карта
-                            <div style={{color: 'var(--primary-color)'}}>50 000 рублей</div>
-                        </div>
-
-                        <img className="gift-card__img" src={GiftCard1} alt="gift card"/>
-
-                        <div style={{display: 'flex', justifyContent: 'center', marginTop: '12px'}}>
-                            <button
-                                className="gift-card__button"
-                                onClick={() => window.open(TO_BUY, '_blank')}
-                            >
-                                Купить
-                                <img style={{marginLeft: '10px'}} src={ArrowRight} alt="arrow-right"/>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div style={{marginTop: '50px'}}>
-                        <div className="gift-card__title">
-                            подарочная карта
-                            <div style={{color: 'var(--primary-color)'}}>100 000 рублей</div>
-                        </div>
-
-                        <img className="gift-card__img" src={GiftCard2} alt="gift card"/>
-
-                        <div style={{display: 'flex', justifyContent: 'center', marginTop: '12px'}}>
-                            <button
-                                className="gift-card__button"
-                                onClick={() => window.open(TO_BUY, '_blank')}
-                            >
-                                Купить
-                                <img style={{marginLeft: '10px'}} src={ArrowRight} alt="arrow-right"/>
-                            </button>
-                        </div>
-                    </div>
+                    {giftCards}
                 </div>
             </div>
         </>
     )
 }
+
+Gift.propTypes = {
+    language: PropTypes.string.isRequired,
+};

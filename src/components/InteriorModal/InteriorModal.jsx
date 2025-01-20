@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import "./InteriorModal.css";
-import { INTERIOR_ITEMS } from "../../utils/constants.js";
+
 import Cross from "../../../public/assets/icons/cross.svg";
 
-export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], onCategoryChange }) => {
+export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryChange, interiorData, interiorBlocksData, language, photos = [] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHorizontalPhoto, setIsHorizontalPhoto] = useState(false);
     const [progressKey, setProgressKey] = useState(0);
@@ -90,9 +90,10 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
     };
 
     const scrollToActiveTag = () => {
-        const activeIndex = INTERIOR_ITEMS.findIndex(
-            (item) => item.photos === selectedCategory.photos
+        const activeIndex = interiorBlocksData.findIndex(
+            (item) => item.key === selectedCategory.key
         );
+
         if (tagRefs.current[activeIndex]) {
             tagRefs.current[activeIndex].scrollIntoView({
                 behavior: "smooth",
@@ -110,18 +111,18 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
         }
     };
 
-    const interiorItems = INTERIOR_ITEMS.map((item, index) => (
+    const interiorItems = interiorBlocksData.map((item, index) => (
         <div
             key={item.id}
             className={`interior__tag ${
-                selectedCategory.photos === item.photos ? "interior__tag--active" : "interior__tag--inactive"
+                selectedCategory.key === item.key ? "interior__tag--active" : "interior__tag--inactive"
             }`}
             ref={(el) => (tagRefs.current[index] = el)}
             onClick={() => {
-                onCategoryChange(item);
+                onCategoryChange(item.key);
             }}
         >
-            {item.text}
+            {item[`title_${language}`]}
         </div>
     ));
 
@@ -174,14 +175,14 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
                     <button className="interior-modal__close-btn interior-modal__close-btn--small" onClick={onClose}>
                         <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
                         <div className="interior-modal__close-text">
-                            Закрыть
+                            {interiorData[`close_button_text_${language}`]}
                         </div>
                     </button>
                 </div>
                 <button className="interior-modal__close-btn interior-modal__close-btn--big" onClick={onClose}>
                     <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
                     <div className="interior-modal__close-text">
-                        Закрыть
+                        {interiorData[`close_button_text_${language}`]}
                     </div>
                 </button>
             </div>
@@ -191,8 +192,11 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, photos = [], 
 
 InteriorModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    language: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
     photos: PropTypes.array,
     selectedCategory: PropTypes.object.isRequired,
     onCategoryChange: PropTypes.func.isRequired,
+    interiorBlocksData: PropTypes.array.isRequired,
+    interiorData: PropTypes.object.isRequired,
 };

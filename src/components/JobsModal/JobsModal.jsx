@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
-import { TELEGRAM, WHATSAPP } from "../../utils/constants.js";
 
 import './JobsModal.css';
 
-export const JobsModal = ({ isOpen, onClose }) => {
+export const JobsModal = ({ language, isOpen, jobsData, contactsData, onClose }) => {
     if (!isOpen) return null;
 
     return (
@@ -12,19 +11,20 @@ export const JobsModal = ({ isOpen, onClose }) => {
             <div className="jobs-modal" onClick={onClose}>
                 <div className="jobs-modal__content" onClick={(e) => e.stopPropagation()}>
                     <h2 className="jobs-modal__title">
-                        Свяжитесь с нами по поводу вакансий через мессенджеры
+                        {contactsData[`title_${language}`]}
                     </h2>
                     <div className="jobs-modal__buttons">
                         <button
                             className="jobs-modal__button whatsapp"
-                            onClick={() => window.open(WHATSAPP, '_blank')}
+                            onClick={() => window.open(jobsData[`whatsapp_contact_link`], '_blank')}
                         >
+
                             Whatsapp
                             <img src={ArrowRight} style={{marginLeft: '10px'}} alt=""/>
                         </button>
                         <button
                             className="jobs-modal__button telegram"
-                            onClick={() => window.open(TELEGRAM, '_blank')}
+                            onClick={() => window.open(jobsData[`telegram_contact_link`], '_blank')}
                         >
                             Telegram
                             <img src={ArrowRight} style={{marginLeft: '10px'}} alt=""/>
@@ -37,6 +37,9 @@ export const JobsModal = ({ isOpen, onClose }) => {
 };
 
 JobsModal.propTypes = {
+    language: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
+    jobsData: PropTypes.object.isRequired,
+    contactsData: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
 };

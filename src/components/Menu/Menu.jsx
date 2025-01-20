@@ -6,9 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import './Menu.css'
-import { ADDRESS, BOOK_NUMBER, MENU_ITEMS } from "../../utils/constants.js";
 
-export const Menu = ({ showMenu, onMenuChange }) => {
+import { useEffect, useState } from "react";
+import ApiService from "../../api/api.js";
+
+export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
     const navigate = useNavigate()
     const location = useLocation();
 
@@ -30,15 +32,33 @@ export const Menu = ({ showMenu, onMenuChange }) => {
         onMenuChange(false);
     }
 
+    const [menuItems, setMenuItems] = useState([]);
+    // const [error, setError] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const menuItems = await ApiService.fetchMenu();
+                setMenuItems(menuItems);
+            } catch (err) {
+                /* TODO подумать как хэндлить ошибки сервера */
+                // setError('Ошибка при загрузке данных');
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <>
             <div style={{ position: 'relative' }}>
                 {showMenu &&
                     <div className="menu">
                         <div className="menu-list">
-                            {MENU_ITEMS.map((item, index) => (
+                            {menuItems.map((item, index) => (
                                 <div className="menu-list__item" key={index} onClick={() => goToLinkHref(item)}>
-                                    <div>{item.text}</div>
+                                        <div>{item[`text_${language}`]}</div>
                                     <div style={{marginLeft: "auto", marginRight: "10px"}}>
                                         <img className="menu-list__item-icon" src={ArrowRight} alt="Arrow right"/>
                                     </div>
@@ -49,11 +69,13 @@ export const Menu = ({ showMenu, onMenuChange }) => {
                         <button
                             className="menu-reserve-button"
                             onClick={() => {
-                                window.location.href = `tel:${BOOK_NUMBER}`;
+                                window.location.href = `tel:${contactsData['phone']}`;
                             }}
                         >
                             <img className="reserve-button__phone-call" src={PhoneCall} alt="Phone call"/>
-                                <a href={`tel:${BOOK_NUMBER}`}>Забронировать</a>
+                                <a href={`tel:${contactsData['phone']}`}>
+                                    {contactsData[`book_button_${language}`]}
+                                </a>
                             <img className="reserve-button__arrow-right" src={ArrowRight} alt="Arrow right"/>
                         </button>
 
@@ -61,25 +83,35 @@ export const Menu = ({ showMenu, onMenuChange }) => {
                             <div
                                 className="menu__phone"
                                 onClick={() => {
-                                    window.location.href = `tel:${BOOK_NUMBER}`;
+                                    window.location.href = `tel:${contactsData['phone']}`;
                                 }}>
                                 <img className="menu__phone-img" src={Phone} alt="Phone"/>
-                                <div className="menu__phone-text" >+7 (495) 245-99-99</div>
+                                <div className="menu__phone-text" >
+                                    {contactsData[`phone_formatted`]}
+                                </div>
                             </div>
 
                             <div style={{display: "flex"}}>
                                 <div style={{ marginTop: '20px' }}>
-                                    <div className="menu__map" onClick={() => window.open(ADDRESS, '_blank')}>
+                                    <div className="menu__map" onClick={() => window.open(contactsData['navigator_link'], '_blank')}>
                                         <img className="menu__map-img" src={Map} alt="Map"/>
-                                        <div className="menu__address">ул. Красная <br/> <div style={{ marginTop: '5px' }}>Пресня, 24</div></div>
+                                        <div className="menu__address">
+                                            {contactsData[`short_address_${language}`]}
+                                        </div>
                                     </div>
 
-                                    <div className="menu__parking">Клубный паркинг</div>
+                                    <div className="menu__parking">
+                                        {contactsData[`parking_${language}`]}
+                                    </div>
                                 </div>
 
                                 <div style={{marginLeft: "auto", marginTop: '20px'}}>
-                                    <div className="menu__days">Ежедневно</div>
-                                    <div className="menu__hours" style={{ marginTop: '5px' }}>с 21:00 до 06:00</div>
+                                    <div className="menu__days">
+                                        {contactsData[`opening_hours_text_${language}`]}
+                                    </div>
+                                    <div className="menu__hours" style={{ marginTop: '5px' }}>
+                                        {contactsData[`opening_hours_${language}`]}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,4 +125,6 @@ export const Menu = ({ showMenu, onMenuChange }) => {
 Menu.propTypes = {
     showMenu: PropTypes.bool.isRequired,
     onMenuChange: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
+    contactsData: PropTypes.object.isRequired,
 };
