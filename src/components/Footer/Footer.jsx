@@ -5,6 +5,8 @@ import AufLogoBigShadowed from "../../../public/assets/icons/auf-logo-big-shadow
 import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
 import { useEffect, useRef, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 import './Footer.css'
 
 import PropTypes from "prop-types";
@@ -40,11 +42,10 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                     </h2>
 
                     <div className="gastronomy-cards">
-                        {/* TODO пофиксить переход */}
                         <div
                             className="gastronomy-card"
                             onClick={() => {
-                                window.open(gastronomyData['kitchen_file'], '_blank');
+                                window.open(`${API_BASE_URL}${gastronomyData['kitchen_file']}`, '_blank');
                             }}
                         >
                             <div><img src={Kitchen} alt="Kitchen"/></div>
@@ -67,7 +68,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                         <div
                             className="gastronomy-card"
                             onClick={() => {
-                                window.open(gastronomyData['bar_file'], '_blank');
+                                window.open(`${API_BASE_URL}${gastronomyData['bar_file']}`, '_blank');
                             }}
                         >
                             <div><img src={Bar} alt="Bar"/></div>

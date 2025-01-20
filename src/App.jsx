@@ -82,7 +82,7 @@ function App() {
         })
 
         setCurrentPhotos(photos || []);
-        setSelectedCategory(newCategory)
+        setSelectedCategory(interiorBlocksData.find(item => item.key === newCategory))
     }
 
     useEffect(() => {
