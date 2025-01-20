@@ -70,10 +70,19 @@ export const Jobs = ({ language, jobsData, onOpenModal }) => {
                     </div>
 
                     <div className="jobs__text">
-                        {jobsData[`text_1_${language}`]?.split('{{email}}')[0]}
-                        <a className="jobs__mail" href="mailto:aufclub@bk.ru"> {jobsData[`email`]} </a>
-                        {jobsData[`text_1_${language}`]?.split('{{email}}')[1]}
-                        <a className="jobs__phone" href="tel:+79031387198"> {jobsData[`phone`]}</a>
+                        {jobsData[`text_1_${language}`]
+                            ?.split("{{email}}")[0]
+                            ?.split("{{phone}}")[0]}
+                        <a className="jobs__mail" href={`mailto:${jobsData.email}`}>
+                            {jobsData.email}
+                        </a>
+                        {jobsData[`text_1_${language}`]
+                            ?.split("{{email}}")[1]
+                            ?.split("{{phone}}")[0]}
+                        <a className="jobs__phone" href={`tel:${jobsData.phone?.replace(/\s+/g, '')}`}>
+                            {jobsData.phone}
+                        </a>
+                        {jobsData[`text_1_${language}`]?.split("{{phone}}")[1]}
                     </div>
 
                     <div className="jobs__subtitle">
