@@ -35,7 +35,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                                 window.open(`${API_BASE_URL}${gastronomyData['kitchen_file']}`, '_blank');
                             }}
                         >
-                            <div><img src={Kitchen} alt="Kitchen"/></div>
+                            <div><img src={Kitchen} alt="Kitchen" loading="lazy" /></div>
 
                             <div style={{marginLeft: '20px'}}>
                                 <div className="gastronomy-card__title">
@@ -47,7 +47,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                                         {gastronomyData[`kitchen_button_${language}`]}
                                     </div>
 
-                                    <img src={ArrowRight} alt="arrow right"/>
+                                    <img src={ArrowRight} alt="arrow right" loading="lazy" />
                                 </button>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                                 window.open(`${API_BASE_URL}${gastronomyData['bar_file']}`, '_blank');
                             }}
                         >
-                            <div><img src={Bar} alt="Bar"/></div>
+                            <div><img src={Bar} alt="Bar" loading="lazy" /></div>
 
                             <div style={{marginLeft: '20px'}}>
                                 <div className="gastronomy-card__title">
@@ -70,7 +70,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                                         {gastronomyData[`bar_button_${language}`]}
                                     </div>
 
-                                    <img src={ArrowRight} alt="arrow right"/>
+                                    <img src={ArrowRight} alt="arrow right" loading="lazy" />
                                 </button>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                         {contactsData[`subtitle_${language}`]}
                     </div>
 
-                    <img className="footer__logo" src={AufLogoBigShadowed} alt="AUF logo"/>
+                    <img className="footer__logo" src={AufLogoBigShadowed} alt="AUF logo" loading="lazy" />
 
                     <div className="footer__days">
                         {contactsData[`opening_hours_text_${language}`]}
@@ -110,7 +110,7 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
                             window.location.href = `tel:${contactsData['phone']}`;
                         }}
                     >
-                        <img className="footer__phone-img" src={PhoneCallShadowed} alt="phone"/>
+                        <img className="footer__phone-img" src={PhoneCallShadowed} alt="phone" loading="lazy" />
                         <div className="footer__phone-text">
                             {contactsData[`phone_formatted`]}
                         </div>

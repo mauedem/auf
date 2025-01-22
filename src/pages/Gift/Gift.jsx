@@ -27,7 +27,7 @@ export const Gift = ({ language }) => {
                 </div>
             </div>
 
-            <img className="gift-card__img" src={`${API_BASE_URL}${card['card_photo']}`} alt="gift card"/>
+            <img className="gift-card__img" src={`${API_BASE_URL}${card['card_photo']}`} alt="gift card" loading="lazy" />
 
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '12px'}}>
                 <button
@@ -35,7 +35,7 @@ export const Gift = ({ language }) => {
                     onClick={() => window.open(card['to_buy_link'], '_blank')}
                 >
                     {card[`button_text_${language}`]}
-                    <img style={{marginLeft: '10px'}} src={ArrowRight} alt="arrow-right"/>
+                    <img style={{marginLeft: '10px'}} src={ArrowRight} alt="arrow-right" loading="lazy" />
                 </button>
             </div>
         </div>

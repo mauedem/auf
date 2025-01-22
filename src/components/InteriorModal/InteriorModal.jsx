@@ -168,19 +168,20 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryCha
                                     isHorizontalPhoto ? "interior-photo--horizontal" : "interior-photo--vertical"
                                 }`}
                                 alt={`Interior ${currentIndex + 1}`}
+                                loading="lazy"
                                 onClick={handlePhotoClick}
                             />
                         </div>
                     )}
                     <button className="interior-modal__close-btn interior-modal__close-btn--small" onClick={onClose}>
-                        <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
+                        <img className="interior-modal__close-img" src={Cross} alt="Cross" loading="lazy" />
                         <div className="interior-modal__close-text">
                             {interiorData[`close_button_text_${language}`]}
                         </div>
                     </button>
                 </div>
                 <button className="interior-modal__close-btn interior-modal__close-btn--big" onClick={onClose}>
-                    <img className="interior-modal__close-img" src={Cross} alt="Cross"/>
+                    <img className="interior-modal__close-img" src={Cross} alt="Cross" loading="lazy" />
                     <div className="interior-modal__close-text">
                         {interiorData[`close_button_text_${language}`]}
                     </div>

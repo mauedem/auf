@@ -108,6 +108,7 @@ export const Header = ({
                     className="header__logo"
                     src={AufLogoShadowed}
                     alt="Auf logo"
+                    loading="lazy"
                     onClick={() => {
                         onLanguageMenuChange(false);
                         onMenuChange(false);
@@ -127,7 +128,7 @@ export const Header = ({
 
                 <div className="header--big">
                     <div className="header-map">
-                        <img className="header-map__img" src={Map} alt="map"/>
+                        <img className="header-map__img" src={Map} alt="map" loading="lazy" />
                         <div
                             className="header-map__addess-block"
                             onClick={() => window.open(contactsData['navigator_link'], '_blank')}
@@ -160,6 +161,7 @@ export const Header = ({
                             onClick={() => onLanguageMenuChange(!showLanguageMenu)}
                             onMouseEnter={handleMouseEnterLanguageMenu}
                             onMouseLeave={handleMouseLeaveLanguageMenu}
+                            loading="lazy"
                         />
                     </div>
 
@@ -171,6 +173,7 @@ export const Header = ({
                         onClick={() => onMenuChange(!showMenu)}
                         onMouseEnter={handleMouseEnterMenu}
                         onMouseLeave={handleMouseLeaveMenu}
+                        loading="lazy"
                     />
                 </div>
 
@@ -181,7 +184,7 @@ export const Header = ({
                             window.location.href = `tel:${contactsData['phone']}`;
                         }}
                     >
-                        <img className="reserve-btn__phone-call" src={PhoneCallShadowed} alt="Phone call"/>
+                        <img className="reserve-btn__phone-call" src={PhoneCallShadowed} alt="Phone call" loading="lazy" />
                         <div className="reserve-btn__text">
                             <a href={`tel:${contactsData['phone']}`}>Бронь</a>
                         </div>
@@ -195,6 +198,7 @@ export const Header = ({
                             onClick={() => onLanguageMenuChange(!showLanguageMenu)}
                             onMouseEnter={handleMouseEnterLanguageMenu}
                             onMouseLeave={handleMouseLeaveLanguageMenu}
+                            loading="lazy"
                         />
                     </div>
 
@@ -205,6 +209,7 @@ export const Header = ({
                         onClick={() => onMenuChange(!showMenu)}
                         onMouseEnter={handleMouseEnterMenu}
                         onMouseLeave={handleMouseLeaveMenu}
+                        loading="lazy"
                     />
                 </div>
             </div>

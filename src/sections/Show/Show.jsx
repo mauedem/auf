@@ -163,7 +163,7 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
                                     animate={image1InView ? "visible" : "hidden"}
                                     variants={imageVariants}
                                 >
-                                    <img className="interior__img-1" src={images.image_1} alt="Interior"/>
+                                    <img className="interior__img-1" src={images.image_1} alt="Interior" loading="lazy" />
                                 </motion.div>
                             }
 
@@ -179,7 +179,7 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
                                 animate={image2InView ? "visible" : "hidden"}
                                 variants={imageVariants}
                             >
-                                <img className="interior__img-2" src={images.image_2} alt="Interior"/>
+                                <img className="interior__img-2" src={images.image_2} alt="Interior" loading="lazy" />
                             </motion.div>
                         }
 
@@ -191,7 +191,7 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
                                     animate={image3InView ? "visible" : "hidden"}
                                     variants={imageVariants}
                                 >
-                                    <img className="interior__img-3" src={images.image_3} alt="Interior"/>
+                                    <img className="interior__img-3" src={images.image_3} alt="Interior" loading="lazy" />
                                 </motion.div>
                             }
                         </div>
@@ -203,7 +203,7 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
                                 animate={image4InView ? "visible" : "hidden"}
                                 variants={imageVariants}
                             >
-                                <img className="interior__img-4" src={images.image_4} alt="Interior"/>
+                                <img className="interior__img-4" src={images.image_4} alt="Interior" loading="lazy" />
                             </motion.div>
                         }
                     </div>

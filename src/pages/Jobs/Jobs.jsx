@@ -42,7 +42,7 @@ export const Jobs = ({ language, jobsData, onOpenModal }) => {
 
             <button className="jobs-card__btn jobs-card__btn--filled" onClick={onOpenModal}>
                 {vacancy[`contacts_button_text_${language}`]}
-                <img src={ArrowRight} style={{marginLeft: '10px'}} alt=""/>
+                <img src={ArrowRight} style={{marginLeft: '10px'}} alt="" loading="lazy" />
             </button>
         </div>
     ));
@@ -78,7 +78,7 @@ export const Jobs = ({ language, jobsData, onOpenModal }) => {
 
                     {vacancies}
 
-                    <img src={AufLogoShadowed} alt="auf logo"/>
+                    <img src={AufLogoShadowed} alt="auf logo" loading="lazy" />
                 </div>
             </div>
         </>

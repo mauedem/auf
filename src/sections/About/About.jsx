@@ -143,7 +143,7 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
                         media="(max-width: 575px)"
                     />
                     <noscript>
-                        <img src={MobileBg} alt=""/>
+                        <img src={MobileBg} alt="" loading="lazy" />
                     </noscript>
                 </video>
                 <div className={`video-overlay ${isVideoLoaded ? '' : 'loading-overlay'}`}></div>
@@ -158,7 +158,7 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
                         {aboutData[`text_1_${language}`]}
                     </motion.div>
 
-                    <img className="about__logo" src={AufLogo} alt="AUF Logo"/>
+                    <img className="about__logo" src={AufLogo} alt="AUF Logo" loading="lazy" />
 
                     <motion.div
                         className="about__title about__title--experience"
@@ -216,7 +216,7 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
 
                 <motion.div className="about__info" variants={textVariant("y", 50)}>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <img src={Map} alt="Map"/>
+                        <img src={Map} alt="Map" loading="lazy" />
                         <div className="about__address">ул. Красная Пресня, 24</div>
                     </div>
 

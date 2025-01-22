@@ -159,7 +159,7 @@ function App() {
                 }`}
             >
                 <div className="floating-button" onClick={() => window.open(contactsData['taxi_link'], '_blank')}>
-                    <img src={Taxi} alt="Taxi" />
+                    <img src={Taxi} alt="Taxi" loading="lazy" />
                 </div>
             </div>
 

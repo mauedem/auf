@@ -132,7 +132,7 @@ export const Info = ({ language }) => {
                                 animate={infoImage1InView ? "visible" : "hidden"}
                                 variants={imageVariantLeftToRight}
                             >
-                                <img className="info__img" src={images.image_1} alt=""/>
+                                <img className="info__img" src={images.image_1} alt="" loading="lazy" />
                             </motion.div>
                         }
 
@@ -169,7 +169,7 @@ export const Info = ({ language }) => {
                                 animate={infoImage2InView ? "visible" : "hidden"}
                                 variants={imageVariantRightToLeft}
                             >
-                                <img className="info__img" src={images.image_2} alt=""/>
+                                <img className="info__img" src={images.image_2} alt="" loading="lazy" />
                             </motion.div>
                         }
 
@@ -190,7 +190,7 @@ export const Info = ({ language }) => {
                                 animate={infoImage3InView ? "visible" : "hidden"}
                                 variants={imageVariantLeftToRight}
                             >
-                                <img className="info__img" src={images.image_3} alt=""/>
+                                <img className="info__img" src={images.image_3} alt="" loading="lazy" />
                             </motion.div>
                         }
 
@@ -238,7 +238,7 @@ export const Info = ({ language }) => {
                         >
                             <div style={{display: "flex"}}>
                                 <div className="info-rating-card__img">
-                                    <img src={Yandex} alt="Yandex"/>
+                                    <img src={Yandex} alt="Yandex" loading="lazy" />
                                 </div>
                                 <div>
                                     <div className="info-rating-card__rating">
@@ -271,7 +271,7 @@ export const Info = ({ language }) => {
                         >
                             <div style={{display: "flex"}}>
                                 <div className="info-rating-card__img">
-                                    <img src={Google} alt="Google"/>
+                                    <img src={Google} alt="Google" loading="lazy" />
                                 </div>
                                 <div>
                                     <div className="info-rating-card__rating">

@@ -45,7 +45,7 @@ export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
                                 <div className="menu-list__item" key={index} onClick={() => goToLinkHref(item)}>
                                         <div>{item[`text_${language}`]}</div>
                                     <div style={{marginLeft: "auto", marginRight: "10px"}}>
-                                        <img className="menu-list__item-icon" src={ArrowRight} alt="Arrow right"/>
+                                        <img className="menu-list__item-icon" src={ArrowRight} alt="Arrow right" loading="lazy" />
                                     </div>
                                 </div>
                             ))}
@@ -57,11 +57,11 @@ export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
                                 window.location.href = `tel:${contactsData['phone']}`;
                             }}
                         >
-                            <img className="reserve-button__phone-call" src={PhoneCall} alt="Phone call"/>
+                            <img className="reserve-button__phone-call" src={PhoneCall} alt="Phone call" loading="lazy" />
                                 <a href={`tel:${contactsData['phone']}`}>
                                     {contactsData[`book_button_${language}`]}
                                 </a>
-                            <img className="reserve-button__arrow-right" src={ArrowRight} alt="Arrow right"/>
+                            <img className="reserve-button__arrow-right" src={ArrowRight} alt="Arrow right" loading="lazy" />
                         </button>
 
                         <div className="menu__contacts">
@@ -70,7 +70,7 @@ export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
                                 onClick={() => {
                                     window.location.href = `tel:${contactsData['phone']}`;
                                 }}>
-                                <img className="menu__phone-img" src={Phone} alt="Phone"/>
+                                <img className="menu__phone-img" src={Phone} alt="Phone" loading="lazy" />
                                 <div className="menu__phone-text" >
                                     {contactsData[`phone_formatted`]}
                                 </div>
@@ -79,7 +79,7 @@ export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
                             <div style={{display: "flex"}}>
                                 <div style={{ marginTop: '20px' }}>
                                     <div className="menu__map" onClick={() => window.open(contactsData['navigator_link'], '_blank')}>
-                                        <img className="menu__map-img" src={Map} alt="Map"/>
+                                        <img className="menu__map-img" src={Map} alt="Map" loading="lazy" />
                                         <div className="menu__address">
                                             {contactsData[`short_address_${language}`]}
                                         </div>
