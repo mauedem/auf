@@ -17,7 +17,7 @@ import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const About = ({ language, contactsData, navItemsData, onLanguageChange }) => {
     const [aboutRef, aboutRefInView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
 
     const { data } = useContext(DataContext);

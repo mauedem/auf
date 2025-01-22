@@ -7608,7 +7608,7 @@ function usePrefetchBehavior(prefetch, theirElementProps) {
           setShouldPrefetch(entry.isIntersecting);
         });
       };
-      let observer = new IntersectionObserver(callback, { threshold: 0.5 });
+      let observer = new IntersectionObserver(callback, { threshold: 0.5.5 });
       if (ref.current) observer.observe(ref.current);
       return () => {
         observer.disconnect();

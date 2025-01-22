@@ -25,7 +25,7 @@ export const Girls = ({ language }) => {
     };
 
     const [girlsTextRef, girlsTextnView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const textPart1 = girlsData[`text_${language}`] ||  '';
     const textPart2 = girlsData[`highlight_text_${language}`] || '';

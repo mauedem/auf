@@ -20,20 +20,20 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
     const showData = useMemo(() => data?.showData?.[0] || {}, [data?.showData]);
 
     const [textRef, textInView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
 
     const [image1Ref, image1InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const [image2Ref, image2InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const [image3Ref, image3InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const [image4Ref, image4InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const imageVariants = {
         hidden: { scaleX: 0, opacity: 0 },

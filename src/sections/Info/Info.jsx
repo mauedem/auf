@@ -50,18 +50,18 @@ export const Info = ({ language }) => {
     };
 
     const [infoImage1Ref, infoImage1InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const [infoImage2Ref, infoImage2InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const [infoImage3Ref, infoImage3InView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
 
     const stars = [1, 2, 3, 4, 5];
     const [startRef, starsInView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const starVariant = {
         hidden: { opacity: 0, scale: 0.5 },
@@ -77,7 +77,7 @@ export const Info = ({ language }) => {
     };
 
     const [cardsRef, cardsInView] = useInView({
-        threshold: 0
+        threshold: 0.5
     });
     const cardVariants = {
         hidden: { opacity: 0, y: 50 },
