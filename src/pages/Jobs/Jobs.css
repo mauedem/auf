@@ -150,6 +150,14 @@
     }
 }
 
+@media (min-width: 320px) and (max-width: 575px) {
+    .jobs__container {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+}
+
+
 @media (min-width: 2000px) {
     .jobs {
         height: 100vh;

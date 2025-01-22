@@ -188,27 +188,28 @@
 }
 
 .interior__img-1 {
-    width: 727px;
-    height: 527px;
+    /*max-width: 727px;*/
+    max-width: 719px;
+    height: auto;
 }
 
 .interior__img-2 {
     display: block;
-    width: 720px;
-    height: 522px;
+    max-width: 719px;
+    height: auto;
     margin-left: auto;
     margin-top: 30px;
 }
 
 .interior__img-3 {
-    width: 719px;
-    height: 979px;
+    max-width: 719px;
+    height: auto;
 }
 
 .interior__img-4 {
     display: block;
-    width: 719px;
-    height: 522px;
+    max-width: 719px;
+    height: auto;
     margin-left: auto;
 }
 

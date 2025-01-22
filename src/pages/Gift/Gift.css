@@ -65,6 +65,8 @@
 }
 
 .gift-card__img {
+    max-width: 490px;
+    height: auto;
     border-radius: 12px;
     border: 2px solid var(--secondary-color);
     box-shadow: 0 8px 16px 0 var(--secondary-color);
@@ -96,6 +98,11 @@
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
+    .gift-card__img {
+        width: 100%;
+        max-width: 490px;
+    }
+
     .gift__title {
         font-size: 30px;
         line-height: 30px;
@@ -104,6 +111,13 @@
     .gift__text {
         font-size: 18px;
         line-height: 18px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+    .gift__container {
+        padding-right: 14px;
+        padding-left: 14px;
     }
 }
 

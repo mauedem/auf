@@ -18,7 +18,7 @@ export const Gift = ({ language }) => {
     // const [error, setError] = useState({});
 
     const giftCards = giftCardsData?.map((card, index) => (
-        <div style={{marginTop: '70px'}} key={index}>
+        <div className="gift-card" style={{marginTop: '70px'}} key={index}>
             <div className="gift-card__title">
                 {card[`title_${language}`]}
                 <div style={{color: 'var(--primary-color)'}}>

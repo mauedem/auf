@@ -192,6 +192,11 @@
     margin-left: 30px;
 }
 
+.info__img {
+    max-width: 720px;
+    height: auto;
+}
+
 @media (min-width: 320px) and (max-width: 1199px) {
     .info__img {
         width: 100%;
