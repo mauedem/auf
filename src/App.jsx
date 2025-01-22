@@ -172,7 +172,11 @@ function App() {
                 }/>
                 <Route path="/gift" element={<Gift language={language} />}/>
                 <Route path="/jobs" element={<Jobs language={language} jobsData={jobsData} onOpenModal={() => setIsJobsModalOpen(true)}/>}/>
-                <Route path="*" element={<Navigate to="/" replace/>}/>
+                <Route path="*" element={
+                    location.pathname.startsWith('/admin')
+                        ? null
+                        : <Navigate to="/" replace/>
+                }/>
             </Routes>
 
             <div
