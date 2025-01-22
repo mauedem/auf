@@ -1,19 +1,20 @@
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg"
 import AufLogoShadowed from "../../../public/assets/icons/auf-logo-shadowed.svg"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import './Jobs.css'
 
 import PropTypes from "prop-types";
-import ApiService from "../../api/api.js";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const Jobs = ({ language, jobsData, onOpenModal }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const [vacanciesData, setVacanciesData] = useState([]);
-    // const [error, setError] = useState({});
+    const { data } = useContext(DataContext);
+
+    const vacanciesData = useMemo(() => data?.vacancies || [], [data?.vacancies]);
 
     const TextList = (data) => {
         const lines = data?.split("\r\n");
@@ -45,20 +46,6 @@ export const Jobs = ({ language, jobsData, onOpenModal }) => {
             </button>
         </div>
     ));
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const vacanciesData = await ApiService.fetchVacancies();
-                setVacanciesData(vacanciesData);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <>

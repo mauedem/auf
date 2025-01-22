@@ -1,18 +1,23 @@
+import { DataContext } from "../../api/context/DataContext.jsx";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Stories } from "../../components/Stories/Stories.jsx";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import './Show.css'
-import ApiService from "../../api/api.js";
 
 export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksData }) => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
+
+    const { data } = useContext(DataContext);
+
+    const showData = useMemo(() => data?.showData?.[0] || {}, [data?.showData]);
 
     const [textRef, textInView] = useInView({
         threshold: 0
@@ -41,9 +46,6 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
             },
         },
     };
-
-    const [showData, setShowData] = useState({});
-    // const [error, setError] = useState({});
 
     const text = showData[`text_${language}`] ||  ''
     const words = text?.split(" ")
@@ -94,20 +96,6 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
             )
         }
     );
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const showData = await ApiService.fetchShow();
-                setShowData(showData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <>

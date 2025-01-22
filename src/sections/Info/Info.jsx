@@ -9,11 +9,15 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import './Info.css'
 
-import { useEffect, useState } from "react";
-import ApiService from "../../api/api.js";
+import { useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const Info = ({ language }) => {
+    const { data } = useContext(DataContext);
+
+    const infoData = useMemo(() => data?.infoData?.[0] || {}, [data?.infoData]);
+
     const imageVariantRightToLeft = {
         hidden: {
             scaleX: 0,
@@ -88,7 +92,7 @@ export const Info = ({ language }) => {
         }),
     };
 
-    const [infoData, setInfoData] = useState({});
+    // const [infoData, setInfoData] = useState({});
     // const [error, setError] = useState({});
 
     const [images, setImages] = useState({
@@ -106,20 +110,6 @@ export const Info = ({ language }) => {
             });
         }
     }, [infoData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const infoData = await ApiService.fetchInfo();
-                setInfoData(infoData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <>

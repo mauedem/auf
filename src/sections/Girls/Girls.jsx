@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 
 import './Girls.css'
 import { useInView } from "react-intersection-observer";
-import ApiService from "../../api/api.js";
 import PropTypes from "prop-types";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const Girls = ({ language }) => {
     const girlsRef = useRef(null);
 
-    const [girlsData, setGirlsData] = useState({});
-    // const [error, setError] = useState({});
+    const { data } = useContext(DataContext);
+
+    const girlsData = useMemo(() => data?.girlsData?.[0] || {}, [data?.girlsData]);
 
     const images = girlsData?.photos?.length
         ? girlsData.photos.map((photo) => `${API_BASE_URL}${photo.photo}`)
@@ -41,20 +42,6 @@ export const Girls = ({ language }) => {
             },
         }),
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const girlsData = await ApiService.fetchGirls();
-                setGirlsData(girlsData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <>

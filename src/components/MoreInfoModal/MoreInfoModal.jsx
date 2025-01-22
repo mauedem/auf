@@ -1,20 +1,21 @@
 import './MoreInfoModal.css'
 import PropTypes from "prop-types";
 import Cross from "../../../public/assets/icons/cross.svg";
-import { useEffect, useState } from "react";
-import ApiService from "../../api/api.js";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const MoreInfoModal = ({ language, isOpen, onClose }) => {
+    const { data } = useContext(DataContext);
+
+    const moreInfoData = useMemo(() => data?.moreInfoData?.[0] || {}, [data?.moreInfoData]);
+
     const handleOverlayClick = (event) => {
         if (event.target.classList.contains("more-info-modal")) {
             onClose();
         }
     };
-
-    const [moreInfoData, setMoreInfoData] = useState({});
-    // const [error, setError] = useState({});
 
     const [images, setImages] = useState({
         image_1: null,
@@ -31,20 +32,6 @@ export const MoreInfoModal = ({ language, isOpen, onClose }) => {
             });
         }
     }, [moreInfoData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const moreInfoData = await ApiService.fetchMoreInfo();
-                setMoreInfoData(moreInfoData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     const TextList = () => {
         const lines = moreInfoData[`text_6_${language}`]?.split("\r\n");

@@ -3,7 +3,7 @@ import Bar from "../../../public/assets/icons/bar.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import AufLogoBigShadowed from "../../../public/assets/icons/auf-logo-big-shadowed.svg";
 import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useMemo, useRef } from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -11,27 +11,14 @@ import './Footer.css'
 
 import PropTypes from "prop-types";
 import { YandexMap } from "../YandexMap/YandexMap.jsx";
-import ApiService from "../../api/api.js";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
     const gastronomyRef = useRef(null);
 
-    const [gastronomyData, setGastronomyData] = useState({});
-    // const [error, setError] = useState({});
+    const { data } = useContext(DataContext);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const gastronomyData = await ApiService.fetchGastronomy();
-                setGastronomyData(gastronomyData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
+    const gastronomyData = useMemo(() => data?.gastronomyData?.[0] || {}, [data?.gastronomyData]);
 
     return (
         <>

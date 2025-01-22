@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import { Header } from "./components/Header/Header.jsx";
 import { About } from "./sections/About/About.jsx";
 import { Menu } from "./components/Menu/Menu.jsx";
@@ -21,12 +21,20 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import './App.css'
 
-import ApiService from "./api/api.js";
+import { DataContext } from "./api/context/DataContext.jsx";
 
 function App() {
     const [showMenu, setShowMenu] = useState(false);
     const [showLanguageMenu, setShowLanguageMenu] = useState(false);
     const [language, setLanguage] = useState(localStorage.getItem('language') || 'ru');
+
+    const { data } = useContext(DataContext);
+
+    const navItems = useMemo(() => data?.navItems || [], [data?.navItems]);
+    const contactsData = useMemo(() => data?.contactsData?.[0] || {}, [data?.contactsData]);
+    const interiorData = useMemo(() => data?.interiorData?.[0] || {}, [data?.interiorData]);
+    const interiorBlocksData = useMemo(() => data?.interiorBlocksData || [], [data?.interiorBlocksData]);
+    const jobsData = useMemo(() => data?.jobsData?.[0] || {}, [data?.jobsData]);
 
     const [isScrolling, setIsScrolling] = useState(false);
     useEffect(() => {
@@ -96,40 +104,6 @@ function App() {
             document.body.classList.remove("no-scroll");
         }
     }, [isMoreInfoModalOpen, isInteriorModalOpen, showMenu]);
-
-    const [navItems, setNavItems] = useState([]);
-    const [contactsData, setContactsData] = useState({});
-    // const [error, setError] = useState({});
-    const [interiorData, setInteriorData] = useState({});
-    const [interiorBlocksData, setInteriorBlocksData] = useState([]);
-
-    const [jobsData, setJobsData] = useState({});
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const navItems = await ApiService.fetchNav();
-                setNavItems(navItems);
-
-                const contactsData = await ApiService.fetchContacts();
-                setContactsData(contactsData[0]);
-
-                const interiorData = await ApiService.fetchInterior();
-                setInteriorData(interiorData[0]);
-
-                const interiorBlocksData = await ApiService.fetchInteriorBlocks();
-                setInteriorBlocksData(interiorBlocksData);
-
-                const jobsData = await ApiService.fetchJobs();
-                setJobsData(jobsData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <div className="App">

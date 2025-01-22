@@ -1,10 +1,10 @@
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import './Gift.css'
 
-import ApiService from "../../api/api.js";
 import PropTypes from "prop-types";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -13,9 +13,10 @@ export const Gift = ({ language }) => {
         window.scrollTo(0, 0);
     }, []);
 
-    const [giftData, setGiftData] = useState({});
-    const [giftCardsData, setGiftCardsData] = useState([]);
-    // const [error, setError] = useState({});
+    const { data } = useContext(DataContext);
+
+    const giftData = useMemo(() => data?.giftData?.[0] || {}, [data?.giftData]);
+    const giftCardsData = useMemo(() => data?.giftCardsData || [], [data?.giftCardsData]);
 
     const giftCards = giftCardsData?.map((card, index) => (
         <div className="gift-card" style={{marginTop: '70px'}} key={index}>
@@ -40,21 +41,9 @@ export const Gift = ({ language }) => {
         </div>
     ));
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const giftData = await ApiService.fetchGift();
-                setGiftData(giftData[0]);
-                const giftCardsData = await ApiService.fetchGiftCards();
-                setGiftCardsData(giftCardsData);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <>

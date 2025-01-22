@@ -7,48 +7,33 @@ import PropTypes from "prop-types";
 
 import './Menu.css'
 
-import { useEffect, useState } from "react";
-import ApiService from "../../api/api.js";
+import { useContext, useMemo } from "react";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
     const navigate = useNavigate()
     const location = useLocation();
 
+    const { data } = useContext(DataContext);
+
+    const menuItems = useMemo(() => data?.menuItems || [], [data?.menuItems]);
+
     function goToLinkHref(menuItem) {
         if (location.pathname !== menuItem.link) {
             navigate(menuItem.link);
+        }
 
+        if (menuItem.href) {
             setTimeout(() => {
-                if (menuItem.href) {
-                    document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
+                const targetElement = document.getElementById(menuItem.href);
+                if (targetElement) {
+                    targetElement.scrollIntoView({behavior: 'smooth'});
                 }
-            }, 200);
-        } else {
-            if (menuItem.href) {
-                document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
-            }
+            }, 0);
         }
 
         onMenuChange(false);
     }
-
-    const [menuItems, setMenuItems] = useState([]);
-    // const [error, setError] = useState({});
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const menuItems = await ApiService.fetchMenu();
-                setMenuItems(menuItems);
-            } catch (err) {
-                /* TODO подумать как хэндлить ошибки сервера */
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <>

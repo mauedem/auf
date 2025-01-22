@@ -7,18 +7,22 @@ import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import Map from "../../../public/assets/icons/map.svg";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
-import ApiService from "../../api/api.js";
 import PropTypes from "prop-types";
 
 import "./About.css";
-import {LANGUAGES} from "../../utils/constants.js";
+import { LANGUAGES } from "../../utils/constants.js";
+import { DataContext } from "../../api/context/DataContext.jsx";
 
 export const About = ({ language, contactsData, navItemsData, onLanguageChange }) => {
     const [aboutRef, aboutRefInView] = useInView({
         threshold: 0
     });
+
+    const { data } = useContext(DataContext);
+
+    const aboutData = useMemo(() => data?.aboutData?.[0] || {}, [data?.aboutData]);
 
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
@@ -100,23 +104,6 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
             )
         }
     );
-
-    const [aboutData, setAboutData] = useState({});
-    // const [error, setError] = useState({});
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const aboutData = await ApiService.fetchAbout();
-                setAboutData(aboutData[0]);
-            } catch (err) {
-                // setError('Ошибка при загрузке данных');
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     return (
         <motion.div
