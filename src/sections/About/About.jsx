@@ -217,12 +217,18 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
                 <motion.div className="about__info" variants={textVariant("y", 50)}>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <img src={Map} alt="Map" loading="lazy" />
-                        <div className="about__address">ул. Красная Пресня, 24</div>
+                        <div className="about__address">
+                            {contactsData[`short_address_${language}`]}
+                        </div>
                     </div>
 
                     <div style={{display: "flex", flexDirection: "column"}}>
-                        <div className="about__timetable">Ежедневно</div>
-                        <div className="about__opening-hours">с 21:00 до 06:00</div>
+                        <div className="about__timetable">
+                            {contactsData[`opening_hours_text_${language}`]}
+                        </div>
+                        <div className="about__opening-hours">
+                            {contactsData[`opening_hours_${language}`]}
+                        </div>
                     </div>
                 </motion.div>
 

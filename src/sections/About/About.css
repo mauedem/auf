@@ -150,10 +150,11 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #fff;
-    width: 146px;
+    width: 106px;
     height: 27px;
     margin-top: -6px;
     margin-left: 6px;
+    margin-right: 20px;
 }
 
 .about__timetable, .about__opening-hours {
