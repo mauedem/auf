@@ -1,12 +1,14 @@
 import Check from "../../../public/assets/icons/check.svg"
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 
 import './LanguageMenu.css'
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const LanguageMenu = ({ language, onLanguageChange, showLanguageMenu, onLanguageMenuChange }) => {
+export const LanguageMenu = ({ onLanguageChange, showLanguageMenu }) => {
     const languageMenuRef = useRef(null);
+
+    const { language, changeLanguage } = useLanguage();
 
     const [languageMenuItems, setLanguageMenuItems] = useState([
         {
@@ -36,71 +38,30 @@ export const LanguageMenu = ({ language, onLanguageChange, showLanguageMenu, onL
     ])
 
     useEffect(() => {
-        if (language) {
-            setLanguageMenuItems((prevItems) =>
-                prevItems.map((item) => ({
-                    ...item,
-                    active: item.code === language,
-                }))
-            );
-        }
-    }, [language, showLanguageMenu])
+        setLanguageMenuItems((prevItems) =>
+            prevItems.map((item) => ({
+                ...item,
+                active: item.code === language,
+            }))
+        );
+    }, [language]);
 
-    // const navigate = useNavigate();
-
-    // import { useNavigate } from "react-router-dom";
-
-    const changeLanguage = (lang) => {
-        // Обновляем язык в localStorage и вызываем обработчик изменения языка
-        localStorage.setItem("language", lang.code);
+    const toggleLanguage = (lang) => {
         onLanguageChange(lang.code);
 
-        // const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, "");
-        // const newPath = lang.code === "ru" ? currentPath : `/${lang.code}${currentPath}`;
-        // navigate(newPath, {replace: true});
+        changeLanguage(lang.code);
     };
-
-    // const changeLanguage = (lang) => {
-    //     localStorage.setItem('language', lang.code);
-    //     onLanguageChange(lang.code)
-    //
-    //     setLanguageMenuItems((prevItems) =>
-    //         prevItems.map((item) => ({
-    //             ...item,
-    //             active: item.code === lang.code,
-    //         }))
-    //     );
-    // };
-
-    /* TODO решить проблему с click outside */
-    const handleClickOutside = (event) => {
-        // if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
-        //     onLanguageMenuChange(false);
-        // }
-    };
-
-    useEffect(() => {
-        // if (showLanguageMenu) {
-        //     document.addEventListener("mousedown", handleClickOutside);
-        // } else {
-        //     document.removeEventListener("mousedown", handleClickOutside);
-        // }
-        //
-        // return () => {
-        //     document.removeEventListener("mousedown", handleClickOutside);
-        // };
-    }, [showLanguageMenu]);
 
     return (
         <>
-            <div style={{position: 'relative'}} onClick={handleClickOutside}>
+            <div style={{position: 'relative'}}>
                 {showLanguageMenu &&
                     <div className="language-menu" ref={languageMenuRef}>
                         {languageMenuItems.map((item) => (
                             <div
                                 key={item.id}
                                 className="language-menu-list__item"
-                                onClick={() => changeLanguage(item)}
+                                onClick={() => toggleLanguage(item)}
                             >
                                 <div>{item.text}</div>
                                 <div style={{marginLeft: "auto", marginRight: "10px"}}>
@@ -118,8 +79,6 @@ export const LanguageMenu = ({ language, onLanguageChange, showLanguageMenu, onL
 }
 
 LanguageMenu.propTypes = {
-    language: PropTypes.string.isRequired,
     onLanguageChange: PropTypes.func.isRequired,
     showLanguageMenu: PropTypes.bool.isRequired,
-    onLanguageMenuChange: PropTypes.func.isRequired,
 };

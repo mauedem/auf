@@ -10,13 +10,15 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import './Info.css'
 
 import { useContext, useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const Info = ({ language }) => {
+export const Info = () => {
     const { data } = useContext(DataContext);
 
     const infoData = useMemo(() => data?.infoData?.[0] || {}, [data?.infoData]);
+
+    const { language } = useLanguage();
 
     const imageVariantRightToLeft = {
         hidden: {
@@ -91,9 +93,6 @@ export const Info = ({ language }) => {
             },
         }),
     };
-
-    // const [infoData, setInfoData] = useState({});
-    // const [error, setError] = useState({});
 
     const [images, setImages] = useState({
         image_1: null,
@@ -299,7 +298,3 @@ export const Info = ({ language }) => {
         </>
     )
 }
-
-Info.propTypes = {
-    language: PropTypes.string.isRequired,
-};

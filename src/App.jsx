@@ -1,5 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import {useContext, useEffect, useMemo, useState} from "react";
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header/Header.jsx";
 import { About } from "./sections/About/About.jsx";
 import { Menu } from "./components/Menu/Menu.jsx";
@@ -21,12 +21,45 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import './App.css'
 
-import { DataContext } from "./api/context/DataContext.jsx";
+import { DataContext } from "./context/DataContext.jsx";
+import { LANGUAGES } from "./utils/constants.js";
+import { LanguageProvider } from "./context/LanguageProvider.jsx";
 
 function App() {
     const [showMenu, setShowMenu] = useState(false);
     const [showLanguageMenu, setShowLanguageMenu] = useState(false);
-    const [language, setLanguage] = useState(localStorage.getItem('language') || 'ru');
+
+    const [language, setLanguage] = useState(() => {
+        const pathLanguage = location.pathname.split('/')[1];
+        return LANGUAGES.includes(pathLanguage) ? pathLanguage : 'ru';
+    });
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const pathLanguage = location.pathname.split('/')[1];
+        if (!LANGUAGES.includes(pathLanguage) && pathLanguage !== 'ru') {
+            const newPath = language === 'ru' ? location.pathname : `/${language}${location.pathname}`;
+            navigate(newPath, { replace: true });
+        }
+    }, [location.pathname, navigate, language]);
+
+    const handleLanguageChange = (newLanguage) => {
+        setLanguage(newLanguage);
+        localStorage.setItem('language', newLanguage);
+
+        const pathSegments = location.pathname.split('/').filter(Boolean);
+        if (newLanguage === 'ru') {
+            pathSegments.shift();
+        } else if (!LANGUAGES.includes(pathSegments[0])) {
+            pathSegments.unshift(newLanguage);
+        } else {
+            pathSegments[0] = newLanguage;
+        }
+
+        const newPath = `/${pathSegments.join('/')}`;
+        navigate(newPath, { replace: true });
+    };
 
     const { data } = useContext(DataContext);
 
@@ -54,10 +87,6 @@ function App() {
     const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
     const [isInteriorModalOpen, setIsInteriorModalOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const handleLanguageChange = (lang) => {
-        setLanguage(lang)
-    };
 
     const handleShowMenu = (newState) => {
         setShowMenu(newState);
@@ -107,51 +136,50 @@ function App() {
 
     return (
         <div className="App">
-            <Menu contactsData={contactsData} language={language} showMenu={showMenu} onMenuChange={handleShowMenu}/>
-            <LanguageMenu
-                language={language}
-                onLanguageChange={handleLanguageChange}
-                showLanguageMenu={showLanguageMenu}
-                onLanguageMenuChange={handleShowLanguageMenu}
-            />
-            <Header
-                contactsData={contactsData}
-                language={language}
-                onLanguageChange={handleLanguageChange}
-                navItemsData={navItems}
-                showMenu={showMenu}
-                showLanguageMenu={showLanguageMenu}
-                onMenuChange={handleShowMenu}
-                onLanguageMenuChange={handleShowLanguageMenu}
-            />
+            <LanguageProvider>
+                <Menu contactsData={contactsData} showMenu={showMenu} onMenuChange={handleShowMenu}/>
+                <LanguageMenu
+                    onLanguageChange={handleLanguageChange}
+                    showLanguageMenu={showLanguageMenu}
+                />
+                <Header
+                    contactsData={contactsData}
+                    onLanguageChange={handleLanguageChange}
+                    navItemsData={navItems}
+                    showMenu={showMenu}
+                    showLanguageMenu={showLanguageMenu}
+                    onMenuChange={handleShowMenu}
+                    onLanguageMenuChange={handleShowLanguageMenu}
+                />
 
-            <Routes>
-                <Route path="/" element={
-                    <>
-                        <About language={language} contactsData={contactsData} navItemsData={navItems} onLanguageChange={handleLanguageChange} />
-                        <Girls language={language} />
-                        <Info language={language} />
-                        <Show
-                            language={language}
-                            onInteriorClick={handleOpenInteriorModal}
-                            interiorData={interiorData}
-                            interiorBlocksData={interiorBlocksData}
-                        />
-                        <Footer
-                            contactsData={contactsData}
-                            language={language}
-                            onMoreInfoClick={() => setIsMoreInfoModalOpen(true)}
-                        />
-                    </>
-                }/>
-                <Route path="/gift" element={<Gift language={language} />}/>
-                <Route path="/jobs" element={<Jobs language={language} jobsData={jobsData} onOpenModal={() => setIsJobsModalOpen(true)}/>}/>
-                <Route path="*" element={
-                    location.pathname.startsWith('/admin')
-                        ? null
-                        : <Navigate to="/" replace/>
-                }/>
-            </Routes>
+                <Routes>
+                    <Route path="/:lang?" element={
+                        <>
+                            <About contactsData={contactsData} navItemsData={navItems} onLanguageChange={handleLanguageChange} />
+                            <Girls />
+                            <Info />
+                            <Show
+                                onInteriorClick={handleOpenInteriorModal}
+                                interiorData={interiorData}
+                                interiorBlocksData={interiorBlocksData}
+                            />
+                            <Footer
+                                contactsData={contactsData}
+                                onMoreInfoClick={() => setIsMoreInfoModalOpen(true)}
+                            />
+                        </>
+                     }/>
+                    <Route path="/gift/" element={<Gift />} />
+                    <Route path="/jobs/" element={<Jobs jobsData={jobsData} onOpenModal={() => setIsJobsModalOpen(true)}/>} />
+                    <Route path="/:lang/gift/" element={<Gift />} />
+                    <Route path="/:lang/jobs/" element={<Jobs jobsData={jobsData} onOpenModal={() => setIsJobsModalOpen(true)}/>} />
+                    <Route path="*" element={
+                            location.pathname.startsWith('/admin')
+                                ? null
+                                : <Navigate to="/" replace/>
+                        }/>
+                </Routes>
+            </LanguageProvider>
 
             <div
                 className={`floating-buttons ${

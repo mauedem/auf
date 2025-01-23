@@ -13,9 +13,10 @@ import PropTypes from "prop-types";
 
 import "./About.css";
 import { LANGUAGES } from "../../utils/constants.js";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const About = ({ language, contactsData, navItemsData, onLanguageChange }) => {
+export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
     const [aboutRef, aboutRefInView] = useInView({
         threshold: 0.5
     });
@@ -23,6 +24,8 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
     const { data } = useContext(DataContext);
 
     const aboutData = useMemo(() => data?.aboutData?.[0] || {}, [data?.aboutData]);
+
+    const { language } = useLanguage();
 
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
@@ -68,10 +71,6 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
         localStorage.setItem('language', newLanguage);
 
         onLanguageChange(newLanguage);
-
-        // const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, "");
-        // const newPath = language === "ru" ? currentPath : `/${language}${currentPath}`;
-        // navigate(newPath, { replace: true });
     };
 
     function goToLinkHref(menuItem) {
@@ -241,7 +240,6 @@ export const About = ({ language, contactsData, navItemsData, onLanguageChange }
 };
 
 About.propTypes = {
-    language: PropTypes.string.isRequired,
     contactsData: PropTypes.object.isRequired,
     navItemsData: PropTypes.array.isRequired,
     onLanguageChange: PropTypes.func.isRequired,

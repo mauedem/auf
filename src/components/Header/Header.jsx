@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LANGUAGES } from "../../utils/constants.js";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 export const Header = ({
     onMenuChange,
@@ -22,8 +23,7 @@ export const Header = ({
     showLanguageMenu,
     navItemsData,
     contactsData,
-    language,
-    onLanguageChange
+    onLanguageChange,
 }) => {
     const [isMenuHover, setIsMenuHover] = useState(false);
     const handleMouseEnterMenu = () => setIsMenuHover(true);
@@ -46,6 +46,8 @@ export const Header = ({
     const navigate = useNavigate()
     const location = useLocation();
 
+    const { language, changeLanguage } = useLanguage();
+
     const toggleLanguage = () => {
         const currentIndex = LANGUAGES.indexOf(language);
         const nextIndex = (currentIndex + 1) % LANGUAGES.length;
@@ -55,9 +57,7 @@ export const Header = ({
 
         onLanguageChange(newLanguage);
 
-        // const currentPath = window.location.pathname.replace(/^\/[a-z]{2}/, "");
-        // const newPath = language === "ru" ? currentPath : `/${language}${currentPath}`;
-        // navigate(newPath, { replace: true });
+        changeLanguage(newLanguage);
     };
 
     function goToLinkHref(menuItem) {
@@ -224,6 +224,5 @@ Header.propTypes = {
     showLanguageMenu: PropTypes.bool.isRequired,
     navItemsData: PropTypes.array.isRequired,
     contactsData: PropTypes.object.isRequired,
-    language: PropTypes.string.isRequired,
     onLanguageChange: PropTypes.func.isRequired,
 };

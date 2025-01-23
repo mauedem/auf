@@ -11,14 +11,17 @@ import './Footer.css'
 
 import PropTypes from "prop-types";
 import { YandexMap } from "../YandexMap/YandexMap.jsx";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
+export const Footer = ({ contactsData, onMoreInfoClick }) => {
     const gastronomyRef = useRef(null);
 
     const { data } = useContext(DataContext);
 
     const gastronomyData = useMemo(() => data?.gastronomyData?.[0] || {}, [data?.gastronomyData]);
+
+    const { language } = useLanguage();
 
     return (
         <>
@@ -167,7 +170,6 @@ export const Footer = ({ language, contactsData, onMoreInfoClick }) => {
 
 Footer.propTypes = {
     onMoreInfoClick: PropTypes.func.isRequired,
-    language: PropTypes.string.isRequired,
     contactsData: PropTypes.object.isRequired,
 };
 

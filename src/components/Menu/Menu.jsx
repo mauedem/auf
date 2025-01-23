@@ -8,11 +8,13 @@ import PropTypes from "prop-types";
 import './Menu.css'
 
 import { useContext, useMemo } from "react";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
+export const Menu = ({ showMenu, onMenuChange, contactsData }) => {
     const navigate = useNavigate()
     const location = useLocation();
+    const { language } = useLanguage();
 
     const { data } = useContext(DataContext);
 
@@ -110,6 +112,5 @@ export const Menu = ({ showMenu, onMenuChange, language, contactsData }) => {
 Menu.propTypes = {
     showMenu: PropTypes.bool.isRequired,
     onMenuChange: PropTypes.func.isRequired,
-    language: PropTypes.string.isRequired,
     contactsData: PropTypes.object.isRequired,
 };

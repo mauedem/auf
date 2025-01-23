@@ -2,7 +2,7 @@ import './MoreInfoModal.css'
 import PropTypes from "prop-types";
 import Cross from "../../../public/assets/icons/cross.svg";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

@@ -3,17 +3,19 @@ import { motion } from "framer-motion";
 
 import './Girls.css'
 import { useInView } from "react-intersection-observer";
-import PropTypes from "prop-types";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const Girls = ({ language }) => {
+export const Girls = () => {
     const girlsRef = useRef(null);
 
     const { data } = useContext(DataContext);
 
     const girlsData = useMemo(() => data?.girlsData?.[0] || {}, [data?.girlsData]);
+
+    const { language } = useLanguage();
 
     const images = girlsData?.photos?.length
         ? girlsData.photos.map((photo) => `${API_BASE_URL}${photo.photo}`)
@@ -133,7 +135,3 @@ export const Girls = ({ language }) => {
         </>
     )
 }
-
-Girls.propTypes = {
-    language: PropTypes.string.isRequired,
-};

@@ -5,14 +5,17 @@ import { useContext, useEffect, useMemo } from "react";
 import './Jobs.css'
 
 import PropTypes from "prop-types";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const Jobs = ({ language, jobsData, onOpenModal }) => {
+export const Jobs = ({ jobsData, onOpenModal }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     const { data } = useContext(DataContext);
+
+    const { language } = useLanguage();
 
     const vacanciesData = useMemo(() => data?.vacancies || [], [data?.vacancies]);
 
@@ -88,5 +91,4 @@ export const Jobs = ({ language, jobsData, onOpenModal }) => {
 Jobs.propTypes = {
     onOpenModal: PropTypes.func.isRequired,
     jobsData: PropTypes.object.isRequired,
-    language: PropTypes.string.isRequired,
 };

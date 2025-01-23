@@ -1,4 +1,4 @@
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -9,8 +9,9 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import './Show.css'
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksData }) => {
+export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
@@ -18,6 +19,8 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
     const { data } = useContext(DataContext);
 
     const showData = useMemo(() => data?.showData?.[0] || {}, [data?.showData]);
+
+    const { language } = useLanguage();
 
     const [textRef, textInView] = useInView({
         threshold: 0.5
@@ -215,7 +218,6 @@ export const Show = ({ language, onInteriorClick, interiorData, interiorBlocksDa
 
 Show.propTypes = {
     onInteriorClick: PropTypes.func.isRequired,
-    language: PropTypes.string.isRequired,
     interiorData: PropTypes.object.isRequired,
     interiorBlocksData: PropTypes.array.isRequired,
 };

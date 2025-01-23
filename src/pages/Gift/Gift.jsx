@@ -3,17 +3,19 @@ import { useContext, useEffect, useMemo } from "react";
 
 import './Gift.css'
 
-import PropTypes from "prop-types";
-import { DataContext } from "../../api/context/DataContext.jsx";
+import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const Gift = ({ language }) => {
+export const Gift = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     const { data } = useContext(DataContext);
+
+    const { language } = useLanguage();
 
     const giftData = useMemo(() => data?.giftData?.[0] || {}, [data?.giftData]);
     const giftCardsData = useMemo(() => data?.giftCardsData || [], [data?.giftCardsData]);
@@ -76,7 +78,3 @@ export const Gift = ({ language }) => {
         </>
     )
 }
-
-Gift.propTypes = {
-    language: PropTypes.string.isRequired,
-};
