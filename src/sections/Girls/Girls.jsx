@@ -5,7 +5,7 @@ import './Girls.css'
 import { useInView } from "react-intersection-observer";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
-import {Skeleton} from "../../components/Skeleton/Skeleton.jsx";
+import { Skeleton } from "../../components/Skeleton/Skeleton.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -55,7 +55,7 @@ export const Girls = () => {
                         animate={{x: ["100%", "-100%"]}}
                         transition={{
                             repeat: Infinity,
-                            duration: 16,
+                            duration: 30,
                             ease: "linear",
                         }}
                     >
@@ -94,12 +94,12 @@ export const Girls = () => {
                                     initial="initial"
                                     animate="animate"
                                     transition={{
-                                        duration: 1.5,
+                                        duration: 3,
                                         ease: "easeInOut",
-                                        delay: index * 1.5,
+                                        delay: index * 3,
                                         repeat: Infinity,
                                         repeatType: "loop",
-                                        repeatDelay: images.length,
+                                        repeatDelay: images.length * 2
                                     }}
                                 />
                             );

@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import "./InteriorModal.css";
 
 import Cross from "../../../public/assets/icons/cross.svg";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryChange, interiorData, interiorBlocksData, language, photos = [] }) => {
+export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryChange, interiorData, interiorBlocksData, photos = [] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHorizontalPhoto, setIsHorizontalPhoto] = useState(false);
     const [progressKey, setProgressKey] = useState(0);
@@ -14,6 +15,8 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryCha
     const intervalRef = useRef(null);
 
     const tagRefs = useRef([]);
+
+    const { language } = useLanguage();
 
     const nextPhoto = () => {
         if (photos && photos.length > 0) {
@@ -193,7 +196,6 @@ export const InteriorModal = ({ isOpen, onClose, selectedCategory, onCategoryCha
 
 InteriorModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    language: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
     photos: PropTypes.array,
     selectedCategory: PropTypes.object.isRequired,

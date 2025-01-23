@@ -66,14 +66,17 @@ export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
     };
 
     const [images, setImages] = useState({
-        image_1: null,
-        image_2: null,
-        image_3: null,
+        main_image: '',
+        image_1: '',
+        image_2: '',
+        image_3: '',
+        image_4: '',
     });
 
     useEffect(() => {
         if (Object.keys(interiorData).length > 0) {
             setImages({
+                main_image: `${API_BASE_URL}${interiorData['photo']}`,
                 image_1: `${API_BASE_URL}${interiorData['photo_1']}`,
                 image_2: `${API_BASE_URL}${interiorData['photo_2']}`,
                 image_3: `${API_BASE_URL}${interiorData['photo_3']}`,
@@ -147,10 +150,16 @@ export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
                             {loading ? <Skeleton type="text" /> : interiorData[`title_${language}`]}
                         </h2>
 
-                        {/*<img src={Interior} alt="Interior" />*/}
-
                         <div className="interior__tags">
                             {loading ? <Skeleton type="text" /> : interiorItems}
+                        </div>
+
+                        <div className="interior__main-img">
+                            {loading || !images.main_image ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
+                                <img className="interior__img" src={images.main_image} alt="Interior" loading="lazy" />
+                            )}
                         </div>
                     </div>
 

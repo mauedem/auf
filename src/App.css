@@ -32,6 +32,7 @@ html, body {
     --purple: #C618D0;
     --hover-color: #D126DB;
     --bg-color: #021012;
+    --rpv-core__inner-page-background-color: #560B62 !important;
 }
 
 .App {

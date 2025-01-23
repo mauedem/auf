@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import './LanguageMenu.css'
 import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const LanguageMenu = ({ onLanguageChange, showLanguageMenu }) => {
+export const LanguageMenu = ({ onLanguageChange, showLanguageMenu, onLanguageMenuChange }) => {
     const languageMenuRef = useRef(null);
 
     const { language, changeLanguage } = useLanguage();
@@ -52,6 +52,22 @@ export const LanguageMenu = ({ onLanguageChange, showLanguageMenu }) => {
         changeLanguage(lang.code);
     };
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+                onLanguageMenuChange(false);
+            }
+        }
+
+        if (showLanguageMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showLanguageMenu, onLanguageMenuChange]);
+
     return (
         <>
             <div style={{position: 'relative'}}>
@@ -81,4 +97,5 @@ export const LanguageMenu = ({ onLanguageChange, showLanguageMenu }) => {
 LanguageMenu.propTypes = {
     onLanguageChange: PropTypes.func.isRequired,
     showLanguageMenu: PropTypes.bool.isRequired,
+    onLanguageMenuChange: PropTypes.func.isRequired,
 };

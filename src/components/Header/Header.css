@@ -91,6 +91,7 @@
 .header-map {
     display: flex;
     width: 140px;
+    margin-left: 14px;
 }
 
 .header-map__img {
@@ -107,6 +108,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-left: 40px;
+    margin-right: auto;
 }
 
 .header-hours__days {
@@ -142,11 +144,12 @@
 }
 
 .header-reserve-btn {
+    display: block;
     background-color: var(--secondary-color);
     padding: 12px 24px 12px 24px;
     border-radius: 120px;
     border: 2px solid var(--primary-color);
-    margin-left: 80px;
+    margin-left: auto;
     font-family: Aeroport, sans-serif;
     font-size: 11px;
     font-weight: 400;
@@ -163,9 +166,9 @@
 }
 
 .header--big {
-    margin-left: auto;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .header--small {
@@ -189,10 +192,6 @@
 
     .header-reserve-btn {
         margin-left: 10px;
-    }
-
-    .header-hours {
-        display: none;
     }
 }
 

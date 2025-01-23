@@ -3,9 +3,11 @@ import { useMemo, useRef } from "react";
 import { MAP_API_KEY } from "../../utils/constants.js";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
 
+import './YandexMap.css'
+
 export const YandexMap = () => {
     const mapRef = useRef(null);
-    const placemarkCoordinates = [55.763322, 37.561778];
+    const placemarkCoordinates = [55.762277, 37.569899];
 
     const mapState = {
         center: placemarkCoordinates,
@@ -30,16 +32,16 @@ export const YandexMap = () => {
 
     return (
         <YMaps query={{ apikey: MAP_API_KEY, ns: 'use-load-option', lang: getLanguage }}>
-            <div style={{ width: '560px', height: '400px' }}>
+            <div>
                 <Map
+                    className="yandex-map"
                     defaultState={mapState}
-                    style={{ width: '100%', height: '100%' }}
                     options={{
                         mapType: 'yandex#dark',
                         suppressMapOpenBlock: true,
                         yandexMapDisablePoiInteractivity: true,
-                        // mapType: 'yandex#map',
                         theme: 'dark',
+                        behaviors: [],
                     }}
                     instanceRef={(ref) => {
                         mapRef.current = ref;

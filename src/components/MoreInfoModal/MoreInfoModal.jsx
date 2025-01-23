@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import Cross from "../../../public/assets/icons/cross.svg";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { DataContext } from "../../context/DataContext.jsx";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const MoreInfoModal = ({ language, isOpen, onClose }) => {
+export const MoreInfoModal = ({ isOpen, onClose }) => {
     const { data } = useContext(DataContext);
 
     const moreInfoData = useMemo(() => data?.moreInfoData?.[0] || {}, [data?.moreInfoData]);
@@ -16,6 +17,8 @@ export const MoreInfoModal = ({ language, isOpen, onClose }) => {
             onClose();
         }
     };
+
+    const { language } = useLanguage();
 
     const [images, setImages] = useState({
         image_1: null,
@@ -126,7 +129,6 @@ export const MoreInfoModal = ({ language, isOpen, onClose }) => {
 }
 
 MoreInfoModal.propTypes = {
-    language: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
 };

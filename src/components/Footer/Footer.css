@@ -156,16 +156,8 @@
     margin-top: 60px;
 }
 
-.footer__map-filter {
-    filter: invert(1) brightness(1)
-}
-
 .footer__map {
-    display: none;
-}
-
-.footer__map--big {
-    display: block;
+    filter: invert(1) brightness(1)
 }
 
 .footer__phone {
@@ -256,6 +248,13 @@
     cursor: pointer;
 }
 
+@media (min-width: 320px) and (max-width: 575px) {
+    .footer__map {
+        width: 360px;
+        height: 260px;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 767px) {
     .gastronomy-card:nth-child(2) {
         margin-left: 0;
@@ -270,14 +269,6 @@
         display: flex;
         flex-direction: column;
         margin-top: 30px;
-    }
-
-    .footer__map {
-        display: block;
-    }
-
-    .footer__map--big {
-        display: none;
     }
 
     .footer-taxi {

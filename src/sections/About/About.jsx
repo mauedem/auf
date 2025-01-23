@@ -130,7 +130,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                     playsInline
                     preload="auto"
                     onCanPlayThrough={() => setIsVideoLoaded(true)}
-                    onLoadedData={() => setIsVideoLoaded(true)}
+                    onCanPlay={() => setIsVideoLoaded(true)}
                 >
                     <source
                         src={MainBgVideo}

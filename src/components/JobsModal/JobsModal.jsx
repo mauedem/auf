@@ -2,8 +2,11 @@ import PropTypes from "prop-types";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 
 import './JobsModal.css';
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
-export const JobsModal = ({ language, isOpen, jobsData, contactsData, onClose }) => {
+export const JobsModal = ({ isOpen, jobsData, contactsData, onClose }) => {
+    const { language } = useLanguage();
+
     if (!isOpen) return null;
 
     return (
@@ -37,7 +40,6 @@ export const JobsModal = ({ language, isOpen, jobsData, contactsData, onClose })
 };
 
 JobsModal.propTypes = {
-    language: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
     jobsData: PropTypes.object.isRequired,
     contactsData: PropTypes.object.isRequired,

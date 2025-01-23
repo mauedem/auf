@@ -12,8 +12,8 @@ import './Header.css'
 
 import PropTypes from 'prop-types';
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { LANGUAGES } from "../../utils/constants.js";
+import { useNavigate } from "react-router-dom";
+// import { LANGUAGES } from "../../utils/constants.js";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 export const Header = ({
@@ -21,9 +21,9 @@ export const Header = ({
     onLanguageMenuChange,
     showMenu,
     showLanguageMenu,
-    navItemsData,
+    // navItemsData,
     contactsData,
-    onLanguageChange,
+    // onLanguageChange,
     loading
 }) => {
     const [isMenuHover, setIsMenuHover] = useState(false);
@@ -45,62 +45,62 @@ export const Header = ({
     };
 
     const navigate = useNavigate()
-    const location = useLocation();
+    // const location = useLocation();
 
-    const { language, changeLanguage } = useLanguage();
+    const { language } = useLanguage();
 
-    const toggleLanguage = () => {
-        const currentIndex = LANGUAGES.indexOf(language);
-        const nextIndex = (currentIndex + 1) % LANGUAGES.length;
-        const newLanguage = LANGUAGES[nextIndex];
+    // const toggleLanguage = () => {
+    //     const currentIndex = LANGUAGES.indexOf(language);
+    //     const nextIndex = (currentIndex + 1) % LANGUAGES.length;
+    //     const newLanguage = LANGUAGES[nextIndex];
+    //
+    //     localStorage.setItem('language', newLanguage);
+    //
+    //     onLanguageChange(newLanguage);
+    //
+    //     changeLanguage(newLanguage);
+    // };
 
-        localStorage.setItem('language', newLanguage);
+    // function goToLinkHref(menuItem) {
+    //     const isLanguageSwitcher = menuItem['text_ru'] === 'Русский'
+    //     if (isLanguageSwitcher) {
+    //         toggleLanguage(menuItem);
+    //
+    //         return;
+    //     }
+    //
+    //     if (location.pathname !== menuItem.link) {
+    //         navigate(menuItem.link);
+    //
+    //         setTimeout(() => {
+    //             if (menuItem.href) {
+    //                 document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
+    //             }
+    //         }, 200);
+    //     } else {
+    //         if (menuItem.href) {
+    //             document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
+    //         }
+    //     }
+    //
+    //     onMenuChange(false);
+    // }
 
-        onLanguageChange(newLanguage);
-
-        changeLanguage(newLanguage);
-    };
-
-    function goToLinkHref(menuItem) {
-        const isLanguageSwitcher = menuItem['text_ru'] === 'Русский'
-        if (isLanguageSwitcher) {
-            toggleLanguage(menuItem);
-
-            return;
-        }
-
-        if (location.pathname !== menuItem.link) {
-            navigate(menuItem.link);
-
-            setTimeout(() => {
-                if (menuItem.href) {
-                    document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 200);
-        } else {
-            if (menuItem.href) {
-                document.getElementById(menuItem.href).scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        onMenuChange(false);
-    }
-
-    const navItems = navItemsData.map(
-        item => {
-            return (
-                <button
-                    key={item.id}
-                    className="nav-btn"
-                    onClick={() => goToLinkHref(item)}
-                >
-                    <span className="nav-button__link">
-                        {item[`text_${language}`]}
-                    </span>
-                </button>
-            )
-        }
-    );
+    // const navItems = navItemsData.map(
+    //     item => {
+    //         return (
+    //             <button
+    //                 key={item.id}
+    //                 className="nav-btn"
+    //                 onClick={() => goToLinkHref(item)}
+    //             >
+    //                 <span className="nav-button__link">
+    //                     {item[`text_${language}`]}
+    //                 </span>
+    //             </button>
+    //         )
+    //     }
+    // );
 
     return (
         <>
@@ -123,9 +123,9 @@ export const Header = ({
                     }}
                 />
 
-                <div className="header-wrapper">
-                    <nav className="header__nav">{navItems}</nav>
-                </div>
+                {/*<div className="header-wrapper">*/}
+                {/*    <nav className="header__nav">{navItems}</nav>*/}
+                {/*</div>*/}
 
                 <div className="header--big">
                     <div className="header-map">
@@ -226,7 +226,7 @@ Header.propTypes = {
     onLanguageMenuChange: PropTypes.func.isRequired,
     showMenu: PropTypes.bool.isRequired,
     showLanguageMenu: PropTypes.bool.isRequired,
-    navItemsData: PropTypes.array.isRequired,
+    // navItemsData: PropTypes.array.isRequired,
     contactsData: PropTypes.object.isRequired,
     onLanguageChange: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,

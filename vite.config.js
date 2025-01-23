@@ -11,6 +11,10 @@ export default defineConfig({
                 changeOrigin: true,
                 secure: false,
             },
+            '/media': {
+                target: 'http://109.71.14.210',
+                changeOrigin: true,
+            },
         },
         historyApiFallback: true, // Перенаправление всех запросов на index.html
     },

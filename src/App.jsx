@@ -24,6 +24,7 @@ import './App.css'
 import { DataContext } from "./context/DataContext.jsx";
 import { LANGUAGES } from "./utils/constants.js";
 import { LanguageProvider } from "./context/LanguageProvider.jsx";
+import { MenuModal } from "./components/MenuModal/MenuModal.jsx";
 
 function App() {
     const [showMenu, setShowMenu] = useState(false);
@@ -68,6 +69,7 @@ function App() {
     const interiorData = useMemo(() => data?.interiorData?.[0] || {}, [data?.interiorData]);
     const interiorBlocksData = useMemo(() => data?.interiorBlocksData || [], [data?.interiorBlocksData]);
     const jobsData = useMemo(() => data?.jobsData?.[0] || {}, [data?.jobsData]);
+    const gastronomyData = useMemo(() => data?.gastronomyData?.[0] || {}, [data?.gastronomyData]);
 
     const [isScrolling, setIsScrolling] = useState(false);
     useEffect(() => {
@@ -85,6 +87,8 @@ function App() {
 
     const [isJobsModalOpen, setIsJobsModalOpen] = useState(false);
     const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
+    const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
+    const [currentPdfFile, setCurrentPdfFile] = useState('');
     const [isInteriorModalOpen, setIsInteriorModalOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -122,6 +126,11 @@ function App() {
         setSelectedCategory(interiorBlocksData.find(item => item.key === newCategory))
     }
 
+    const handleMenuClick = (pdfFile) => {
+        setCurrentPdfFile(pdfFile)
+        setIsMenuModalOpen(true)
+    }
+
     useEffect(() => {
         const shouldDisableScroll = isMoreInfoModalOpen || isInteriorModalOpen || (window.innerWidth < 768 && showMenu);
 
@@ -140,6 +149,7 @@ function App() {
                 <Menu contactsData={contactsData} showMenu={showMenu} onMenuChange={handleShowMenu}/>
                 <LanguageMenu
                     onLanguageChange={handleLanguageChange}
+                    onLanguageMenuChange={handleShowLanguageMenu}
                     showLanguageMenu={showLanguageMenu}
                 />
                 <Header
@@ -166,7 +176,9 @@ function App() {
                             />
                             <Footer
                                 contactsData={contactsData}
+                                gastronomyData={gastronomyData}
                                 onMoreInfoClick={() => setIsMoreInfoModalOpen(true)}
+                                onMenuClick={handleMenuClick}
                             />
                         </>
                      }/>
@@ -180,6 +192,38 @@ function App() {
                                 : <Navigate to="/" replace/>
                         }/>
                 </Routes>
+
+                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+                <MoreInfoModal
+                    isOpen={isMoreInfoModalOpen}
+                    onClose={() => setIsMoreInfoModalOpen(false)}
+                />
+
+                <InteriorModal
+                    photos={currentPhotos}
+                    selectedCategory={selectedCategory}
+                    isOpen={isInteriorModalOpen}
+                    onCategoryChange={handleCategoryChange}
+                    interiorData={interiorData}
+                    interiorBlocksData={interiorBlocksData}
+                    onClose={() => setIsInteriorModalOpen(false)}
+                />
+
+                <MenuModal
+                    currentPdfFile={currentPdfFile}
+                    gastronomyData={gastronomyData}
+                    interiorData={interiorData}
+                    isOpen={isMenuModalOpen}
+                    onClose={() => setIsMenuModalOpen(false)}
+                />
+
+                <JobsModal
+                    isOpen={isJobsModalOpen}
+                    contactsData={contactsData}
+                    jobsData={jobsData}
+                    onClose={() => setIsJobsModalOpen(false)}
+                />
             </LanguageProvider>
 
             <div
@@ -191,33 +235,6 @@ function App() {
                     <img src={Taxi} alt="Taxi" loading="lazy" />
                 </div>
             </div>
-
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-
-            <MoreInfoModal
-                language={language}
-                isOpen={isMoreInfoModalOpen}
-                onClose={() => setIsMoreInfoModalOpen(false)}
-            />
-
-            <InteriorModal
-                language={language}
-                photos={currentPhotos}
-                selectedCategory={selectedCategory}
-                isOpen={isInteriorModalOpen}
-                onCategoryChange={handleCategoryChange}
-                interiorData={interiorData}
-                interiorBlocksData={interiorBlocksData}
-                onClose={() => setIsInteriorModalOpen(false)}
-            />
-
-            <JobsModal
-                language={language}
-                isOpen={isJobsModalOpen}
-                contactsData={contactsData}
-                jobsData={jobsData}
-                onClose={() => setIsJobsModalOpen(false)}
-            />
         </div>
     )
 }

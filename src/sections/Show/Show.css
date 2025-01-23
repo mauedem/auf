@@ -181,6 +181,17 @@
     margin-right: 30px;
 }
 
+.interior__main-img {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.interior__img {
+    width: 400px;
+    height: 610px;
+}
+
 .interior__img-1 {
     max-width: 719px;
     height: auto;
@@ -254,6 +265,10 @@
 @media (min-width: 320px) and (max-width: 767px) {
     .interior {
         padding-bottom: 20px;
+    }
+
+    .interior__main-img {
+        margin-top: 30px;
     }
 
     .interior__tags {

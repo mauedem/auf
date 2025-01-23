@@ -3,9 +3,7 @@ import Bar from "../../../public/assets/icons/bar.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import AufLogoBigShadowed from "../../../public/assets/icons/auf-logo-big-shadowed.svg";
 import PhoneCallShadowed from "../../../public/assets/icons/phone-call-shadowed.svg";
-import { useContext, useMemo, useRef } from "react";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useContext, useRef } from "react";
 
 import './Footer.css'
 
@@ -13,14 +11,12 @@ import PropTypes from "prop-types";
 import { YandexMap } from "../YandexMap/YandexMap.jsx";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
-import {Skeleton} from "../Skeleton/Skeleton.jsx";
+import { Skeleton } from "../Skeleton/Skeleton.jsx";
 
-export const Footer = ({ contactsData, onMoreInfoClick }) => {
+export const Footer = ({ gastronomyData, contactsData, onMoreInfoClick, onMenuClick }) => {
     const gastronomyRef = useRef(null);
 
-    const { data, loading } = useContext(DataContext);
-
-    const gastronomyData = useMemo(() => data?.gastronomyData?.[0] || {}, [data?.gastronomyData]);
+    const { loading } = useContext(DataContext);
 
     const { language } = useLanguage();
 
@@ -35,9 +31,7 @@ export const Footer = ({ contactsData, onMoreInfoClick }) => {
                     <div className="gastronomy-cards">
                         <div
                             className="gastronomy-card"
-                            onClick={() => {
-                                window.open(`${API_BASE_URL}${gastronomyData['kitchen_file']}`, '_blank');
-                            }}
+                            onClick={() => onMenuClick('kitchen_file')}
                         >
                             <div><img src={Kitchen} alt="Kitchen" loading="lazy" /></div>
 
@@ -58,9 +52,7 @@ export const Footer = ({ contactsData, onMoreInfoClick }) => {
 
                         <div
                             className="gastronomy-card"
-                            onClick={() => {
-                                window.open(`${API_BASE_URL}${gastronomyData['bar_file']}`, '_blank');
-                            }}
+                            onClick={() => onMenuClick('bar_file')}
                         >
                             <div><img src={Bar} alt="Bar" loading="lazy" /></div>
 
@@ -125,11 +117,11 @@ export const Footer = ({ contactsData, onMoreInfoClick }) => {
                         </div>
                     }
 
-                    <div className="footer__map-filter">
+                    <div className="footer__map">
                         {loading ? (
                             <Skeleton type="image" />
                         ) : (
-                            <YandexMap className="footer__map" />
+                            <YandexMap />
                         )}
                     </div>
 
@@ -191,6 +183,8 @@ export const Footer = ({ contactsData, onMoreInfoClick }) => {
 
 Footer.propTypes = {
     onMoreInfoClick: PropTypes.func.isRequired,
+    onMenuClick: PropTypes.func.isRequired,
     contactsData: PropTypes.object.isRequired,
+    gastronomyData: PropTypes.object.isRequired,
 };
 

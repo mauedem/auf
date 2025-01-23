@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import './Menu.css'
 
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
 
@@ -37,11 +37,29 @@ export const Menu = ({ showMenu, onMenuChange, contactsData }) => {
         onMenuChange(false);
     }
 
+    const menuRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                onMenuChange(false);
+            }
+        }
+
+        if (showMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showMenu, onMenuChange]);
+
     return (
         <>
             <div style={{ position: 'relative' }}>
                 {showMenu &&
-                    <div className="menu">
+                    <div className="menu" ref={menuRef}>
                         <div className="menu-list">
                             {menuItems.map((item, index) => (
                                 <div className="menu-list__item" key={index} onClick={() => goToLinkHref(item)}>
