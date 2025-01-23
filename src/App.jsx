@@ -132,7 +132,7 @@ function App() {
     }
 
     useEffect(() => {
-        const shouldDisableScroll = isMoreInfoModalOpen || isInteriorModalOpen || (window.innerWidth < 768 && showMenu);
+        const shouldDisableScroll = isMoreInfoModalOpen || isInteriorModalOpen || isMenuModalOpen || (window.innerWidth < 768 && showMenu);
 
         if (shouldDisableScroll) {
             document.documentElement.classList.add("no-scroll");
