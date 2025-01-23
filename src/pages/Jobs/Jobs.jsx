@@ -7,13 +7,14 @@ import './Jobs.css'
 import PropTypes from "prop-types";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
+import {Skeleton} from "../../components/Skeleton/Skeleton.jsx";
 
 export const Jobs = ({ jobsData, onOpenModal }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const { language } = useLanguage();
 
@@ -55,31 +56,47 @@ export const Jobs = ({ jobsData, onOpenModal }) => {
             <div className="jobs">
                 <div className="jobs__container">
                     <div className="jobs__title">
-                        <div style={{color: 'var(--secondary-color)'}}>{jobsData[`title_${language}`]}</div>
-                        {jobsData[`highlight_title_${language}`]}
+                        {loading ? (
+                            <Skeleton type="text"/>
+                        ) : (
+                            <>
+                                <div style={{color: 'var(--secondary-color)'}}>{jobsData[`title_${language}`]}</div>
+                                {jobsData[`highlight_title_${language}`]}
+                          </>
+                        )}
                     </div>
 
                     <div className="jobs__text">
-                        {jobsData[`text_1_${language}`]
-                            ?.split("{{email}}")[0]
-                            ?.split("{{phone}}")[0]}
-                        <a className="jobs__mail" href={`mailto:${jobsData.email}`}>
-                            {jobsData.email}
-                        </a>
-                        {jobsData[`text_1_${language}`]
-                            ?.split("{{email}}")[1]
-                            ?.split("{{phone}}")[0]}
-                        <a className="jobs__phone" href={`tel:${jobsData.phone?.replace(/\s+/g, '')}`}>
-                            {jobsData.phone}
-                        </a>
-                        {jobsData[`text_1_${language}`]?.split("{{phone}}")[1]}
+                        {loading ? (
+                            <>
+                                <Skeleton type="text"/>
+                                <Skeleton type="text"/>
+                                <Skeleton type="text"/>
+                            </>
+                        ) : (
+                            <>
+                                {jobsData[`text_1_${language}`]
+                                    ?.split("{{email}}")[0]
+                                    ?.split("{{phone}}")[0]}
+                                <a className="jobs__mail" href={`mailto:${jobsData.email}`}>
+                                    {jobsData.email}
+                                </a>
+                                {jobsData[`text_1_${language}`]
+                                    ?.split("{{email}}")[1]
+                                    ?.split("{{phone}}")[0]}
+                                <a className="jobs__phone" href={`tel:${jobsData.phone?.replace(/\s+/g, '')}`}>
+                                    {jobsData.phone}
+                                </a>
+                                {jobsData[`text_1_${language}`]?.split("{{phone}}")[1]}
+                            </>
+                        )}
                     </div>
 
                     <div className="jobs__subtitle">
-                        {jobsData[`text_2_${language}`]}
+                        {loading ? <Skeleton type="text"/> : jobsData[`text_2_${language}`]}
                     </div>
 
-                    {vacancies}
+                    {loading ? <Skeleton type="image"/> : vacancies}
 
                     <img src={AufLogoShadowed} alt="auf logo" loading="lazy" />
                 </div>

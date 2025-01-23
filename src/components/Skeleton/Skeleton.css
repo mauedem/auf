@@ -1,0 +1,26 @@
+.skeleton {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    animation: skeleton-loading 1.5s infinite;
+    background: linear-gradient(270deg, #560B62 0%, rgba(51, 22, 39, 0.25) 100%);
+}
+
+/*@keyframes skeleton-loading {*/
+/*    0% {*/
+/*        background-position: -200% 0;*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 200% 0;*/
+/*    }*/
+/*}*/
+
+.skeleton--text {
+    height: 50px;
+    min-width: 350px;
+}
+
+.skeleton--image {
+    height: 400px;
+    min-width: 350px;
+}

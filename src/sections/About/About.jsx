@@ -7,7 +7,7 @@ import PhoneCall from "../../../public/assets/icons/phone-call.svg";
 import ArrowRight from "../../../public/assets/icons/arrow-right.svg";
 import Map from "../../../public/assets/icons/map.svg";
 import { useInView } from "react-intersection-observer";
-import { useContext, useMemo, useState } from "react";
+import {useContext, useMemo, useState} from "react";
 
 import PropTypes from "prop-types";
 
@@ -15,13 +15,14 @@ import "./About.css";
 import { LANGUAGES } from "../../utils/constants.js";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
+import { Skeleton } from "../../components/Skeleton/Skeleton.jsx";
 
 export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
     const [aboutRef, aboutRefInView] = useInView({
         threshold: 0.5
     });
 
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const aboutData = useMemo(() => data?.aboutData?.[0] || {}, [data?.aboutData]);
 
@@ -154,7 +155,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                         className="about__title about__title--welcome"
                         variants={textVariant("y", -30)}
                     >
-                        {aboutData[`text_1_${language}`]}
+                        {loading ? <Skeleton type="text" /> : aboutData[`text_1_${language}`]}
                     </motion.div>
 
                     <img className="about__logo" src={AufLogo} alt="AUF Logo" loading="lazy" />
@@ -163,7 +164,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                         className="about__title about__title--experience"
                         variants={textVariant("y", 30)}
                     >
-                        {aboutData[`text_2_${language}`]}
+                        {loading ? <Skeleton type="text" /> : aboutData[`text_2_${language}`]}
                     </motion.div>
                 </div>
 
@@ -172,50 +173,59 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                         className="about__subtitle"
                         variants={textVariant("y", -30)}
                     >
-                        {aboutData[`title_${language}`]}
+                         {loading ? <Skeleton type="text" /> : aboutData[`title_${language}`]}
                     </motion.h1>
                     <motion.div
                         className="about__description"
                         variants={textVariant("y", 30)}
                     >
-                        {aboutData[`subtitle_${language}`]}
+                        {loading ? <Skeleton type="text" /> : aboutData[`subtitle_${language}`]}
                     </motion.div>
                 </div>
 
-                <div className="reserve-button__container">
-                    <motion.div
-                        className="reserve-button"
-                        variants={buttonBackgroundVariant}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{duration: 1}}
-                        onClick={() => {
-                            window.location.href = `tel:${contactsData['phone']}`;
-                        }}
-                    >
-                        <motion.img
-                            className="reserve-button__phone-call"
-                            src={PhoneCall}
-                            alt="Phone call"
-                        />
-                        <motion.a
-                            href={`tel:${contactsData['phone']}`}
-                            variants={buttonTextVariant}
-                            transition={{duration: 0.5}}
+                {loading ? (
+                    <div style={{ marginTop: '28px', paddingLeft: '14px', paddingRight: '14px', width: '100%' }}>
+                        <Skeleton type="text" />
+                    </div>
+                ) : (
+                    <div className="reserve-button__container">
+                        <motion.div
+                            className="reserve-button"
+                            variants={buttonBackgroundVariant}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{duration: 1}}
+                            onClick={() => {
+                                window.location.href = `tel:${contactsData['phone']}`;
+                            }}
                         >
-                            {contactsData[`book_button_${language}`]}
-                        </motion.a>
-                        <motion.img
-                            className="reserve-button__arrow-right"
-                            src={ArrowRight}
-                            alt="Arrow right"
-                        />
-                    </motion.div>
-                </div>
+                            <motion.img
+                                className="reserve-button__phone-call"
+                                src={PhoneCall}
+                                alt="Phone call"
+                            />
+                            <motion.a
+                                href={`tel:${contactsData['phone']}`}
+                                variants={buttonTextVariant}
+                                transition={{duration: 0.5}}
+                            >
+                                {contactsData[`book_button_${language}`]}
+                            </motion.a>
+                            <motion.img
+                                className="reserve-button__arrow-right"
+                                src={ArrowRight}
+                                alt="Arrow right"
+                            />
+                        </motion.div>
+                    </div>
+                )}
 
                 <motion.div className="about__info" variants={textVariant("y", 50)}>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <img src={Map} alt="Map" loading="lazy" />
+                        {!loading &&
+                            <img src={Map} alt="Map" loading="lazy" />
+                        }
+
                         <div className="about__address">
                             {contactsData[`short_address_${language}`]}
                         </div>

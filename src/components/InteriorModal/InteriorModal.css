@@ -97,8 +97,6 @@
     top: 15%;
     margin-top: 20px;
     display: flex;
-    /*width: auto;*/
-    /*flex: 0 0 auto;*/
     flex-direction: column;
     overflow-x: auto;
     gap: 10px;

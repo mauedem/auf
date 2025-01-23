@@ -5,13 +5,14 @@ import './Girls.css'
 import { useInView } from "react-intersection-observer";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
+import {Skeleton} from "../../components/Skeleton/Skeleton.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const Girls = () => {
     const girlsRef = useRef(null);
 
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const girlsData = useMemo(() => data?.girlsData?.[0] || {}, [data?.girlsData]);
 
@@ -66,11 +67,12 @@ export const Girls = () => {
 
                 <div className="girls__container">
                     <h2 className="girls__title">
-                        {girlsData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{girlsData[`highlight_title_${language}`]}</span>
+                        {loading ? <Skeleton type="text" /> :
+                        girlsData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{girlsData[`highlight_title_${language}`]}</span>
                     </h2>
 
                     <div className="girls__subtitle">
-                        {girlsData[`subtitle_${language}`]}
+                        {loading ? <Skeleton type="text" /> : girlsData[`subtitle_${language}`]}
                     </div>
 
                     <div className="girls__animation">
@@ -104,32 +106,36 @@ export const Girls = () => {
                         })}
                     </div>
 
-                    <div className="girls__text" ref={girlsTextRef}>
-                        {wordsPart1.map((word, index) => (
-                            <motion.span
-                                key={`part1-${index}`}
-                                custom={index}
-                                initial="hidden"
-                                animate={girlsTextnView ? "visible" : "hidden"}
-                                variants={wordAnimation}
-                            >
-                                {word}{" "}
-                            </motion.span>
-                        ))}
+                    {loading ? (
+                        <Skeleton type="text" />
+                    ) : (
+                        <div className="girls__text" ref={girlsTextRef}>
+                            {wordsPart1.map((word, index) => (
+                                <motion.span
+                                    key={`part1-${index}`}
+                                    custom={index}
+                                    initial="hidden"
+                                    animate={girlsTextnView ? "visible" : "hidden"}
+                                    variants={wordAnimation}
+                                >
+                                    {word}{" "}
+                                </motion.span>
+                            ))}
 
-                        {wordsPart2.map((word, index) => (
-                            <motion.span
-                                key={`part2-${index}`}
-                                className="highlighted-word"
-                                custom={wordsPart1.length + index}
-                                initial="hidden"
-                                animate={girlsTextnView ? "visible" : "hidden"}
-                                variants={wordAnimation}
-                            >
-                                {word}{" "}
-                            </motion.span>
-                        ))}
-                    </div>
+                            {wordsPart2.map((word, index) => (
+                                <motion.span
+                                    key={`part2-${index}`}
+                                    className="highlighted-word"
+                                    custom={wordsPart1.length + index}
+                                    initial="hidden"
+                                    animate={girlsTextnView ? "visible" : "hidden"}
+                                    variants={wordAnimation}
+                                >
+                                    {word}{" "}
+                                </motion.span>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </>

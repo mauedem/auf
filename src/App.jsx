@@ -61,7 +61,7 @@ function App() {
         navigate(newPath, { replace: true });
     };
 
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const navItems = useMemo(() => data?.navItems || [], [data?.navItems]);
     const contactsData = useMemo(() => data?.contactsData?.[0] || {}, [data?.contactsData]);
@@ -143,6 +143,7 @@ function App() {
                     showLanguageMenu={showLanguageMenu}
                 />
                 <Header
+                    loading={loading}
                     contactsData={contactsData}
                     onLanguageChange={handleLanguageChange}
                     navItemsData={navItems}

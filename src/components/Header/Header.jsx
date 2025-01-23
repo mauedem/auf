@@ -24,6 +24,7 @@ export const Header = ({
     navItemsData,
     contactsData,
     onLanguageChange,
+    loading
 }) => {
     const [isMenuHover, setIsMenuHover] = useState(false);
     const handleMouseEnterMenu = () => setIsMenuHover(true);
@@ -128,7 +129,9 @@ export const Header = ({
 
                 <div className="header--big">
                     <div className="header-map">
-                        <img className="header-map__img" src={Map} alt="map" loading="lazy" />
+                        { !loading &&
+                            <img className="header-map__img" src={Map} alt="map" loading="lazy" />
+                        }
                         <div
                             className="header-map__addess-block"
                             onClick={() => window.open(contactsData['navigator_link'], '_blank')}
@@ -148,10 +151,11 @@ export const Header = ({
                         </div>
                     </div>
 
-
-                    <a className="header-reserve-btn" href={`tel:${contactsData['phone']}`}>
-                        {contactsData[`book_button_${language}`]}
-                    </a>
+                    {!loading &&
+                        <a className="header-reserve-btn" href={`tel:${contactsData['phone']}`}>
+                            {contactsData[`book_button_${language}`]}
+                        </a>
+                    }
 
                     <div style={{ marginLeft: '16px', marginRight: '16px', }}>
                         <img
@@ -225,4 +229,5 @@ Header.propTypes = {
     navItemsData: PropTypes.array.isRequired,
     contactsData: PropTypes.object.isRequired,
     onLanguageChange: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
 };

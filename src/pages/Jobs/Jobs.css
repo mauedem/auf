@@ -68,7 +68,6 @@
 }
 
 .jobs-card {
-    /*min-width: 358px;*/
     max-width: 580px;
     padding: 32px 16px 32px 16px;
     border-radius: 12px;
@@ -109,7 +108,6 @@
 .jobs-card__btn {
     display: flex;
     align-items: center;
-    /*border: 2px solid var(--tertiary-color);*/
     padding: 16px 24px 16px 24px;
     border-radius: 120px;
     font-family: Aeroport, sans-serif;

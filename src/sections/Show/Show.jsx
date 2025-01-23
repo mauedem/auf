@@ -10,13 +10,14 @@ import PropTypes from "prop-types";
 
 import './Show.css'
 import { useLanguage } from "../../context/LanguageProvider.jsx";
+import {Skeleton} from "../../components/Skeleton/Skeleton.jsx";
 
 export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
     const vipRef = useRef(null);
     const musicRef = useRef(null);
     const interiorRef = useRef(null);
 
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const showData = useMemo(() => data?.showData?.[0] || {}, [data?.showData]);
 
@@ -106,26 +107,36 @@ export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
                 <div className="show" id="music" ref={musicRef}>
                     <div className="show__container">
                         <h2 className="show__title">
-                            {showData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{showData[`highlight_title_${language}`]}</span>
+                            {loading ? (
+                                <Skeleton type="text"/>
+                            ) : (
+                                <>
+                                    {showData[`title_${language}`]} <span style={{color: 'var(--secondary-color)'}}>{showData[`highlight_title_${language}`]}</span>
+                                </>
+                            )}
                         </h2>
 
                         <div className="show__text">
-                            {words.map((word, index) => (
-                            <motion.span
-                                ref={textRef}
-                                key={`part1-${index}`}
-                                custom={index}
-                                initial="hidden"
-                                animate={textInView ? "visible" : "hidden"}
-                                variants={wordAnimation}
-                            >
-                                {word}{" "}
-                            </motion.span>
-                            ))}
+                            {loading ? (
+                                <Skeleton type="text"/>
+                            ) : (
+                                words.map((word, index) => (
+                                    <motion.span
+                                        ref={textRef}
+                                        key={`part1-${index}`}
+                                        custom={index}
+                                        initial="hidden"
+                                        animate={textInView ? "visible" : "hidden"}
+                                        variants={wordAnimation}
+                                    >
+                                        {word}{" "}
+                                    </motion.span>
+                                ))
+                            )}
                         </div>
 
                         <div className="show__stories">
-                            <Stories videos={videos} />
+                            {loading ? <Skeleton type="image" /> : <Stories videos={videos} />}
                         </div>
                     </div>
                 </div>
@@ -133,25 +144,33 @@ export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
                 <div className="interior" id="interior" ref={interiorRef}>
                     <div className="interior__universal-container">
                         <h2 className="interior__title">
-                            {interiorData[`title_${language}`]}
+                            {loading ? <Skeleton type="text" /> : interiorData[`title_${language}`]}
                         </h2>
 
                         {/*<img src={Interior} alt="Interior" />*/}
 
                         <div className="interior__tags">
-                            {interiorItems}
+                            {loading ? <Skeleton type="text" /> : interiorItems}
                         </div>
                     </div>
 
                     <div className="interior__container" id="vip" ref={vipRef}>
                         <h3 className="interior__title interior__title--secondary">
-                            {interiorData[`title_2_${language}`]}
+                            {loading ? <Skeleton type="text" /> : interiorData[`title_2_${language}`]}
                         </h3>
 
                         <div className="interior__text">
-                            {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[0]}
-                            <span style={{color: 'var(--primary-color)'}}> {interiorData[`highlight_subtitle_${language}`]} </span>
-                            {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[1]}
+                            {loading ? (
+                                <Skeleton type="text"/>
+                            ) : (
+                                <>
+                                    {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[0]}
+                                    <span style={{color: 'var(--primary-color)'}}>
+                                        {interiorData[`highlight_subtitle_${language}`]}
+                                    </span>
+                                    {interiorData[`subtitle_${language}`]?.split('{{highlited}}')[1]}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -159,56 +178,64 @@ export const Show = ({ onInteriorClick, interiorData, interiorBlocksData }) => {
                 <div className="interior__universal-container--1">
                     <div className="interior__universal-container">
                         <div className="interior__block">
-                            {images.image_1 &&
-                                <motion.div
-                                    ref={image1Ref}
-                                    initial="hidden"
-                                    animate={image1InView ? "visible" : "hidden"}
-                                    variants={imageVariants}
-                                >
+                            <motion.div
+                                ref={image1Ref}
+                                initial="hidden"
+                                animate={image1InView ? "visible" : "hidden"}
+                                variants={imageVariants}
+                            >
+                                {loading || !images.image_1 ? (
+                                    <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                                ) : (
                                     <img className="interior__img-1" src={images.image_1} alt="Interior" loading="lazy" />
-                                </motion.div>
-                            }
+                                )}
+                            </motion.div>
 
                             <div className="interior__subtext">
                                 {interiorData[`text_${language}`]}
                             </div>
                         </div>
 
-                        {images.image_2 &&
-                            <motion.div
-                                ref={image2Ref}
-                                initial="hidden"
-                                animate={image2InView ? "visible" : "hidden"}
-                                variants={imageVariants}
-                            >
+                        <motion.div
+                            ref={image2Ref}
+                            initial="hidden"
+                            animate={image2InView ? "visible" : "hidden"}
+                            variants={imageVariants}
+                        >
+                            {loading || !images.image_2 ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
                                 <img className="interior__img-2" src={images.image_2} alt="Interior" loading="lazy" />
-                            </motion.div>
-                        }
+                            )}
+                        </motion.div>
 
                         <div className="interior__block">
-                            {images.image_3 &&
-                                <motion.div
-                                    ref={image3Ref}
-                                    initial="hidden"
-                                    animate={image3InView ? "visible" : "hidden"}
-                                    variants={imageVariants}
-                                >
-                                    <img className="interior__img-3" src={images.image_3} alt="Interior" loading="lazy" />
-                                </motion.div>
-                            }
-                        </div>
-
-                        {images.image_4 &&
                             <motion.div
-                                ref={image4Ref}
+                                ref={image3Ref}
                                 initial="hidden"
-                                animate={image4InView ? "visible" : "hidden"}
+                                animate={image3InView ? "visible" : "hidden"}
                                 variants={imageVariants}
                             >
-                                <img className="interior__img-4" src={images.image_4} alt="Interior" loading="lazy" />
+                                {loading || !images.image_3 ? (
+                                    <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                                ) : (
+                                    <img className="interior__img-3" src={images.image_3} alt="Interior" loading="lazy" />
+                                )}
                             </motion.div>
-                        }
+                        </div>
+
+                        <motion.div
+                            ref={image4Ref}
+                            initial="hidden"
+                            animate={image4InView ? "visible" : "hidden"}
+                            variants={imageVariants}
+                        >
+                            {loading || !images.image_4 ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
+                                <img className="interior__img-4" src={images.image_4} alt="Interior" loading="lazy" />
+                            )}
+                        </motion.div>
                     </div>
                 </div>
             </div>

@@ -12,9 +12,10 @@ import './Info.css'
 import { useContext, useEffect, useMemo, useState } from "react";
 import { DataContext } from "../../context/DataContext.jsx";
 import { useLanguage } from "../../context/LanguageProvider.jsx";
+import { Skeleton } from "../../components/Skeleton/Skeleton.jsx";
 
 export const Info = () => {
-    const { data } = useContext(DataContext);
+    const { data, loading } = useContext(DataContext);
 
     const infoData = useMemo(() => data?.infoData?.[0] || {}, [data?.infoData]);
 
@@ -95,9 +96,9 @@ export const Info = () => {
     };
 
     const [images, setImages] = useState({
-        image_1: null,
-        image_2: null,
-        image_3: null,
+        image_1: '',
+        image_2: '',
+        image_3: '',
     });
 
     useEffect(() => {
@@ -115,91 +116,118 @@ export const Info = () => {
             <div className="info">
                 <div className="info__container">
                     <h2 className="info__title">
-                        <span style={{color: 'var(--secondary-color)'}}>{infoData[`highlight_title_${language}`]}</span> {infoData[`title_${language}`]}
+                        {loading ? (
+                            <Skeleton type="text"/>
+                        ) : (
+                            <>
+                                <span style={{color: 'var(--secondary-color)'}}>
+                                    {infoData[`highlight_title_${language}`]}
+                                </span> {infoData[`title_${language}`]}
+                            </>
+                        )}
                     </h2>
                     <div className="info__subtitle">
                         <span style={{color: 'var(--primary-color)'}}>
-                            {infoData[`subtitle_${language}`]}
+                            {loading ? <Skeleton type="text"/> : infoData[`subtitle_${language}`]}
                         </span>
                     </div>
 
                     <div className="info__block">
-                        {images.image_1 &&
-                            <motion.div
-                                ref={infoImage1Ref}
-                                initial="hidden"
-                                animate={infoImage1InView ? "visible" : "hidden"}
-                                variants={imageVariantLeftToRight}
-                            >
-                                <img className="info__img" src={images.image_1} alt="" loading="lazy" />
-                            </motion.div>
-                        }
+                        <motion.div
+                            ref={infoImage1Ref}
+                            initial="hidden"
+                            animate={infoImage1InView ? "visible" : "hidden"}
+                            variants={imageVariantLeftToRight}
+                        >
+                            {loading || !images.image_1 ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
+                                <img
+                                    className="info__img"
+                                    src={images.image_1}
+                                    alt=""
+                                    loading="lazy"
+                                />
+                            )}
+                        </motion.div>
 
                         <div className="info-service">
                             <h4 className="info__header">
-                                {infoData[`block_1_title_${language}`]}
+                                {loading ? <Skeleton type="text"/> : infoData[`block_1_title_${language}`]}
                             </h4>
 
                             <div className="info__text" style={{marginTop: '14px'}}>
-                                {infoData[`block_1_text_${language}`]}
+                                {loading ? <Skeleton type="text"/> : infoData[`block_1_text_${language}`]}
                             </div>
                         </div>
                     </div>
 
                     <h3 className="info__title info__title--90">
-                        <span style={{color: 'var(--primary-color)'}}>{infoData[`highlight_title_2_${language}`]}</span> {infoData[`title_2_${language}`]}
+                        {loading ? (
+                            <Skeleton type="text" />
+                        ) : (
+                            <>
+                                <span style={{color: 'var(--primary-color)'}}>{infoData[`highlight_title_2_${language}`]}</span> {infoData[`title_2_${language}`]}
+                            </>
+                        )}
                     </h3>
 
                     <div className="info__block">
                         <div className="info-manager info-manager--big">
                             <h4 className="info__header info-manager__title">
-                                {infoData[`block_2_title_${language}`]}
+                                {loading ? <Skeleton type="text" /> : infoData[`block_2_title_${language}`]}
                             </h4>
 
                             <div className="info__text info-manager__text" style={{marginTop: '10px'}}>
-                                {infoData[`block_2_text_${language}`]}
+                                {loading ? <Skeleton type="text" /> : infoData[`block_2_text_${language}`]}
                             </div>
                         </div>
 
-                        {images.image_2 &&
-                            <motion.div
-                                ref={infoImage2Ref}
-                                initial="hidden"
-                                animate={infoImage2InView ? "visible" : "hidden"}
-                                variants={imageVariantRightToLeft}
-                            >
+                        <motion.div
+                            ref={infoImage2Ref}
+                            initial="hidden"
+                            animate={infoImage2InView ? "visible" : "hidden"}
+                            variants={imageVariantRightToLeft}
+                        >
+                            {loading || !images.image_2 ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
                                 <img className="info__img" src={images.image_2} alt="" loading="lazy" />
-                            </motion.div>
-                        }
+                            )}
+                        </motion.div>
 
                         <div className="info-manager info-manager--small">
-                            <h4 className="info__header info-manager__title">{infoData[`block_2_title_${language}`]}</h4>
+                            <h4 className="info__header info-manager__title">
+                                {loading ? <Skeleton type="text" /> : infoData[`block_2_title_${language}`]}
+                            </h4>
 
                             <div className="info__text info-manager__text" style={{marginTop: '10px'}}>
-                                {infoData[`block_2_text_${language}`]}
+                                {loading ? <Skeleton type="text" /> : infoData[`block_2_text_${language}`]}
                             </div>
                         </div>
                     </div>
 
                     <div className="info__block info__block--90">
-                        {images.image_3 &&
-                            <motion.div
-                                ref={infoImage3Ref}
-                                initial="hidden"
-                                animate={infoImage3InView ? "visible" : "hidden"}
-                                variants={imageVariantLeftToRight}
-                            >
+                        <motion.div
+                            ref={infoImage3Ref}
+                            initial="hidden"
+                            animate={infoImage3InView ? "visible" : "hidden"}
+                            variants={imageVariantLeftToRight}
+                        >
+                            {loading || !images.image_3 ? (
+                                <Skeleton type="image" style={{width: '100%', height: '300px'}}/>
+                            ) : (
                                 <img className="info__img" src={images.image_3} alt="" loading="lazy" />
-                            </motion.div>
-                        }
+                            )}
+                        </motion.div>
 
                         <div className="info-privacy">
                             <h4 className="info__header" style={{width: '360px'}}>
-                                {infoData[`block_3_title_${language}`]}
+                                {loading ? <Skeleton type="text" /> : infoData[`block_3_title_${language}`]}
                             </h4>
 
                             <div className="info__text" style={{marginTop: '10px'}}>
-                            {infoData[`block_3_text_${language}`]}
+                                {loading ? <Skeleton type="text" /> : infoData[`block_3_text_${language}`]}
                             </div>
                         </div>
                     </div>
@@ -223,7 +251,7 @@ export const Info = () => {
                     </div>
 
                     <div className="info__review">
-                        {infoData[`reviews_total_count_${language}`]}
+                        {loading ? <Skeleton type="text" /> : infoData[`reviews_total_count_${language}`]}
                     </div>
 
                     <div className="info-rating-cards">
