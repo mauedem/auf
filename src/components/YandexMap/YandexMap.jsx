@@ -1,6 +1,7 @@
-import { YMaps, Map, Placemark, ZoomControl } from '@pbe/react-yandex-maps';
-import { useRef } from "react";
+import { Map, Placemark, YMaps, ZoomControl } from '@pbe/react-yandex-maps';
+import { useMemo, useRef } from "react";
 import { MAP_API_KEY } from "../../utils/constants.js";
+import { useLanguage } from "../../context/LanguageProvider.jsx";
 
 export const YandexMap = () => {
     const mapRef = useRef(null);
@@ -12,8 +13,23 @@ export const YandexMap = () => {
         controls: [],
     };
 
+    const { language } = useLanguage();
+
+    const getLanguage = useMemo(() => {
+        switch (language) {
+            case 'en':
+                return 'en_US';
+            case 'ar':
+                return 'ar_AE';
+            case 'zh':
+                return 'zh_CN';
+            default:
+                return 'ru_RU';
+        }
+    }, [language]);
+
     return (
-        <YMaps query={{ apikey: MAP_API_KEY, ns: 'use-load-option', lang: 'ru_RU' }}>
+        <YMaps query={{ apikey: MAP_API_KEY, ns: 'use-load-option', lang: getLanguage }}>
             <div style={{ width: '560px', height: '400px' }}>
                 <Map
                     defaultState={mapState}
