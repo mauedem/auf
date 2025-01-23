@@ -28,6 +28,7 @@
     max-width: 720px;
     padding-right: 70px;
     padding-left: 70px;
+    min-height: 800px;
 }
 
 .show__title {

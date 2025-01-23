@@ -38,7 +38,7 @@ export const MoreInfoModal = ({ language, isOpen, onClose }) => {
 
         return (
             <ul style={{ padding: '0', margin: '0' }}>
-                {lines.map((line, index) => (
+                {lines?.map((line, index) => (
                     <li key={index}>{line}</li>
                 ))}
             </ul>

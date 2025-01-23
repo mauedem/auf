@@ -20,7 +20,7 @@ export const DataProvider = ({ children }) => {
         showData: null,
         menuItems: null,
         navItems: null,
-        moreInfo: null,
+        moreInfoData: null,
     });
 
     const [loading, setLoading] = useState(true);
@@ -43,7 +43,7 @@ export const DataProvider = ({ children }) => {
                     showData,
                     menuItems,
                     navItems,
-                    moreInfo,
+                    moreInfoData,
                 ] = await Promise.all([
                     ApiService.fetchAbout(),
                     ApiService.fetchContacts(),
@@ -77,7 +77,7 @@ export const DataProvider = ({ children }) => {
                     showData,
                     menuItems,
                     navItems,
-                    moreInfo,
+                    moreInfoData,
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
