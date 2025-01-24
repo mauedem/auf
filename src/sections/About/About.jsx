@@ -131,6 +131,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                     disablePictureInPicture
                     onCanPlayThrough={() => setIsVideoLoaded(true)}
                     onCanPlay={() => setIsVideoLoaded(true)}
+                    onLoadedData={() => setIsVideoLoaded(true)}
                 >
                     <source
                         src={MainBgVideo}
