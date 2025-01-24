@@ -128,7 +128,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
                     muted
                     loop
                     playsInline
-                    preload="auto"
+                    disablePictureInPicture
                     onCanPlayThrough={() => setIsVideoLoaded(true)}
                     onCanPlay={() => setIsVideoLoaded(true)}
                 >
