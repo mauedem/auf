@@ -113,7 +113,7 @@ export const Info = () => {
 
     return (
         <>
-            <div className="info">
+            <div className="info" id="info">
                 <div className="info__container">
                     <h2 className="info__title">
                         {loading ? (
