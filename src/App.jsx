@@ -64,10 +64,18 @@ function App() {
 
     const { data, loading } = useContext(DataContext);
 
-    const navItems = useMemo(() => data?.navItems || [], [data?.navItems]);
+    const navItems = useMemo(() => {
+        const items = data?.navItems || [];
+        return [...items].sort((a, b) => a.order - b.order);
+    }, [data?.navItems]);
+
     const contactsData = useMemo(() => data?.contactsData?.[0] || {}, [data?.contactsData]);
     const interiorData = useMemo(() => data?.interiorData?.[0] || {}, [data?.interiorData]);
-    const interiorBlocksData = useMemo(() => data?.interiorBlocksData || [], [data?.interiorBlocksData]);
+    const interiorBlocksData = useMemo(() => {
+        const items = data?.interiorBlocksData || [];
+        return [...items].sort((a, b) => a.order - b.order);
+    }, [data?.interiorBlocksData]);
+
     const jobsData = useMemo(() => data?.jobsData?.[0] || {}, [data?.jobsData]);
     const gastronomyData = useMemo(() => data?.gastronomyData?.[0] || {}, [data?.gastronomyData]);
 

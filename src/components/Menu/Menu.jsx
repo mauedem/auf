@@ -18,7 +18,10 @@ export const Menu = ({ showMenu, onMenuChange, contactsData }) => {
 
     const { data } = useContext(DataContext);
 
-    const menuItems = useMemo(() => data?.menuItems || [], [data?.menuItems]);
+    const menuItems = useMemo(() => {
+        const items = data?.menuItems || [];
+        return [...items].sort((a, b) => a.order - b.order);
+    }, [data?.menuItems]);
 
     function goToLinkHref(menuItem) {
         if (location.pathname !== menuItem.link) {

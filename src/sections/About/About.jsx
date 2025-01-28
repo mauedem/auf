@@ -75,9 +75,7 @@ export const About = ({ contactsData, navItemsData, onLanguageChange }) => {
     };
 
     function goToLinkHref(menuItem) {
-        console.log('goToLinkHref menuItem', menuItem)
         const isLanguageSwitcher = menuItem['text_ru'] === 'Русский'
-        console.log('isLanguageSwitcher', isLanguageSwitcher)
         if (isLanguageSwitcher) {
             toggleLanguage(menuItem);
 
