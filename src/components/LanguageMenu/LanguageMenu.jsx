@@ -54,7 +54,8 @@ export const LanguageMenu = ({ onLanguageChange, showLanguageMenu, onLanguageMen
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+            const isHeaderClick = event.target.closest('.header');
+            if (!isHeaderClick && languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
                 onLanguageMenuChange(false);
             }
         }

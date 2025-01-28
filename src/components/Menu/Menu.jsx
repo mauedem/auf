@@ -41,7 +41,8 @@ export const Menu = ({ showMenu, onMenuChange, contactsData }) => {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
+            const isHeaderClick = event.target.closest('.header');
+            if (!isHeaderClick && menuRef.current && !menuRef.current.contains(event.target)) {
                 onMenuChange(false);
             }
         }
