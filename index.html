@@ -22,7 +22,7 @@
     <meta property="og:image" content="/promo-photo-auf.jpg"/>
 
     <!-- LocalBusiness -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" async>
     {
         "@context": "http://schema.org/",
         "@type": "LocalBusiness",
@@ -50,7 +50,7 @@
     </script>
 
     <!-- Product -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" async>
     {
         "@context": "http://schema.org/",
         "@type": "Product",
@@ -74,7 +74,7 @@
     </script>
 
     <!-- FAQ -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" async>
     {
         "@context": "http://schema.org/",
         "@type": "FAQPage",
@@ -109,10 +109,10 @@
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx" defer></script>
+    <script type="module" src="/src/main.jsx" async></script>
 
     <!-- Чат на сайте -->
-    <script>
+    <script async>
         window.replainSettings = {id: 'f70255f0-8b36-4bb6-bd8c-3528d944ffa1'};
         (function (u) {
             var s = document.createElement('script');
@@ -124,7 +124,7 @@
     </script>
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    <script type="text/javascript" async>
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -139,6 +139,5 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/92736638" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-
 </body>
 </html>
